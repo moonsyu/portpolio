@@ -84,7 +84,7 @@ def stm():
     d.arrow([(657,281),(752,281)],'요청·응답',(704,246),both=True)
     d.arrow([(940,281),(1036,281)],'IPC',(988,250),both=True)
     d.box(260,579,326,159)
-    d.node('save',423,600,'localStorage','프로젝트 자동 저장',size=47,color='#2355de')
+    d.node('save',423,600,'localStorage','자동 저장 (JSON 문자열)',size=47,color='#2355de')
     d.arrow([(423,475),(423,572)],'저장·복원',(423,531),both=True)
     d.box(1000,579,287,159)
     d.node('file-code',1144,600,'프로젝트 파일','.stm32lab · .ioc · C · CSV',size=47)
