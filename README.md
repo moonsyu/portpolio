@@ -68,9 +68,11 @@ python scripts/build_architectures.py
 
 ## 트러블슈팅 검증 자료
 
-- 공통 형식: 문제 → 원인 → 해결 / 검증 결과
+- 공통 형식: 문제 → 원인 → 해결 / 실제 동작 화면; 화면의 출처·검증 결과 제목은 본문에서 생략
 - `assets/stm-uart-verified.webp`: 수정된 STM 앱에서 9600 baud·260ms 입력·20ms 단계 실행으로 RX/TX 일치를 직접 확인한 실행 모니터 화면(2026.09.23)
 - `assets/cons-unity-runtime.webp`: 캡스톤1 개발 시스템 발표 7쪽의 Android–Unity AR 실행 화면; 빌드 성공 로그가 아닌 통합 앱 실행 결과
-- Beacon: 캡스톤1 10주차 연구일지 「Beacon 연동 테스트」의 데이터 표시 확인 기록(제출일 2024.05.13); 실제 수신 데이터 캡처는 보존 자료에서 미확인
-- BOOKIES: 개선 효과를 입증하는 전후 자료가 없어 구현·개선 섹션 제외, 개요와 아키텍처에 수행 범위 표시
+- `assets/cons-beacon-rssi.gif`: 디지털 학회 추계 자료의 `좌표 측위 영상.mp4` 01:00–01:12에서 실제 비콘 이름·RSSI 수신 목록을 연속 crop·resize한 12초 GIF(5fps 추출, UI·수치 합성 없음)
+- Beacon 영상의 범위: 수신 목록·RSSI 변화 확인; 원본에 버튼 조작이 있으므로 자동 갱신·위치 정확도·특정 API 변경의 효과로 확대 해석하지 않음
+- Beacon GIF: 재생·일시정지 제공, 모션 감소 설정에서는 `cons-beacon-rssi-poster.webp` 표시
+- BOOKIES: DB 이전·Web 배포·접근 제어의 구현 내용 유지, 개선 효과로 표현한 별도 박스 제외
 - 이미지 확대 화면: 닫기 버튼만 표시, 드래그·휠·방향키·두 번 클릭/0 키 화면 맞춤 유지

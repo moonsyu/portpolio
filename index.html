@@ -11,9 +11,9 @@
   <meta property="og:url" content="https://moonsyu.github.io/portpolio/">
   <link rel="canonical" href="https://moonsyu.github.io/portpolio/">
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' rx='6' fill='%23172538'/%3E%3Cpath d='M9 29V11l11 12 11-12v18' fill='none' stroke='%23fff' stroke-width='3'/%3E%3C/svg%3E">
-  <link rel="stylesheet" href="./styles.css?v=portfolio-3">
+  <link rel="stylesheet" href="./styles.css?v=portfolio-4">
   <title>장문수 | Developer Portfolio</title>
-  <script src="./app.js?v=portfolio-3" defer></script>
+  <script src="./app.js?v=portfolio-4" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#main">본문으로 바로가기</a>
@@ -89,9 +89,9 @@
     <div><dt>문제</dt><dd><ul><li>특정 입력 시점에서 <strong>UART 에코의 일부 문자 누락</strong></li></ul></dd></div>
     <div><dt>원인</dt><dd><ul><li><strong>µs → ms → µs 변환 오차</strong>로 수신 시점 오판</li></ul></dd></div>
     <div><dt>해결</dt><dd><ul><li>기존 송신 기준의 <strong>허용 오차를 수신 판정에도 적용</strong></li><li>입력 시점·baud·tick을 교차한 <strong>24개 조건으로 회귀 검증</strong></li></ul></dd></div>
-  </dl><figure class="evidence-figure"><strong class="evidence-heading">검증 결과</strong>
+  </dl><figure class="evidence-figure">
     <button class="image-button" type="button" data-enlarge aria-label="STM UART 수신·송신 테스트 화면 확대"><img src="./assets/stm-uart-verified.webp" width="480" height="162" alt="STM 실행 모니터: 0.261초에 USART2 RX와 TX 모두 HAL log 표시" loading="lazy"></button>
-    <figcaption><strong>RX·TX 모두 ‘HAL log’ 일치</strong><br>9600 baud · 260ms에 입력 · 20ms 한 단계 실행<br>수정된 앱의 UART 예제 직접 재현 · 2026.09.23</figcaption>
+    <figcaption><strong>RX·TX 모두 ‘HAL log’ 일치</strong><br>9600 baud · 260ms에 입력 · 20ms 한 단계 실행</figcaption>
   </figure></div>
 </section>
         </div></details>
@@ -122,9 +122,9 @@
     <div><dt>문제</dt><dd><ul><li>기존 예제의 연동 함수에서 <strong>빌드·비콘 인식 문제</strong> 발생</li></ul></dd></div>
     <div><dt>원인</dt><dd><ul><li>오래된 예제에 <strong>지원 중단 API</strong> 포함</li><li>예제와 현재 라이브러리의 API 차이 확인</li></ul></dd></div>
     <div><dt>해결</dt><dd><ul><li>함수의 동작·인자를 비교해 <strong>바인딩·해제·탐색 API 교체</strong></li><li>Beacon 탐색 버튼과 수신 데이터 표시 분리</li></ul></dd></div>
-  </dl><figure class="evidence-figure"><strong class="evidence-heading">검증 결과</strong>
-    <div class="evidence-record"><span>연구일지 · Beacon 연동 테스트</span><blockquote>“TextView에 Beacon 수신 데이터 표시 안정화”</blockquote></div>
-    <figcaption><strong>캡스톤1 10주차 연구일지</strong><br>제출일 2024.05.13 · 수신 데이터 표시 확인 기록<br>당시 수신 결과 화면은 보존 자료에서 미확인</figcaption>
+  </dl><figure class="evidence-figure demo-figure" id="cons-beacon-demo">
+    <button class="image-button" type="button" data-enlarge aria-label="CONS Beacon RSSI 수신 GIF 확대"><img src="./assets/cons-beacon-rssi.gif" data-gif="./assets/cons-beacon-rssi.gif" data-poster="./assets/cons-beacon-rssi-poster.webp" width="360" height="652" alt="Beacon 테스트 앱에서 감지된 기기 이름과 RSSI 수치가 바뀌는 실제 수신 화면" loading="lazy"></button>
+    <figcaption><strong>Beacon 감지 · RSSI 실시간 수신</strong><button class="demo-toggle" type="button" data-demo-toggle="cons-beacon-demo" aria-pressed="true">GIF 일시정지</button></figcaption>
   </figure></div>
 </section>
 <section class="detail-section" aria-labelledby="cons-unity-build">
@@ -133,9 +133,9 @@
     <div><dt>문제</dt><dd><ul><li>구버전 연동 예제 적용 후 <strong>Unity 모듈 빌드·실행 오류</strong> 발생</li></ul></dd></div>
     <div><dt>원인</dt><dd><ul><li>예제와 현재 환경의 <strong>모듈·Java·SDK 설정 차이</strong></li><li>당시 활성화한 <strong>Oculus 옵션</strong> 관련 오류 확인</li></ul></dd></div>
     <div><dt>해결</dt><dd><ul><li><strong>Unity 모듈·의존성 연결</strong>과 빌드 설정 조정</li><li><strong>Java·SDK·namespace·NDK 경로</strong> 점검</li><li>해당 프로젝트의 <strong>Oculus 옵션 해제</strong></li></ul></dd></div>
-  </dl><figure class="evidence-figure"><strong class="evidence-heading">검증 결과</strong>
+  </dl><figure class="evidence-figure">
     <button class="image-button" type="button" data-enlarge aria-label="CONS Android–Unity 통합 실행 화면 확대"><img src="./assets/cons-unity-runtime.webp" width="332" height="720" alt="CONS Android 앱에 통합한 Unity AR 실행 화면: 복도 위 길안내 화살표와 미니맵" loading="lazy"></button>
-    <figcaption><strong>Android 앱에 통합한 Unity AR 실행 화면</strong><br>캡스톤1 개발 시스템 발표 · 7쪽<br>AR 경로 화살표·목적지 선택·미니맵 표시</figcaption>
+    <figcaption><strong>Android–Unity 통합 실행</strong><br>AR 경로 화살표·목적지 선택·미니맵 표시</figcaption>
   </figure></div>
 </section>
         </div></details>
@@ -146,7 +146,7 @@
           <figure class="project-visual bookies-visual"><button class="image-button" type="button" data-enlarge aria-label="BOOKIES 메인 화면 확대"><img src="./assets/bookies.webp" width="1156" height="533" alt="BOOKIES 전자책 서비스의 메인 화면" loading="lazy"></button><figcaption><span>전자책 구매·열람 Web 서비스</span><span>클릭하여 확대 ↗</span></figcaption></figure>
           <div class="project-description"><h4>전자책 Web·App 서비스의<br>DB 이전과 클라우드 배포</h4><div class="project-meta"><span>2025.02 — 2025.03</span><span>전체 10명 · Web 파트 4명</span></div><ul><li>개발 일정·기준 관리와 Oracle DB 관리</li><li>Oracle RDS 이전 및 EC2 Web 서비스 배포</li><li>S3 연동과 접근 권한 설정</li></ul><p class="techline">Java · Spring Boot · Oracle · JDBC<br>AWS EC2 / RDS / S3 · Gradle · Linux</p></div>
         </div>
-        <details class="detail" open><summary>애플리케이션 아키텍처</summary><div class="detail-body">
+        <details class="detail" open><summary>애플리케이션 아키텍처 · 구현 내용</summary><div class="detail-body">
           <section class="detail-section" aria-labelledby="bookies-architecture">
             <span class="label">APPLICATION ARCHITECTURE</span><h4 class="detail-title" id="bookies-architecture">애플리케이션 아키텍처</h4>
             <figure class="application-architecture">
@@ -159,6 +159,10 @@
               <p class="diagram-scroll-hint">클릭하여 확대 · 확대 화면에서 좌클릭 드래그로 이동</p>
             </figure>
           </section>
+        <section class="detail-section" aria-labelledby="bookies-implementation">
+  <span class="label">IMPLEMENTATION</span><h4 class="detail-title" id="bookies-implementation">Oracle DB 이전 및 Web 서비스 배포</h4>
+  <div class="implementation-list"><div><h5>DB 운영 환경 이전</h5><ul><li><strong>Oracle 19c → RDS</strong> 이전</li><li>Web 서버의 <strong>JDBC 연결</strong> 구성</li></ul></div><div><h5>Web 서비스 배포</h5><ul><li>Gradle로 <strong>WAR 빌드</strong></li><li><strong>EC2 배포·실행</strong> 및 Web 접속 확인</li></ul></div><div><h5>접근 범위 설정</h5><ul><li><strong>DB 관리자·Web EC2</strong> 기준 RDS 접근 제어</li><li>관리자 SSH와 <strong>Web 서비스 포트 구분</strong></li></ul></div></div>
+</section>
         </div></details>
       </article>
     </section>
