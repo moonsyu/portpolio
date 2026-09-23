@@ -7,7 +7,9 @@ document.querySelectorAll('[data-enlarge]').forEach(button => {
     dialogImage.src = image.src;
     dialogImage.alt = image.alt;
     dialogCaption.textContent = image.alt;
+    dialog.classList.toggle('is-diagram', button.hasAttribute('data-diagram'));
     dialog.showModal();
+    dialog.querySelector('.dialog-viewport').scrollTo(0, 0);
   });
 });
 dialog.querySelector('.dialog-close').addEventListener('click', () => dialog.close());
