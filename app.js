@@ -1,15 +1,12 @@
 const dialog = document.querySelector('.image-dialog');
 const dialogImage = dialog.querySelector('img');
-const dialogCaption = dialog.querySelector('#image-caption');
 const viewport = dialog.querySelector('.dialog-viewport');
-const zoomLabel = dialog.querySelector('[data-zoom-label]');
 let zoom = 1;
 let pan = { x: 0, y: 0 };
 let drag = null;
 
 function renderImage() {
   dialogImage.style.transform = `translate(-50%, -50%) translate(${pan.x}px, ${pan.y}px) scale(${zoom})`;
-  zoomLabel.textContent = `${Math.round(zoom * 100)}%`;
 }
 function fitImage() {
   if (!dialog.open || !dialogImage.naturalWidth) return;
@@ -30,7 +27,7 @@ document.querySelectorAll('[data-enlarge]').forEach(button => {
     const image = button.querySelector('img');
     dialogImage.src = image.currentSrc || image.src;
     dialogImage.alt = image.alt;
-    dialogCaption.textContent = image.alt;
+    dialog.setAttribute('aria-label', image.alt);
     dialog.showModal(); fitImage();
   });
 });
@@ -73,9 +70,6 @@ viewport.addEventListener('keydown', event => {
   else if (event.key === '-') { event.preventDefault(); changeZoom(zoom / 1.25); }
   else if (event.key === 'Home' || event.key === '0') { event.preventDefault(); fitImage(); }
 });
-dialog.querySelector('[data-zoom-in]').addEventListener('click', () => changeZoom(zoom * 1.25));
-dialog.querySelector('[data-zoom-out]').addEventListener('click', () => changeZoom(zoom / 1.25));
-dialog.querySelector('[data-zoom-reset]').addEventListener('click', fitImage);
 dialog.querySelector('.dialog-close').addEventListener('click', () => dialog.close());
 dialog.addEventListener('close', () => { drag = null; viewport.classList.remove('is-dragging'); dialogImage.removeAttribute('src'); });
 dialog.addEventListener('click', event => {
