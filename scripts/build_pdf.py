@@ -292,27 +292,28 @@ const jobs=JSON.parse(fs.readFileSync(process.argv[1],'utf8'));
         deck.finish('about')
 
         y = deck.start('01 / ABOUT', '수상 · 자격 · 어학')
-        award_width, gap = 363, 20
+        deck.text('수상 내역', M+22, y, 620, 18, MUTED)
+        deck.text('주최·주관', 730, y, 285, 18, MUTED)
+        deck.text('수상일', 1090, y, 112, 18, MUTED)
         for i, award in enumerate(doc.one(cls='award-list').select(tag='li')):
-            x, top = M+(award_width+gap)*(i%2), y+166*(i//2)
-            deck.panel(x, top, award_width, 149)
-            deck.text(award.one(cls='award-organizer').text(), x+18, top+14,
-                      award_width-36, 17, BLUE)
-            deck.text(award.one(tag='h4').text(), x+18, top+45,
-                      award_width-36, 20, leading=29)
-            deck.text(award.one(tag='time').text(), x+18, top+116,
-                      award_width-36, 16, MUTED)
-        qx, qw = 846, W-M-846
+            top = y+34+56*i
+            deck.panel(M, top, CW, 51)
+            deck.text(award.one(tag='h4').text(), M+22, top+9,
+                      620, 22, leading=32, bottom=top+42)
+            deck.text(award.one(cls='award-organizer').text(), 730, top+12,
+                      335, 19, BLUE, leading=28, bottom=top+42)
+            deck.text(award.one(tag='time').text(), 1090, top+13,
+                      112, 18, MUTED, leading=27, bottom=top+42)
+        qw = (CW-28)/2
         for i, item in enumerate(doc.one(cls='qualification-list').select(tag='li')):
-            top = y+i*250
-            deck.panel(qx, top, qw, 232)
-            cy = deck.text(item.one(tag='h4').text(), qx+25, top+22, qw-50, 30)+17
+            qx, top = M+(qw+28)*i, 545
+            deck.panel(qx, top, qw, 109)
+            deck.text(item.one(tag='h4').text(), qx+22, top+13, 230, 26)
             for grade in item.select(cls='qualification-grade'):
-                cy = deck.text(grade.text(), qx+25, cy, qw-50, 23, BLUE)+15
-            for row in direct(item.one(tag='dl')):
-                deck.text(row.one(tag='dt').text(), qx+25, cy, 87, 18, MUTED)
-                cy = deck.text(row.one(tag='dd').text(), qx+119, cy,
-                               qw-144, 18)+13
+                deck.text(grade.text(), qx+186, top+18, qw-208, 22, BLUE)
+            fields = '    ·    '.join(row.one(tag='dt').text()+'  '+row.one(tag='dd').text()
+                                      for row in direct(item.one(tag='dl')))
+            deck.text(fields, qx+22, top+65, qw-44, 17, MUTED)
         deck.finish('about')
 
         y = deck.start('02 / SELECTED WORK', '프로젝트')
