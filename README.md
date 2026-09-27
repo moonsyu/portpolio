@@ -66,6 +66,19 @@ python scripts/build_architectures.py
 - 확대 이미지: 좌클릭·터치 드래그, 휠 확대·축소, 화면 맞춤 및 방향키 이동
 - 일반 페이지의 아키텍처 영역에서는 세로 휠 입력을 페이지로 전달
 
+## PDF 다운로드 및 갱신
+
+- 상단 `PDF 다운로드` 버튼으로 포트폴리오 파일 저장
+- 출력: `output/pdf/Jang-MoonSu-Portfolio.pdf`
+- 소개·수상·자격·프로젝트·개선·트러블슈팅 내용: `index.html`에서 추출
+- 기존 프로젝트 화면·아키텍처 사용, GIF는 시작·중간·마지막 장면과 온라인 재생 링크로 변환
+- 사이트 내용 변경 후 PDF 재생성 및 함께 커밋
+- 준비: `python -m pip install -r scripts/requirements-pdf.txt`, `npm install`
+- 생성: `python scripts/build_pdf.py`
+- 기본 글꼴: Windows 맑은 고딕, PDF에 글꼴 포함
+- 다른 환경: `--font-dir`로 `malgun.ttf`·`malgunbd.ttf` 폴더 지정
+- 공유 Node 패키지 환경: `--node-modules`로 패키지 폴더 지정
+
 ## 트러블슈팅 검증 자료
 
 - 공통 형식: 문제 → 원인 → 해결 / 실제 동작 화면; 화면의 출처·검증 결과 제목은 본문에서 생략

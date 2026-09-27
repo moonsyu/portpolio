@@ -1,0 +1,6 @@
+{
+  "name": "portpolio",
+  "private": true,
+  "scripts": { "build:pdf": "python scripts/build_pdf.py" },
+  "devDependencies": { "sharp": "0.35.4" }
+}
