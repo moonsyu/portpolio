@@ -70,8 +70,13 @@ python scripts/build_architectures.py
 
 - 상단 `PDF 다운로드` 버튼으로 포트폴리오 파일 저장
 - 출력: `output/pdf/Jang-MoonSu-Portfolio.pdf`
+- 형식: PPT와 같은 16:9 가로 슬라이드, 1280 × 720 pt
+- 웹페이지의 색상·강조·좌우 배치를 반영하고 각 구역을 독립 슬라이드로 출력
+- 순서: 표지 → 소개 → 기술 스택 → 수상·자격 → 프로젝트 목록 → 프로젝트별 개요·아키텍처·구현·트러블슈팅 → 연락처
+- 개요와 아키텍처를 서로 다른 페이지로 분리하고 글자를 선택·검색할 수 있도록 출력
 - 소개·수상·자격·프로젝트·개선·트러블슈팅 내용: `index.html`에서 추출
-- 기존 프로젝트 화면·아키텍처 사용, GIF는 시작·중간·마지막 장면과 온라인 재생 링크로 변환
+- 기존 프로젝트 화면·아키텍처 사용, 새 이미지 생성 불필요
+- GIF는 실행 화면 한 장과 온라인 재생 링크로 표시해 웹페이지의 좌우 배치 유지
 - 사이트 내용 변경 후 PDF 재생성 및 함께 커밋
 - 준비: `python -m pip install -r scripts/requirements-pdf.txt`, `npm install`
 - 생성: `python scripts/build_pdf.py`

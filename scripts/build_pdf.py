@@ -12,7 +12,6 @@ import subprocess
 import tempfile
 
 from reportlab.lib import colors
-from reportlab.lib.pagesizes import A4
 from reportlab.lib.styles import ParagraphStyle
 from reportlab.lib.utils import ImageReader
 from reportlab.pdfbase import pdfmetrics
@@ -24,9 +23,10 @@ from PIL import Image
 ROOT = Path(__file__).resolve().parents[1]
 OUTPUT = ROOT / 'output/pdf/Jang-MoonSu-Portfolio.pdf'
 INK, BLUE, MUTED, LINE, PAPER = map(colors.HexColor,
-    ['#172538', '#2355de', '#47556b', '#dce3ed', '#f4f7fc'])
-W, H = A4
-M, CW = 38, W - 76
+    ['#172538', '#2355de', '#47556b', '#dce3ed', '#f8fafc'])
+# PowerPoint widescreen: every source section owns one complete slide.
+W, H = 1280, 720
+M, CW = 56, W - 112
 
 
 class Element:
@@ -51,6 +51,8 @@ class Element:
         return found[0]
 
     def text(self):
+        if self.tag == 'br':
+            return ' · '
         return ' '.join(''.join(c.text() if isinstance(c, Element) else c
                                 for c in self.children).split()).replace('—', '-')
 
@@ -66,8 +68,6 @@ class Document(HTMLParser):
         self.feed(source)
 
     def handle_starttag(self, tag, attrs):
-        if tag == 'br':
-            self.stack[-1].children.append(' · ')
         node = Element(tag, attrs)
         self.stack[-1].children.append(node)
         if tag not in self.VOID:
@@ -83,237 +83,328 @@ class Document(HTMLParser):
         self.stack[-1].children.append(data)
 
 
+def direct(node, tag=None):
+    return [c for c in node.children if isinstance(c, Element)
+            and (not tag or c.tag == tag)]
+
+
+def rich(node):
+    """Keep source emphasis and line breaks without copying screen controls."""
+    if isinstance(node, str):
+        return escape(node)
+    if node.tag == 'button':
+        return ''
+    if node.tag == 'br':
+        return '<br/>'
+    body = ''.join(rich(c) for c in node.children)
+    return f'<b>{body}</b>' if node.tag in {'strong', 'b'} else body
+
+
+class Slides:
+    def __init__(self, site, count):
+        self.pdf = canvas.Canvas(str(OUTPUT), pagesize=(W, H),
+                                 pageCompression=1, invariant=1)
+        self.pdf.setTitle('장문수 | Developer Portfolio')
+        self.pdf.setAuthor('Jang MoonSu')
+        self.pdf.setPageSize((W, H))
+        self.site, self.count, self.page = site, count, 0
+
+    def text(self, value, x, y, width, size=22, color=INK, bold=True,
+             leading=None, bottom=654, markup=False):
+        style = ParagraphStyle('slide', fontName='CareerBold' if bold else 'Career',
+                               fontSize=size, leading=leading or size*1.5,
+                               textColor=color, wordWrap='LTR')
+        para = Paragraph(value if markup else escape(value), style)
+        _, height = para.wrap(width, H)
+        if y + height > bottom:
+            raise ValueError(f'Slide {self.page+1} overflow at {y+height:.1f}: {value}')
+        para.drawOn(self.pdf, x, H-y-height)
+        return y + height
+
+    def line(self, x, y, width, color=LINE):
+        self.pdf.setStrokeColor(color)
+        self.pdf.setLineWidth(1)
+        self.pdf.line(x, H-y, x+width, H-y)
+
+    def panel(self, x, y, width, height, fill=colors.white, border=LINE):
+        self.pdf.setFillColor(fill)
+        self.pdf.setStrokeColor(border)
+        self.pdf.roundRect(x, H-y-height, width, height, 12, fill=1, stroke=1)
+
+    def start(self, label, title, subtitle=None, dark=False):
+        self.pdf.setFillColor(INK if dark else PAPER)
+        self.pdf.rect(0, 0, W, H, stroke=0, fill=1)
+        self.text(label, M, 32, CW, 16, colors.HexColor('#a5bbff') if dark else BLUE)
+        end = self.text(title, M, 64, CW, 42,
+                        colors.white if dark else INK, leading=58)
+        if subtitle:
+            end = self.text(subtitle, M, end+7, CW, 27,
+                            colors.white if dark else INK, leading=39)
+        return end+28
+
+    def finish(self, anchor, dark=False):
+        self.page += 1
+        color = colors.HexColor('#b3bfd1') if dark else MUTED
+        self.line(M, 676, CW, colors.HexColor('#405067') if dark else LINE)
+        self.text('Jang MoonSu / PORTFOLIO', M, 685, 700, 13, color, bottom=714)
+        self.text(f'{self.page:02d} / {self.count:02d}', W-133, 685, 80,
+                  13, color, bottom=714)
+        self.pdf.linkURL(self.site+'#'+anchor, (M, 6, M+265, 36), relative=0)
+        self.pdf.showPage()
+
+    def bullets(self, nodes, x, y, width, size=22, gap=10, bottom=654):
+        for node in nodes:
+            self.text('•', x, y, 20, size, BLUE, bottom=bottom)
+            y = self.text(rich(node), x+25, y, width-25, size, bold=False,
+                          markup=True, bottom=bottom)+gap
+        return y
+
+    def link(self, title, href, x, y, width, size=19, color=BLUE):
+        end = self.text(title, x, y, width, size, color)
+        self.pdf.linkURL(href, (x, H-end, x+width, H-y), relative=0)
+        return end
+
+    def picture(self, path, x, y, width, height):
+        if height <= 0:
+            raise ValueError('Image has no available slide area')
+        with Image.open(path) as source:
+            rgba = source.convert('RGBA')
+            white = Image.new('RGBA', rgba.size, 'white')
+            white.alpha_composite(rgba)
+            scale = min(width/source.width, height/source.height)
+            iw, ih = source.width*scale, source.height*scale
+            self.pdf.drawImage(ImageReader(white.convert('RGB')),
+                               x+(width-iw)/2, H-y-(height-ih)/2-ih, iw, ih)
+
+
 def build(font_dir, node_modules=None):
     for name, filename in [('Career', 'malgun.ttf'), ('CareerBold', 'malgunbd.ttf')]:
         pdfmetrics.registerFont(TTFont(name, str(font_dir / filename)))
+    pdfmetrics.registerFontFamily('Career', normal='Career', bold='CareerBold')
+    pdfmetrics.registerFontFamily('CareerBold', normal='CareerBold', bold='CareerBold')
     doc = Document((ROOT / 'index.html').read_text(encoding='utf-8')).root
     projects = doc.select(tag='article', cls='project')
-    total = 2 + sum(len(p.select(cls='detail-section')) for p in projects)
-    site = next(n.attrs['href'] for n in doc.select(tag='link') if n.attrs.get('rel') == 'canonical')
+    site = next(n.attrs['href'] for n in doc.select(tag='link')
+                if n.attrs.get('rel') == 'canonical')
+    # Cover, profile, skills, credentials, index, each project section, contact.
+    total = 6 + sum(1+len(p.select(cls='detail-section')) for p in projects)
     OUTPUT.parent.mkdir(parents=True, exist_ok=True)
-    pdf = canvas.Canvas(str(OUTPUT), pagesize=A4, pageCompression=1, invariant=1)
-    pdf.setTitle('장문수 | Developer Portfolio')
-    pdf.setAuthor('Jang MoonSu')
-    page = 0
+    deck = Slides(site, total)
 
-    def text(value, x, top, width=CW, size=11, color=INK, bold=True, leading=None, bottom=H-42):
-        style = ParagraphStyle('portfolio', fontName='CareerBold' if bold else 'Career',
-            fontSize=size, leading=leading or size*1.6, textColor=color,
-            wordWrap='CJK', splitLongWords=True)
-        para = Paragraph(escape(value), style)
-        _, height = para.wrap(width, H)
-        if top + height > bottom:
-            raise ValueError(f'Page {page+1} overflow: {value}')
-        para.drawOn(pdf, x, H-top-height)
-        return top+height
-
-    def line(y):
-        pdf.setStrokeColor(LINE)
-        pdf.line(M, H-y, W-M, H-y)
-
-    def footer(anchor='home'):
-        nonlocal page
-        page += 1
-        line(H-35)
-        text('Jang MoonSu · PORTFOLIO', M, H-29, 220, 8, MUTED, False, bottom=H-8)
-        text(f'{page:02d} / {total:02d}', W-90, H-29, 52, 8, MUTED, False, bottom=H-8)
-        pdf.linkURL(site+'#'+anchor, (M,13,M+220,30), relative=0)
-        pdf.showPage()
-
-    def heading(label, title):
-        text(label, M, 35, size=10, color=BLUE)
-        y = text(title, M, 60, size=23, leading=33)
-        line(y+16)
-        return y+35
-
-    def bullets(items, x, y, width=CW, size=11):
-        for item in items:
-            y = text('• '+item.text(), x, y, width, size)+7
-        return y
-
-    def direct(node, tag=None):
-        return [c for c in node.children if isinstance(c, Element) and (not tag or c.tag==tag)]
-
-    def link(label, url, x, y, width=CW):
-        end = text(label, x, y, width, 10, BLUE)
-        pdf.linkURL(url, (x,H-end,x+width,H-y), relative=0)
-        return end
-
-    def caption(fig):
-        node = fig.one(tag='figcaption')
-        return ' '.join(c.text() if isinstance(c,Element) else c for c in node.children
-                        if not isinstance(c,Element) or c.tag!='button').strip()
-
-    with tempfile.TemporaryDirectory(prefix='portfolio-pdf-') as temp:
+    with tempfile.TemporaryDirectory(prefix='portfolio-slides-') as temp:
         temp = Path(temp)
-        images = {}
-        jobs = []
+        images, jobs = {}, []
         for img in doc.select(tag='img'):
             source = img.attrs.get('src')
             if not source or source in images:
                 continue
-            path = ROOT/source
+            path = ROOT / source
             if path.suffix == '.svg':
-                dest = temp/(path.stem+'.png')
-                jobs.append({'source':str(path),'dest':str(dest)})
-                images[source]=dest
+                dest = temp / (path.stem+'.png')
+                jobs.append({'source': str(path), 'dest': str(dest)})
+                images[source] = dest
             else:
-                images[source]=path
+                images[source] = path
         manifest = temp/'images.json'
-        manifest.write_text(json.dumps(jobs),encoding='utf-8')
+        manifest.write_text(json.dumps(jobs), encoding='utf-8')
         env = os.environ.copy()
         if node_modules:
-            env['NODE_PATH']=str(node_modules)
-        subprocess.run(['node','-e',"""
+            env['NODE_PATH'] = str(node_modules)
+        subprocess.run(['node', '-e', """
 const sharp=require('sharp'),fs=require('node:fs');
 const jobs=JSON.parse(fs.readFileSync(process.argv[1],'utf8'));
 (async()=>{for(const j of jobs) await sharp(j.source,{density:192}).png().toFile(j.dest);})()
 .catch(e=>{console.error(e);process.exitCode=1;});
-""",str(manifest)],check=True,env=env,cwd=ROOT)
+""", str(manifest)], check=True, env=env, cwd=ROOT)
 
-        def picture(path, x, y, width, height):
-            with Image.open(path) as im:
-                ratio=min(width/im.width,height/im.height)
-                iw,ih=im.width*ratio,im.height*ratio
-                rgba=im.convert('RGBA')
-                white=Image.new('RGBA',rgba.size,'white')
-                white.alpha_composite(rgba)
-                pdf.drawImage(ImageReader(white.convert('RGB')),x+(width-iw)/2,H-y-ih,iw,ih)
-                return y+ih
+        def image_path(node):
+            return images[node.attrs['src']]
 
-        def figure(fig, y, height):
+        def caption(fig):
+            node = fig.one(tag='figcaption')
+            spans = node.select(tag='span')
+            return rich(spans[0] if spans else node)
+
+        def figure(fig, x, y, width, height, fill=colors.white):
+            deck.panel(x, y, width, height, fill)
             nodes = fig.select(tag='img')
-            gap=14
-            width=(CW-gap*(len(nodes)-1))/len(nodes)
-            bottom=y
-            for i,node in enumerate(nodes):
-                bottom=max(bottom,picture(images[node.attrs['src']],M+(width+gap)*i,y,width,height))
-            first=fig.one(tag='figcaption')
-            spans=first.select(tag='span')
-            label=spans[0].text() if spans else caption(fig)
-            return text(label,M,bottom+9,size=10,color=MUTED)+10
+            inset, gap = 24, 18
+            slot = (width-2*inset-gap*(len(nodes)-1))/len(nodes)
+            for i, node in enumerate(nodes):
+                deck.picture(image_path(node), x+inset+(slot+gap)*i, y+inset,
+                             slot, height-100)
+            deck.text(caption(fig), x+24, y+height-66, width-48,
+                      18, MUTED, markup=True)
 
-        # Profile and skills: the current website remains the content source.
-        y=heading('01 / ABOUT','장문수 · Developer Portfolio')
-        profile=doc.one(cls='profile-heading')
-        picture(images[profile.one(tag='img').attrs['src']],M,y,76,92)
-        text(profile.one(tag='p').text(),M+94,y+8,size=21)
-        text(doc.one(cls='about-copy').text(),M+94,y+47,size=12,color=BLUE)
-        y+=115
-        bullets(doc.one(cls='about-points').select(tag='li'),M,y,220,11)
-        text('경력 및 교육',M+248,y,CW-248,14,BLUE)
-        cy=y+31
+        def facts(node, x, y, width):
+            for row in direct(node):
+                y = deck.text(row.one(tag='dt').text(), x, y, width, 23, BLUE)+6
+                y = deck.bullets(row.one(tag='dd').select(tag='li'), x, y,
+                                 width, 21, 7)+11
+            return y
+
+        # Match the website's cover, typography, colors, and reading order.
+        deck.start('MOONSYU / PORTFOLIO', '')
+        deck.text(doc.one(cls='hero').one(cls='eyebrow').text(), M, 137, CW, 20, BLUE)
+        title = doc.one(id='hero-title')
+        deck.text(''.join(c for c in title.children if isinstance(c, str)),
+                  M, 203, CW, 65, leading=84)
+        deck.text(title.one(tag='span').text(), M, 287, CW, 65, BLUE, leading=84)
+        deck.text(rich(doc.one(cls='hero-description')), M, 405, CW, 25,
+                  MUTED, markup=True, leading=43)
+        deck.link('프로젝트 보기 →', site+'#projects', M, 556, 280, 23)
+        deck.link('GitHub →', 'https://github.com/moonsyu', M+310, 556, 210, 23)
+        deck.finish('home')
+
+        y = deck.start('01 / ABOUT', '소개')
+        profile = doc.one(cls='profile-heading')
+        deck.picture(image_path(profile.one(tag='img')), M, y+12, 122, 148)
+        deck.text(profile.one(tag='h3').text(), M+150, y+32, 365, 37)
+        deck.text(profile.one(tag='p').text(), M+150, y+93, 365, 23, BLUE)
+        deck.text(doc.one(cls='about-copy').text(), M, y+198, 510, 29)
+        deck.bullets(doc.one(cls='about-points').select(tag='li'), M, y+260, 495, 23, 17)
+        x = 635
+        deck.text('경력 및 교육', x, y, W-M-x, 29)
+        cy = y+61
         for row in doc.select(cls='timeline-item'):
-            cy=text(row.one(tag='dt').text(),M+248,cy,CW-248,9,MUTED)+3
-            dd=row.one(tag='dd')
-            title=''.join(c for c in dd.children if isinstance(c,str)).strip()
-            cy=text(title,M+248,cy,CW-248,11)+2
-            cy=text(dd.one(tag='span').text(),M+248,cy,CW-248,10,MUTED)+13
-        y=max(487,cy+8)
-        text('보유 기술 스택',M,y,size=15,color=BLUE)
-        y+=33
-        for i,group in enumerate(doc.select(cls='skill-group')):
-            x=M+(CW/2+7)*(i%2)
-            top=y+85*(i//2)
-            text(group.one(tag='h3').text(),x,top,CW/2-14,12)
-            for j,item in enumerate(group.select(tag='li')):
-                sx=x+(CW/4)*(j%2)
-                sy=top+27+25*(j//2)
-                picture(images[item.one(tag='img').attrs['src']],sx,sy,17,17)
-                text(item.one(tag='span').text(),sx+22,sy,CW/4-28,8.5)
-        line(749)
-        for i,item in enumerate(doc.one(cls='contact-links').select(tag='a')):
-            link(item.select(tag='span')[-1].text().replace('↗','').strip(),item.attrs['href'],M+i*CW/3,760,CW/3-8)
-        footer('about')
+            deck.line(x, cy-9, W-M-x)
+            deck.text(row.one(tag='dt').text(), x, cy, 200, 18, MUTED)
+            dd = row.one(tag='dd')
+            label = ''.join(c for c in dd.children if isinstance(c, str)).strip()
+            end = deck.text(label, x+208, cy, W-M-x-208, 23)
+            end = deck.text(dd.one(tag='span').text(), x+208, end+5,
+                            W-M-x-208, 19, MUTED)
+            cy = max(cy+105, end+25)
+        deck.finish('about')
 
-        y=heading('01 / CREDENTIALS','수상 · 자격 · 어학')
-        text('수상',M,y,size=16,color=BLUE)
-        cy=y+40
-        for award in doc.one(cls='award-list').select(tag='li'):
-            cy=text(award.one(cls='award-organizer').text(),M,cy,310,10,BLUE)+4
-            cy=text(award.one(tag='h4').text(),M,cy,310,12)+5
-            cy=text(award.one(tag='time').text(),M,cy,310,10,MUTED)+24
-        qx=M+340
-        text('자격 · 어학',qx,y,CW-340,16,BLUE)
-        cy=y+40
-        for item in doc.one(cls='qualification-list').select(tag='li'):
-            cy=text(item.one(tag='h4').text(),qx,cy,CW-340,15)+12
+        y = deck.start('01 / ABOUT', '보유 기술 스택')
+        gap = 28
+        width = (CW-gap)/2
+        for i, group in enumerate(doc.select(cls='skill-group')):
+            x, top = M+(width+gap)*(i%2), y+250*(i//2)
+            deck.panel(x, top, width, 226)
+            deck.text(group.one(tag='h3').text(), x+24, top+20, width-48, 26)
+            for j, item in enumerate(group.select(tag='li')):
+                sx, sy = x+24+(width-48)/2*(j%2), top+81+64*(j//2)
+                deck.picture(image_path(item.one(tag='img')), sx, sy, 35, 35)
+                deck.text(item.one(tag='span').text(), sx+46, sy+1,
+                          (width-48)/2-54, 19, leading=26)
+        deck.finish('about')
+
+        y = deck.start('01 / ABOUT', '수상 · 자격 · 어학')
+        award_width, gap = 363, 20
+        for i, award in enumerate(doc.one(cls='award-list').select(tag='li')):
+            x, top = M+(award_width+gap)*(i%2), y+166*(i//2)
+            deck.panel(x, top, award_width, 149)
+            deck.text(award.one(cls='award-organizer').text(), x+18, top+14,
+                      award_width-36, 17, BLUE)
+            deck.text(award.one(tag='h4').text(), x+18, top+45,
+                      award_width-36, 20, leading=29)
+            deck.text(award.one(tag='time').text(), x+18, top+116,
+                      award_width-36, 16, MUTED)
+        qx, qw = 846, W-M-846
+        for i, item in enumerate(doc.one(cls='qualification-list').select(tag='li')):
+            top = y+i*250
+            deck.panel(qx, top, qw, 232)
+            cy = deck.text(item.one(tag='h4').text(), qx+25, top+22, qw-50, 30)+17
             for grade in item.select(cls='qualification-grade'):
-                cy=text(grade.text(),qx,cy,CW-340,12,BLUE)+12
+                cy = deck.text(grade.text(), qx+25, cy, qw-50, 23, BLUE)+15
             for row in direct(item.one(tag='dl')):
-                cy=text(row.one(tag='dt').text(),qx,cy,CW-340,10,MUTED)+3
-                cy=text(row.one(tag='dd').text(),qx,cy,CW-340,11)+12
-            cy+=26
-        footer('about')
+                deck.text(row.one(tag='dt').text(), qx+25, cy, 87, 18, MUTED)
+                cy = deck.text(row.one(tag='dd').text(), qx+119, cy,
+                               qw-144, 18)+13
+        deck.finish('about')
 
-        for i,project in enumerate(projects,1):
-            name=project.one(tag='h3').text()
-            anchor=project.attrs['id']
-            y=heading(f'02 / PROJECT {i:02d}',name)
-            desc=project.one(cls='project-description')
-            y=text(desc.one(tag='h4').text(),M,y,size=13)+5
-            meta=' · '.join(n.text() for n in desc.one(cls='project-meta').select(tag='span'))
-            y=text(meta,M,y,size=10,color=MUTED)+8
-            y=bullets(desc.one(tag='ul').select(tag='li'),M,y,size=10.5)
-            y=text(desc.one(cls='techline').text(),M,y,size=9,color=BLUE)+12
-            arch=project.one(cls='application-architecture')
-            image=arch.one(tag='img')
-            with Image.open(images[image.attrs['src']]) as im:
-                arch_height=CW*im.height/im.width
-            remaining=H-48-y-arch_height-56
-            y=figure(project.one(cls='project-visual'),y,max(75,remaining-30))
-            y=text('애플리케이션 아키텍처',M,y,size=11,color=BLUE)+9
-            end=picture(images[image.attrs['src']],M,y,CW,arch_height)
-            text(arch.one(tag='figcaption').select(tag='span')[0].text(),M,end+7,size=9,color=MUTED)
-            footer(anchor)
+        y = deck.start('02 / SELECTED WORK', '프로젝트')
+        for i, item in enumerate(doc.one(cls='project-index').select(tag='a')):
+            top = y+166*i
+            deck.panel(M, top, CW, 142)
+            deck.text(item.one(cls='index-number').text(), M+30, top+38, 85, 32, BLUE)
+            deck.text(item.one(tag='strong').text(), M+124, top+25, CW-170, 34)
+            deck.text(item.one(tag='small').text(), M+124, top+82, CW-170, 22, MUTED)
+            deck.pdf.linkURL(site+item.attrs['href'], (M, H-top-142, W-M, H-top), relative=0)
+        deck.finish('projects')
+
+        for project in projects:
+            name, anchor = project.one(tag='h3').text(), project.attrs['id']
+            y = deck.start(project.one(cls='project-category').text(), name)
+            figure(project.one(cls='project-visual'), M, y+8, 640, 480,
+                   colors.HexColor('#fff4df' if anchor=='bookies' else '#eaf0f8'))
+            desc = project.one(cls='project-description')
+            x, width = 737, W-M-737
+            cy = deck.text(rich(desc.one(tag='h4')), x, y+18, width, 29,
+                           markup=True, leading=44)+22
+            cy = deck.text('  |  '.join(n.text() for n in desc.one(cls='project-meta').select(tag='span')),
+                           x, cy, width, 19, MUTED)+23
+            cy = deck.bullets(desc.one(tag='ul').select(tag='li'), x, cy, width, 21, 13)+12
+            deck.line(x, cy, width)
+            deck.text(rich(desc.one(cls='techline')), x, cy+15, width,
+                      19, BLUE, markup=True, leading=30)
+            deck.finish(anchor)
 
             for section in project.select(cls='detail-section'):
-                if section.select(cls='application-architecture'):
-                    continue
-                title=section.one(tag='h4').text()
-                y=heading(name+' / '+section.one(cls='label').text(),title)
-                facts=section.select(cls='case-facts')
-                if facts:
-                    for row in direct(facts[0]):
-                        y=text(row.one(tag='dt').text(),M,y,size=13,color=BLUE)+7
-                        y=bullets(row.one(tag='dd').select(tag='li'),M,y,size=12)+12
-                else:
-                    for card in direct(section.one(cls='implementation-list')):
-                        y=text(card.one(tag='h5').text(),M,y,size=14,color=BLUE)+7
-                        y=bullets(card.select(tag='li'),M,y,size=12)+18
-                figures=section.select(tag='figure')
-                if figures:
-                    fig=figures[0]
-                    node=fig.one(tag='img')
-                    src=node.attrs['src']
+                title = section.one(tag='h4').text()
+                label = section.one(cls='label').text()
+                y = deck.start(label, name, title)
+                architecture = section.select(cls='application-architecture')
+                if architecture:
+                    fig = architecture[0]
+                    deck.panel(M, y-7, CW, 650-y)
+                    deck.picture(image_path(fig.one(tag='img')), M+12, y,
+                                 CW-24, 596-y)
+                    deck.text(caption(fig), M+25, 612, CW-50, 19, MUTED, markup=True)
+                elif section.select(cls='case-facts'):
+                    fact = section.one(cls='case-facts')
+                    fig = section.one(tag='figure')
+                    is_measurement = section.attrs['aria-labelledby']=='cons-measurement'
+                    fx, ix = (738, M) if is_measurement else (M, 636)
+                    fw, iw = (486, 640) if is_measurement else (530, 588)
+                    facts(fact, fx, y+6, fw)
+                    node = fig.one(tag='img')
+                    src = node.attrs['src']
                     if src.endswith('.gif'):
-                        with Image.open(images[src]) as gif:
-                            indices=[0,gif.n_frames//2,gif.n_frames-1]
-                            width=(CW-24)/3
-                            image_end=y
-                            for k,index in enumerate(indices):
-                                gif.seek(index)
-                                frame=temp/f'{anchor}-{section.attrs["aria-labelledby"]}-{k}.png'
-                                gif.convert('RGB').save(frame)
-                                x=M+(width+12)*k
-                                text(['시작','중간','마지막'][k],x,y,width,10,BLUE)
-                                image_end=max(image_end,picture(frame,x,y+24,width,H-y-130))
-                        y=text(caption(fig),M,image_end+14,size=11)+14
-                        link('실행 GIF 보기 - 온라인 포트폴리오',site+'#'+fig.attrs['id'],M,y)
+                        # One large source frame keeps the same composition as the web slide.
+                        # Motion remains accessible through a real, clickable online link.
+                        with Image.open(image_path(node)) as gif:
+                            gif.seek(gif.n_frames-1)
+                            frame = temp/(anchor+'-demo.png')
+                            gif.convert('RGB').save(frame)
+                        deck.panel(ix, y, iw, 650-y)
+                        deck.picture(frame, ix+20, y+20, iw-40, 541-y)
+                        deck.text(caption(fig), ix+24, 569, iw-48, 20, markup=True)
+                        deck.link('실행 GIF 보기 →', site+'#'+fig.attrs['id'],
+                                  ix+24, 609, iw-48, 19)
                     else:
-                        end=picture(images[src],M,y,CW,H-y-100)
-                        text(caption(fig),M,end+12,size=10,color=MUTED)
+                        figure(fig, ix, y, iw, 650-y)
                 else:
-                    figure(project.one(cls='project-visual'),y,min(250,H-y-100))
-                footer(section.attrs['aria-labelledby'])
-        assert page==total
-    pdf.save()
-    print(f'Created {OUTPUT} ({page} pages)')
+                    cards = direct(section.one(cls='implementation-list'))
+                    gap, width = 28, (CW-56)/3
+                    for i, card in enumerate(cards):
+                        x = M+(width+gap)*i
+                        deck.panel(x, y+26, width, 365)
+                        deck.text(f'{i+1:02d}', x+26, y+55, width-52, 25, BLUE)
+                        deck.text(card.one(tag='h5').text(), x+26, y+119, width-52, 26)
+                        deck.bullets(card.select(tag='li'), x+26, y+188, width-52, 22, 22)
+                deck.finish(section.attrs['aria-labelledby'])
+
+        y = deck.start('03 / CONTACT', '장문수', '개발 기록과 연락처', dark=True)
+        for i, item in enumerate(doc.one(cls='contact-links').select(tag='a')):
+            top = y+57+118*i
+            spans = item.select(tag='span')
+            deck.text(spans[0].text(), M, top, 220, 23, colors.HexColor('#b3bfd1'))
+            deck.link(spans[-1].text().replace('↗', '').strip(), item.attrs['href'],
+                      M+270, top-3, CW-270, 29, colors.white)
+            deck.line(M, top+64, CW, colors.HexColor('#405067'))
+        deck.finish('contact', dark=True)
+    assert deck.page == total, (deck.page, total)
+    deck.pdf.save()
+    print(f'Created {OUTPUT} ({total} slides, 16:9, {W} x {H} pt)')
 
 
-if __name__=='__main__':
-    parser=ArgumentParser(description=__doc__)
-    parser.add_argument('--font-dir',type=Path,default=Path(os.environ.get('WINDIR','C:/Windows'))/'Fonts')
-    parser.add_argument('--node-modules',type=Path)
-    args=parser.parse_args()
-    build(args.font_dir,args.node_modules)
+if __name__ == '__main__':
+    parser = ArgumentParser(description=__doc__)
+    parser.add_argument('--font-dir', type=Path,
+                        default=Path(os.environ.get('WINDIR', 'C:/Windows'))/'Fonts')
+    parser.add_argument('--node-modules', type=Path)
+    args = parser.parse_args()
+    build(args.font_dir, args.node_modules)
