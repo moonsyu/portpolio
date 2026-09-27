@@ -70,7 +70,12 @@ python scripts/build_architectures.py
 
 - 상단 `PDF 다운로드` 버튼으로 포트폴리오 파일 저장
 - 출력: `output/pdf/Jang-MoonSu-Portfolio.pdf`
+- 상단 `웹·앱 PDF` 버튼: `output/pdf/Jang-MoonSu-Web-App-Portfolio.pdf` 별도 편집본 저장
+- 별도본: STM-Simulator·임베디드 학습 기술·SSAFY 임베디드 트랙 및 전역 IoT·하드웨어 소개 제외
+- 사용자 지정 유지 항목: CONS 소개·아키텍처·개선·트러블슈팅과 모바일 연동 기술, BOOKIES 전체 내용
 - 형식: PPT와 같은 16:9 가로 슬라이드, 1280 × 720 pt
+- 수상 페이지: 왼쪽 수상 세로 목록·가로 구분선, 오른쪽 자격·어학 카드
+- 마지막 연락처 페이지: 본문과 같은 밝은 배경·푸른색 링크
 - 웹페이지의 색상·강조·좌우 배치를 반영하고 각 구역을 독립 슬라이드로 출력
 - 순서: 표지 → 소개 → 기술 스택 → 수상·자격 → 프로젝트 목록 → 프로젝트별 개요·아키텍처·구현·트러블슈팅 → 연락처
 - 개요와 아키텍처를 서로 다른 페이지로 분리하고 글자를 선택·검색할 수 있도록 출력
@@ -79,7 +84,8 @@ python scripts/build_architectures.py
 - GIF는 실행 화면 한 장과 온라인 재생 링크로 표시해 웹페이지의 좌우 배치 유지
 - 사이트 내용 변경 후 PDF 재생성 및 함께 커밋
 - 준비: `python -m pip install -r scripts/requirements-pdf.txt`, `npm install`
-- 생성: `python scripts/build_pdf.py`
+- 두 파일 생성: `python scripts/build_pdf.py`
+- 선택 생성: `--variant full` 또는 `--variant web-app`
 - 기본 글꼴: Windows 맑은 고딕, PDF에 글꼴 포함
 - 다른 환경: `--font-dir`로 `malgun.ttf`·`malgunbd.ttf` 폴더 지정
 - 공유 Node 패키지 환경: `--node-modules`로 패키지 폴더 지정

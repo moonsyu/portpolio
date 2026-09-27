@@ -22,6 +22,7 @@ from PIL import Image
 
 ROOT = Path(__file__).resolve().parents[1]
 OUTPUT = ROOT / 'output/pdf/Jang-MoonSu-Portfolio.pdf'
+WEB_APP_OUTPUT = ROOT / 'output/pdf/Jang-MoonSu-Web-App-Portfolio.pdf'
 INK, BLUE, MUTED, LINE, PAPER = map(colors.HexColor,
     ['#172538', '#2355de', '#47556b', '#dce3ed', '#f8fafc'])
 # PowerPoint widescreen: every source section owns one complete slide.
@@ -100,14 +101,51 @@ def rich(node):
     return f'<b>{body}</b>' if node.tag in {'strong', 'b'} else body
 
 
+def web_app_document(doc):
+    """Create the requested omission-only edition from the public source."""
+    def remove(node, predicate):
+        node.children = [c for c in node.children
+                         if not isinstance(c, Element) or not predicate(c)]
+        for child in direct(node):
+            remove(child, predicate)
+
+    # The requested separate edition excludes STM-Simulator completely.
+    # CONS remains intact under the user's explicit exception.
+    remove(doc, lambda n: n.tag == 'article' and n.attrs.get('id') == 'stm')
+    remove(doc.one(cls='project-index'), lambda n: n.tag == 'a' and
+           n.attrs.get('href') == '#stm')
+    remove(doc, lambda n: 'timeline-item' in n.attrs.get('class', '').split()
+           and 'SSAFY' in n.text())
+    remove(doc, lambda n: 'skill-group' in n.attrs.get('class', '').split()
+           and n.one(tag='h3').text() not in {'백엔드', '데이터 · 배포', '모바일 · 연동'})
+    title = doc.one(id='hero-title')
+    subtitle = Element('span')
+    subtitle.children = ['모바일 연동 · 클라우드 배포']
+    title.children = ['Java 백엔드 개발', subtitle]
+    doc.one(cls='hero-description').children = [
+        'Java 백엔드 개발과 Android·서버 연동 경험', Element('br'),
+        'CONS·BOOKIES의 구현 및 문제 해결 기록']
+    # Keep the broader profile software-focused; preserve all CONS project pages.
+    points = doc.one(cls='about-points')
+    bookies_roles = doc.one(id='bookies').one(cls='project-description').one(tag='ul')
+    mobile_point = Element('li')
+    mobile_point.children = ['Android·서버 연동']
+    points.children = [points.select(tag='li')[0], mobile_point, bookies_roles.select(tag='li')[1]]
+    for i, number in enumerate(doc.select(cls='index-number'), 1):
+        number.children = [f'{i:02d}']
+    for i, number in enumerate(doc.select(cls='project-number'), 1):
+        number.children = [f'{i:02d}']
+    return doc
+
+
 class Slides:
-    def __init__(self, site, count):
-        self.pdf = canvas.Canvas(str(OUTPUT), pagesize=(W, H),
+    def __init__(self, site, count, output=OUTPUT, variant='full'):
+        self.pdf = canvas.Canvas(str(output), pagesize=(W, H),
                                  pageCompression=1, invariant=1)
-        self.pdf.setTitle('장문수 | Developer Portfolio')
+        self.pdf.setTitle('장문수 | '+('Web & App Portfolio' if variant=='web-app' else 'Developer Portfolio'))
         self.pdf.setAuthor('Jang MoonSu')
         self.pdf.setPageSize((W, H))
-        self.site, self.count, self.page = site, count, 0
+        self.site, self.count, self.page, self.variant = site, count, 0, variant
 
     def text(self, value, x, y, width, size=22, color=INK, bold=True,
              leading=None, bottom=654, markup=False):
@@ -149,7 +187,9 @@ class Slides:
         self.text('Jang MoonSu / PORTFOLIO', M, 685, 700, 13, color, bottom=714)
         self.text(f'{self.page:02d} / {self.count:02d}', W-133, 685, 80,
                   13, color, bottom=714)
-        self.pdf.linkURL(self.site+'#'+anchor, (M, 6, M+265, 36), relative=0)
+        self.pdf.bookmarkPage(anchor)
+        if self.variant == 'full':
+            self.pdf.linkURL(self.site+'#'+anchor, (M, 6, M+265, 36), relative=0)
         self.pdf.showPage()
 
     def bullets(self, nodes, x, y, width, size=22, gap=10, bottom=654):
@@ -177,19 +217,23 @@ class Slides:
                                x+(width-iw)/2, H-y-(height-ih)/2-ih, iw, ih)
 
 
-def build(font_dir, node_modules=None):
+def build(font_dir, node_modules=None, variant='full', output=None):
     for name, filename in [('Career', 'malgun.ttf'), ('CareerBold', 'malgunbd.ttf')]:
         pdfmetrics.registerFont(TTFont(name, str(font_dir / filename)))
     pdfmetrics.registerFontFamily('Career', normal='Career', bold='CareerBold')
     pdfmetrics.registerFontFamily('CareerBold', normal='CareerBold', bold='CareerBold')
     doc = Document((ROOT / 'index.html').read_text(encoding='utf-8')).root
+    if variant == 'web-app':
+        doc = web_app_document(doc)
+    output = output or (WEB_APP_OUTPUT if variant == 'web-app' else OUTPUT)
     projects = doc.select(tag='article', cls='project')
     site = next(n.attrs['href'] for n in doc.select(tag='link')
                 if n.attrs.get('rel') == 'canonical')
     # Cover, profile, skills, credentials, index, each project section, contact.
-    total = 6 + sum(1+len(p.select(cls='detail-section')) for p in projects)
-    OUTPUT.parent.mkdir(parents=True, exist_ok=True)
-    deck = Slides(site, total)
+    include_index = len(projects) > 1
+    total = 5 + int(include_index) + sum(1+len(p.select(cls='detail-section')) for p in projects)
+    output.parent.mkdir(parents=True, exist_ok=True)
+    deck = Slides(site, total, output, variant)
 
     with tempfile.TemporaryDirectory(prefix='portfolio-slides-') as temp:
         temp = Path(temp)
@@ -249,10 +293,15 @@ const jobs=JSON.parse(fs.readFileSync(process.argv[1],'utf8'));
         title = doc.one(id='hero-title')
         deck.text(''.join(c for c in title.children if isinstance(c, str)),
                   M, 203, CW, 65, leading=84)
-        deck.text(title.one(tag='span').text(), M, 287, CW, 65, BLUE, leading=84)
+        deck.text(title.one(tag='span').text(), M, 287, CW,
+                  60 if variant=='web-app' else 65, BLUE, leading=84)
         deck.text(rich(doc.one(cls='hero-description')), M, 405, CW, 25,
                   MUTED, markup=True, leading=43)
-        deck.link('프로젝트 보기 →', site+'#projects', M, 556, 280, 23)
+        if variant == 'web-app':
+            end = deck.text('프로젝트 보기 →', M, 556, 280, 23, BLUE)
+            deck.pdf.linkAbsolute('', 'projects', (M, H-end, M+280, H-556))
+        else:
+            deck.link('프로젝트 보기 →', site+'#projects', M, 556, 280, 23)
         deck.link('GitHub →', 'https://github.com/moonsyu', M+310, 556, 210, 23)
         deck.finish('home')
 
@@ -282,49 +331,69 @@ const jobs=JSON.parse(fs.readFileSync(process.argv[1],'utf8'));
         width = (CW-gap)/2
         for i, group in enumerate(doc.select(cls='skill-group')):
             x, top = M+(width+gap)*(i%2), y+250*(i//2)
-            deck.panel(x, top, width, 226)
-            deck.text(group.one(tag='h3').text(), x+24, top+20, width-48, 26)
+            wide = variant=='web-app' and i==2
+            group_width = CW if wide else width
+            deck.panel(x, top, group_width, 226)
+            deck.text(group.one(tag='h3').text(), x+24, top+20, group_width-48, 26)
             for j, item in enumerate(group.select(tag='li')):
-                sx, sy = x+24+(width-48)/2*(j%2), top+81+64*(j//2)
-                deck.picture(image_path(item.one(tag='img')), sx, sy, 35, 35)
-                deck.text(item.one(tag='span').text(), sx+46, sy+1,
-                          (width-48)/2-54, 19, leading=26)
+                if wide:
+                    sx, sy = x+28+j*(CW-56)/4, top+92
+                    deck.picture(image_path(item.one(tag='img')), sx, sy, 44, 44)
+                    deck.text(item.one(tag='span').text(), sx+65, sy+4,
+                              (CW-56)/4-76, 23)
+                else:
+                    sx, sy = x+24+(width-48)/2*(j%2), top+81+64*(j//2)
+                    deck.picture(image_path(item.one(tag='img')), sx, sy, 35, 35)
+                    deck.text(item.one(tag='span').text(), sx+46, sy+1,
+                              (width-48)/2-54, 19, leading=26)
         deck.finish('about')
 
-        y = deck.start('01 / ABOUT', '수상 · 자격 · 어학')
-        deck.text('수상 내역', M+22, y, 620, 18, MUTED)
-        deck.text('주최·주관', 730, y, 285, 18, MUTED)
-        deck.text('수상일', 1090, y, 112, 18, MUTED)
+        deck.start('01 / ABOUT', '')
+        award_width, qx, qw = 720, 834, W-M-834
+        deck.text('수상', M, 76, award_width, 32)
+        deck.text('자격 · 어학', qx, 76, qw, 32)
         for i, award in enumerate(doc.one(cls='award-list').select(tag='li')):
-            top = y+34+56*i
-            deck.panel(M, top, CW, 51)
-            deck.text(award.one(tag='h4').text(), M+22, top+9,
-                      620, 22, leading=32, bottom=top+42)
-            deck.text(award.one(cls='award-organizer').text(), 730, top+12,
-                      335, 19, BLUE, leading=28, bottom=top+42)
-            deck.text(award.one(tag='time').text(), 1090, top+13,
-                      112, 18, MUTED, leading=27, bottom=top+42)
-        qw = (CW-28)/2
+            top = 142+85*i
+            deck.text(award.one(cls='award-organizer').text(), M, top,
+                      award_width, 16, BLUE, leading=22)
+            title = award.one(tag='h4')
+            title_markup = ''.join(
+                f'<font color="#2355de">{rich(c)}</font>'
+                if isinstance(c, Element) and 'award-grade' in c.attrs.get('class', '').split()
+                else rich(c) for c in title.children)
+            deck.text(title_markup, M, top+23, award_width, 21,
+                      leading=29, bottom=top+52, markup=True)
+            deck.text(award.one(tag='time').text(), M, top+53,
+                      award_width, 15, MUTED, leading=21)
+            if i < 5:
+                deck.line(M, top+78, award_width)
         for i, item in enumerate(doc.one(cls='qualification-list').select(tag='li')):
-            qx, top = M+(qw+28)*i, 545
-            deck.panel(qx, top, qw, 109)
-            deck.text(item.one(tag='h4').text(), qx+22, top+13, 230, 26)
+            top = 142+i*188
+            deck.panel(qx, top, qw, 165 if i==0 else 218)
+            cy = deck.text(item.one(tag='h4').text(), qx+23, top+20, qw-46, 26)+18
             for grade in item.select(cls='qualification-grade'):
-                deck.text(grade.text(), qx+186, top+18, qw-208, 22, BLUE)
-            fields = '    ·    '.join(row.one(tag='dt').text()+'  '+row.one(tag='dd').text()
-                                      for row in direct(item.one(tag='dl')))
-            deck.text(fields, qx+22, top+65, qw-44, 17, MUTED)
+                grade_name = ''.join(c for c in grade.children if isinstance(c, str)).strip()
+                cy = deck.text(grade_name, qx+23, cy, qw-46, 24, BLUE)+4
+                cy = deck.text(grade.one(tag='span').text(), qx+23, cy, qw-46, 18, BLUE)+18
+            for row in direct(item.one(tag='dl')):
+                deck.text(row.one(tag='dt').text(), qx+23, cy, 90, 17, MUTED)
+                cy = deck.text(row.one(tag='dd').text(), qx+119, cy, qw-142, 17)+8
         deck.finish('about')
 
-        y = deck.start('02 / SELECTED WORK', '프로젝트')
-        for i, item in enumerate(doc.one(cls='project-index').select(tag='a')):
-            top = y+166*i
-            deck.panel(M, top, CW, 142)
-            deck.text(item.one(cls='index-number').text(), M+30, top+38, 85, 32, BLUE)
-            deck.text(item.one(tag='strong').text(), M+124, top+25, CW-170, 34)
-            deck.text(item.one(tag='small').text(), M+124, top+82, CW-170, 22, MUTED)
-            deck.pdf.linkURL(site+item.attrs['href'], (M, H-top-142, W-M, H-top), relative=0)
-        deck.finish('projects')
+        if include_index:
+            y = deck.start('02 / SELECTED WORK', '프로젝트')
+            for i, item in enumerate(doc.one(cls='project-index').select(tag='a')):
+                top = y+166*i
+                deck.panel(M, top, CW, 142)
+                deck.text(item.one(cls='index-number').text(), M+30, top+38, 85, 32, BLUE)
+                deck.text(item.one(tag='strong').text(), M+124, top+25, CW-170, 34)
+                deck.text(item.one(tag='small').text(), M+124, top+82, CW-170, 22, MUTED)
+                rect = (M, H-top-142, W-M, H-top)
+                if variant=='web-app':
+                    deck.pdf.linkAbsolute('', item.attrs['href'][1:], rect)
+                else:
+                    deck.pdf.linkURL(site+item.attrs['href'], rect, relative=0)
+            deck.finish('projects')
 
         for project in projects:
             name, anchor = project.one(tag='h3').text(), project.attrs['id']
@@ -388,18 +457,18 @@ const jobs=JSON.parse(fs.readFileSync(process.argv[1],'utf8'));
                         deck.bullets(card.select(tag='li'), x+26, y+188, width-52, 22, 22)
                 deck.finish(section.attrs['aria-labelledby'])
 
-        y = deck.start('03 / CONTACT', '장문수', '개발 기록과 연락처', dark=True)
+        y = deck.start('03 / CONTACT', '장문수', '개발 기록과 연락처')
         for i, item in enumerate(doc.one(cls='contact-links').select(tag='a')):
             top = y+57+118*i
             spans = item.select(tag='span')
-            deck.text(spans[0].text(), M, top, 220, 23, colors.HexColor('#b3bfd1'))
+            deck.text(spans[0].text(), M, top, 220, 23, MUTED)
             deck.link(spans[-1].text().replace('↗', '').strip(), item.attrs['href'],
-                      M+270, top-3, CW-270, 29, colors.white)
-            deck.line(M, top+64, CW, colors.HexColor('#405067'))
-        deck.finish('contact', dark=True)
+                      M+270, top-3, CW-270, 29, BLUE)
+            deck.line(M, top+64, CW)
+        deck.finish('contact')
     assert deck.page == total, (deck.page, total)
     deck.pdf.save()
-    print(f'Created {OUTPUT} ({total} slides, 16:9, {W} x {H} pt)')
+    print(f'Created {output} ({total} slides, 16:9, {W} x {H} pt)')
 
 
 if __name__ == '__main__':
@@ -407,5 +476,7 @@ if __name__ == '__main__':
     parser.add_argument('--font-dir', type=Path,
                         default=Path(os.environ.get('WINDIR', 'C:/Windows'))/'Fonts')
     parser.add_argument('--node-modules', type=Path)
+    parser.add_argument('--variant', choices=['all', 'full', 'web-app'], default='all')
     args = parser.parse_args()
-    build(args.font_dir, args.node_modules)
+    for variant in (['full', 'web-app'] if args.variant=='all' else [args.variant]):
+        build(args.font_dir, args.node_modules, variant)
