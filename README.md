@@ -23,7 +23,6 @@ python -m http.server 8080
 
 - `index.html`: 소개·프로젝트·경력·연락처
 - `styles.css`: 반응형 디자인·인쇄·모션 감소 설정
-- `selected-design.css`: 확정된 B안 소개·A안 경력 및 소개~STM 슬라이드 디자인
 - `app.js`: 이미지 확대·탐색 상태 표시
 - `assets/`: 포트폴리오에 사용한 실제 프로젝트 화면·프로필 사진
 - `assets/architecture/`: 애플리케이션 아키텍처 SVG·아이콘·출처·라이선스
@@ -74,13 +73,11 @@ python scripts/build_architectures.py
 - 상단 `웹·앱 PDF` 버튼: `output/pdf/Jang-MoonSu-Web-App-Portfolio.pdf` 별도 편집본 저장
 - 별도본: STM-Simulator·임베디드 학습 기술·SSAFY 임베디드 트랙 및 전역 IoT·하드웨어 소개 제외
 - 사용자 지정 유지 항목: CONS 소개·아키텍처·개선·트러블슈팅과 모바일 연동 기술, BOOKIES 전체 내용
-- 형식: PPT와 같은 16:9 가로 슬라이드, 1600 × 900 pt
-- 페이지 수: 전체 17쪽, 웹·앱 별도본 14쪽
+- 형식: PPT와 같은 16:9 가로 슬라이드, 1280 × 720 pt
 - 수상 페이지: 왼쪽 수상 세로 목록·가로 구분선, 오른쪽 자격·어학 카드
 - 마지막 연락처 페이지: 본문과 같은 밝은 배경·푸른색 링크
 - 웹페이지의 색상·강조·좌우 배치를 반영하고 각 구역을 독립 슬라이드로 출력
-- 순서: 소개 → 경력 및 교육 → 기술 스택 → 수상·자격 → 프로젝트별 개요·아키텍처·구현·트러블슈팅 → 연락처
-- 웹·앱 별도본: 프로젝트 상세 앞에 CONS·BOOKIES 목차 추가
+- 순서: 표지 → 소개 → 기술 스택 → 수상·자격 → 프로젝트 목록 → 프로젝트별 개요·아키텍처·구현·트러블슈팅 → 연락처
 - 개요와 아키텍처를 서로 다른 페이지로 분리하고 글자를 선택·검색할 수 있도록 출력
 - 소개·수상·자격·프로젝트·개선·트러블슈팅 내용: `index.html`에서 추출
 - 기존 프로젝트 화면·아키텍처 사용, 새 이미지 생성 불필요
@@ -92,19 +89,6 @@ python scripts/build_architectures.py
 - 기본 글꼴: Windows 맑은 고딕, PDF에 글꼴 포함
 - 다른 환경: `--font-dir`로 `malgun.ttf`·`malgunbd.ttf` 폴더 지정
 - 공유 Node 패키지 환경: `--node-modules`로 패키지 폴더 지정
-
-## 확정 디자인 및 화면 검증
-
-- 소개~STM-Simulator: B안 소개와 A안 경력 배치, 파란 글자, 슬라이드별 여백·제목 체계 적용
-- 기존 `assets/architecture/` 도식 원본 유지
-- 수상 6건: 왼쪽 세로 목록·가로 구분선, 오른쪽 자격·어학 카드 유지
-- 웹폰트: Manrope·Noto Sans KR, SIL OFL 라이선스와 함께 `assets/fonts/`에 자체 호스팅
-- 글자 추가 후 폰트 갱신: `fonttools` 설치 후 `python scripts/subset_site_fonts.py`
-- 폰트 원본: `PORTFOLIO_DESIGN_FONTS` 폴더의 `Manrope.ttf`, `NotoSansKR.ttf`; 기본 경로는 저장소 옆 `portpolio-work/design-fonts`
-- 화면 검사: Playwright 사용 환경에서 `node scripts/check_selected_site.cjs`
-- 검사 브라우저: 기본 Windows Chrome, 다른 환경은 `PORTFOLIO_TEST_BROWSER`로 실행 파일 지정
-- 검사 범위: 1600~360px 너비, 글꼴 로드, 8개 슬라이드, 이미지 확대·휠·드래그, GIF 재생, 탐색 상태
-- 검사 결과·이미지: 저장소 옆 `portpolio-work/site-review`; `PORTFOLIO_SITE_REVIEW`로 출력 폴더 변경 가능
 
 ## 트러블슈팅 검증 자료
 

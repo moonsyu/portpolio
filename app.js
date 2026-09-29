@@ -95,10 +95,8 @@ const navigation = document.querySelectorAll('nav a[href^="#"]');
 const observer = new IntersectionObserver(entries => {
   entries.forEach(entry => {
     if (entry.isIntersecting) {
-      const sectionId = entry.target.id;
-      const destination = ['about', 'skills', 'credentials'].includes(sectionId) ? 'home' : sectionId;
       navigation.forEach(link => {
-        if (link.hash === `#${destination}`) link.setAttribute('aria-current', 'location');
+        if (link.hash === `#${entry.target.id}`) link.setAttribute('aria-current', 'location');
         else link.removeAttribute('aria-current');
       });
     }
