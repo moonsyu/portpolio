@@ -29,6 +29,13 @@ python -m http.server 8080
 - `scripts/build_architectures.py`: 아키텍처 도식 생성 스크립트(Python 표준 라이브러리)
 - `.nojekyll`: 정적 파일 배포 설정
 
+## 포트폴리오 전면 개편 계획
+
+- [개발자 포트폴리오 제작 기준](docs/portfolio-redesign/README.md)
+- [35페이지 구성과 내용별 수정·확인 사항](docs/portfolio-redesign/페이지_구성_및_확인사항.md)
+- Canva Almost White and Black 템플릿 기반 PPTX 제작 계획. 최신 내용 결정일: 2026-10-02.
+- 2026-10-04 `remote-codex`에서 이전. 현재 웹사이트와 PDF에 적용한 결과가 아닌 제작 기준 문서.
+
 ## 배포
 
 - GitHub Pages: `main` 브랜치의 `/` 경로에서 배포
