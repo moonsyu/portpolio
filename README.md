@@ -2,13 +2,23 @@
 
 - 웹사이트: [moonsyu.github.io/portpolio](https://moonsyu.github.io/portpolio/)
 - 구성: HTML·CSS·JavaScript 기반 정적 사이트
-- 프로젝트: STM-Simulator → CONS → BOOKIES
+- 프로젝트: STM-Simulator → CONS → BOOKIES → Arabica → CMP → Wallet
 - 소개: Java 백엔드, IoT 연동, 학습 도구 개발 경험
 - 순서: 소개(01) → 프로젝트(02) → 연락처(03)
 - 보유 기술: 기술 아이콘과 이름을 함께 표시
 - 수상·자격: 별도 목록, 수상 기관·행사명·일자 및 자격·어학 등급·취득일 표시
 - 기능: 소개·프로젝트 탐색, 상세 내용 기본 펼침·접기, 이미지 드래그·휠 확대, 실행 GIF 재생·일시정지, 반응형 레이아웃
-- 애플리케이션 아키텍처: 기술·기능 아이콘, 모듈별 영역, 요청·응답·저장 흐름을 표현한 SVG 도식 3개
+- 애플리케이션 아키텍처: 기술·기능 아이콘, 모듈별 영역, 요청·응답·저장 흐름을 표현한 SVG 도식 6개
+
+## 회사 프로젝트 추가 · 2026-10-04
+
+- 기존 스타일·반응형 레이아웃·이미지 확대 동작을 유지하고 회사 프로젝트 3개 추가.
+- Arabica: 정책·예약 백업, 비동기 실행과 결과 판독·검증 분리, 복원 이력 날짜 처리, 차등 백업 명령 인자 수정.
+- CMP: NSS·NBU API 연동, MVC→WebFlux 전환, 테넌트별 조회 범위 수정, 평균·P95·오류율을 함께 비교한 부하 시험.
+- Wallet: 사용자 식별자 분리, DB·계좌 저장 매핑 수정, Wallet·Store SSE 인증 연동, XSS 정제값 반영.
+- 추가 보완 설계·회고 페이지는 보류. 현재 구현과 Git에서 확인한 변경만 사용.
+- 기존 회사 프로젝트 도식 8개를 재사용. 출처·포함 범위는 [콘텐츠 반영 기록](docs/company-projects-content.md)에 정리.
+- 이번 변경은 웹페이지에만 반영. 다운로드 PDF는 기존 프로젝트 구성 유지.
 
 ## 로컬 실행
 
@@ -61,6 +71,7 @@ python scripts/build_architectures.py
 - 기술 아이콘: [Devicon](https://github.com/devicons/devicon), MIT 라이선스
 - 기능 아이콘: [Lucide](https://github.com/lucide-icons/lucide), ISC 라이선스
 - 원본 아이콘·고정 커밋별 다운로드 경로: `assets/architecture/icon-sources.json`
+- 회사 프로젝트 도식에 포함된 아이콘 출처: `assets/architecture/company-icon-sources.json` (동일 라이선스·고정 커밋)
 - 라이선스 전문: `assets/architecture/DEVICON-LICENSE.txt`, `assets/architecture/LUCIDE-LICENSE.txt`
 - 기술 로고는 사용 기술의 식별 목적으로 표시하며 각 상표권은 해당 권리자에게 귀속
 - 결과 SVG에 아이콘을 포함하여 외부 CDN 연결 없이 렌더링
@@ -89,7 +100,7 @@ python scripts/build_architectures.py
 - 소개·수상·자격·프로젝트·개선·트러블슈팅 내용: `index.html`에서 추출
 - 기존 프로젝트 화면·아키텍처 사용, 새 이미지 생성 불필요
 - GIF는 실행 화면 한 장과 온라인 재생 링크로 표시해 웹페이지의 좌우 배치 유지
-- 사이트 내용 변경 후 PDF 재생성 및 함께 커밋
+- PDF 갱신 요청 시 사이트 내용에 맞춰 별도 생성. 2026-10-04 회사 프로젝트 추가는 웹 전용이며 기존 PDF에 미반영.
 - 준비: `python -m pip install -r scripts/requirements-pdf.txt`, `npm install`
 - 두 파일 생성: `python scripts/build_pdf.py`
 - 선택 생성: `--variant full` 또는 `--variant web-app`
