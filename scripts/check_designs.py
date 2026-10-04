@@ -2,8 +2,7 @@
 from collections import defaultdict
 import re
 from design_board import Board, width, AWARDS, TIMELINE, UART
-from build_design_ac import make_a, make_c
-from build_design_b import build
+from build_design_c import make_c
 
 original = Board.text
 layouts = defaultdict(list)
@@ -18,8 +17,6 @@ def record(self, x, y, value, size=24, weight=600, color='#211C37', anchor='star
     return original(self, x, y, value, size, weight, color, anchor)
 
 Board.text = record
-make_a()
-build()
 make_c()
 for filename, boxes in layouts.items():
     for i, a in enumerate(boxes):

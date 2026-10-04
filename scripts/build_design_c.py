@@ -1,107 +1,9 @@
-"""Static, vector-based portfolio design alternatives A and C.
-
-Both boards deliberately reuse only verified portfolio copy and supplied assets.
-They are review artifacts; neither changes the published portfolio.
-"""
+"""Archived C design generator; excluded from the current portfolio redesign."""
 from design_board import (Board, TIMELINE, SKILLS, AWARDS, ABOUT, STM_POINTS,
                           OLD, IMPROVED, UART, qualification, icon, width, ROOT)
 
 
 ASSET = ROOT / 'assets'
-
-
-def rule(b, x, y, w, color):
-    b.line(x, y, x + w, y, color, 2)
-
-
-def a_skill_row(b, x, y, group, items):
-    b.text(x, y, group, 23, 750, '#6845D7')
-    cx = x
-    for name, label in items:
-        icon(b, name, cx, y + 52, 32)
-        b.text(cx + 44, y + 56, label, 21, 650, '#211C37')
-        cx += max(170, width(label, 21, 650) + 78)
-
-
-def make_a():
-    p = '#6845D7'; pale = '#F2EEFF'; ink = '#211C37'; muted = '#635E73'
-    b = Board('a-frontend-design', 'A안 · 강한 타이포그래피 포트폴리오', 7500, '#FFFFFF')
-    # Introduction: an editorial violet field separated sharply from project work.
-    b.rect(0, 0, 1600, 1370, p)
-    b.text(100, 74, '장문수  ·  Jang MoonSu', 30, 760, '#FFFFFF')
-    b.text(100, 130, '소개', 20, 650, pale)
-    b.text(270, 130, 'STM-Simulator', 20, 650, pale)
-    b.text(510, 130, 'GitHub', 20, 650, pale)
-    rule(b, 100, 183, 1400, '#A996EE')
-    b.text(100, 285, '백엔드에서', 86, 820, '#FFFFFF')
-    b.text(100, 405, '하드웨어 학습까지', 86, 820, '#FFFFFF')
-    b.text(100, 525, '연결하는 개발자', 86, 820, '#FFFFFF')
-    b.para(105, 685, 'Java 기반 서버 개발 경험을 바탕으로\nAndroid·센서 데이터 연동과 STM32 HAL 학습을 이어갑니다.', 690, 27, 600, pale, 48)
-    b.rect(104, 875, 230, 66, '#FFFFFF', 0)
-    b.text(129, 894, '프로젝트 보기', 22, 750, p)
-    b.image(ASSET / 'profile.webp', 1045, 245, 380, 475, 0, 'slice')
-    b.line(1015, 810, 1450, 810, '#A996EE', 2)
-    b.text(1045, 850, 'Java · Android · IoT', 24, 700, '#FFFFFF')
-    b.text(1045, 902, '학습과 구현의 연결', 24, 600, pale)
-    # Evidence sections have generous white space and no repeated card grid.
-    b.text(100, 1480, '경력', 55, 820, ink)
-    b.text(100, 1560, '경험을 축적하며 개발의 범위를 넓혔습니다.', 26, 600, muted)
-    rule(b, 100, 1625, 1400, '#DAD3ED')
-    y = 1680
-    for date, role, org in TIMELINE:
-        b.text(100, y, date, 22, 750, p)
-        b.text(430, y, role, 27, 760, ink)
-        b.text(1080, y + 3, org, 22, 600, muted)
-        rule(b, 100, y + 58, 1400, '#E7E1F2')
-        y += 96
-
-    b.rect(0, 2100, 1600, 850, pale)
-    b.text(100, 2200, '기술', 55, 820, ink)
-    b.text(100, 2285, '실제 사용한 도구를 역할별로 정리했습니다.', 26, 600, muted)
-    y = 2385
-    for group, items in SKILLS:
-        a_skill_row(b, 100, y, group, items)
-        y += 132
-
-    b.text(100, 3130, '수상 · 자격', 55, 820, ink)
-    b.text(100, 3215, '학습 과정과 결과를 기록한 이력입니다.', 26, 600, muted)
-    rule(b, 100, 3280, 900, '#DAD3ED')
-    y = 3335
-    for date, org, title, award in AWARDS:
-        b.text(100, y, date, 19, 700, p)
-        b.text(285, y, org, 20, 680, muted)
-        b.para(285, y + 38, title, 650, 23, 730, ink, 34)
-        b.text(945, y + 18, award, 23, 800, p, 'end')
-        y += 112
-    qualification(b, 1080, 3305, 330, p, ink, pale)
-
-    # Project half: dark, wide, screenshot-led composition.
-    b.rect(0, 4100, 1600, 3400, ink)
-    b.text(100, 4210, 'STM-Simulator', 70, 820, '#FFFFFF')
-    b.text(100, 4310, '2026.09 — 현재  ·  1인', 24, 750, '#C8B9FF')
-    b.text(100, 4365, '회로와 C/HAL 학습을 한 화면에서 연결한 데스크톱 학습 도구', 27, 600, pale)
-    b.bullets(100, 4440, STM_POINTS, 1300, 23, 600, pale, 6)
-    b.text(100, 4570, 'Electron · JavaScript · HTML / CSS / SVG · C · STM32 HAL 학습', 23, 650, '#C8B9FF')
-    b.image(ASSET / 'stm-simulator.webp', 100, 4615, 1400, 838, 0)
-    b.text(100, 5540, '애플리케이션 구조', 33, 820, '#FFFFFF')
-    b.image(ASSET / 'architecture/stm-application.svg', 300, 5600, 1000)
-    b.text(100, 6310, '확인 흐름 개선', 29, 820, '#FFFFFF')
-    b.text(100, 6370, '기존 실습 준비', 24, 750, '#C8B9FF')
-    yy = b.bullets(100, 6420, OLD, 700, 23, 600, pale, 8)
-    b.text(100, yy + 20, '개선 사항', 24, 750, '#C8B9FF')
-    b.bullets(100, yy + 68, IMPROVED, 700, 23, 600, pale, 8)
-    b.image(ASSET / 'stm-led-demo-poster.webp', 880, 6310, 600, 460, 0)
-    b.text(880, 6790, 'HAL LED 예제 화면', 22, 650, pale)
-    b.line(100, 6880, 1500, 6880, '#635E73')
-    b.text(100, 6930, 'UART 시뮬레이션의 시간 경계 오류 수정', 38, 820, '#FFFFFF')
-    for i, (label, value) in enumerate(UART):
-        yy = 7020 + i * 90
-        b.text(100, yy, label, 23, 750, '#C8B9FF')
-        b.para(245, yy, value, 630, 23, 600, pale, 34)
-    b.image(ASSET / 'stm-uart-verified.webp', 990, 7030, 480, 162, 0)
-    b.text(990, 7220, 'RX·TX 모두 ‘HAL log’ 일치', 25, 750, '#FFFFFF')
-    b.para(990, 7275, '9600 baud · 260ms에 입력\n20ms 한 단계 실행', 480, 22, 600, pale, 34)
-    b.save()
 
 
 def c_rail_item(b, y, label, active=False):
@@ -213,5 +115,4 @@ def make_c():
 
 
 if __name__ == '__main__':
-    make_a()
     make_c()
