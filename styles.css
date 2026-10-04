@@ -111,6 +111,7 @@ strong,b{font-weight:750;color:var(--ink)}
 @media print{body{font-size:11pt}.about,.projects{padding-block:20px}.detail-body{padding:16px}.demo-toggle{display:none}.skill-icons img{width:25px;height:25px}.credentials-layout{display:block}.qualification-list{grid-template-columns:1fr 1fr}}
 
 /* Shared troubleshooting evidence layout and minimal image viewer */
+.image-button[data-demo-toggle]{cursor:pointer}
 .dialog-toolbar{justify-content:flex-end;margin-bottom:10px}
 .dialog-viewport{height:78vh;max-height:820px}
 .troubleshooting-grid{display:grid;grid-template-columns:1fr 1.15fr;gap:36px;align-items:start}

@@ -84,8 +84,8 @@ document.querySelectorAll('[data-demo-toggle]').forEach(button => {
   const image = demo.querySelector('img');
   function setPlaying(playing) {
     image.src = playing ? image.dataset.gif : image.dataset.poster;
-    button.textContent = playing ? 'GIF 일시정지' : 'GIF 재생';
     button.setAttribute('aria-pressed', String(playing));
+    button.setAttribute('aria-label', `${button.dataset.demoLabel} GIF ${playing ? '일시정지' : '재생'}`);
   }
   setPlaying(!window.matchMedia('(prefers-reduced-motion: reduce)').matches);
   button.addEventListener('click', () => setPlaying(button.getAttribute('aria-pressed') !== 'true'));

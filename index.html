@@ -11,9 +11,9 @@
   <meta property="og:url" content="https://moonsyu.github.io/portpolio/">
   <link rel="canonical" href="https://moonsyu.github.io/portpolio/">
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' rx='6' fill='%23172538'/%3E%3Cpath d='M9 29V11l11 12 11-12v18' fill='none' stroke='%23fff' stroke-width='3'/%3E%3C/svg%3E">
-  <link rel="stylesheet" href="./styles.css?v=portfolio-4">
+  <link rel="stylesheet" href="./styles.css?v=portfolio-5">
   <title>장문수 | Developer Portfolio</title>
-  <script src="./app.js?v=portfolio-4" defer></script>
+  <script src="./app.js?v=portfolio-5" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#main">본문으로 바로가기</a>
@@ -63,7 +63,7 @@
           <figure class="project-visual"><button class="image-button" type="button" data-enlarge aria-label="STM-Simulator 실행 화면 확대"><img src="./assets/stm-simulator.webp" width="1800" height="1078" alt="STM-Simulator — 회로 편집·주변장치 설정·코드 실행 화면" loading="lazy"></button><figcaption><span>회로·설정·소스를 함께 확인하는 작업 공간</span><span>클릭하여 확대 ↗</span></figcaption></figure>
           <div class="project-description"><h4>Electron 기반<br>회로 배선·주변장치 설정 시뮬레이터</h4><div class="project-meta"><span>2026.09 — 현재</span><span>1인 프로젝트</span></div><ul><li>회로 편집과 주변장치 설정 기능 구현</li><li>지원 범위의 C/HAL 동작 모델과 장치 상태 연동</li><li>HAL 예제에서 설정·회로를 함께 확인하는 실습 환경</li></ul><p class="techline">Electron · JavaScript · HTML / CSS / SVG<br>C · STM32 HAL 학습</p></div>
         </div>
-        <details class="detail" open><summary>애플리케이션 아키텍처 · 개선 · 트러블슈팅 <small>UART 수신 경계 오류 수정</small></summary><div class="detail-body">
+        <details class="detail" open><summary>애플리케이션 아키텍처 · 구현 · 트러블슈팅 · 테스트 <small>UART 수신 시간 경계 오류</small></summary><div class="detail-body">
           <section class="detail-section" aria-labelledby="stm-architecture">
             <span class="label">APPLICATION ARCHITECTURE</span><h4 class="detail-title" id="stm-architecture">애플리케이션 아키텍처</h4>
             <figure class="application-architecture">
@@ -72,8 +72,6 @@
                   <img src="./assets/architecture/stm-application.svg" width="1320" height="800" alt="STM-Simulator 애플리케이션 아키텍처: Renderer·Preload·Main과 로컬 저장 흐름" loading="lazy">
                 </button>
               </div>
-              <figcaption><span>Electron · Renderer / Preload / Main</span><span>클릭하여 크게 보기 ↗</span></figcaption>
-              <p class="diagram-scroll-hint">클릭하여 확대 · 확대 화면에서 좌클릭 드래그로 이동</p>
             </figure>
           </section>
           <section class="detail-section" aria-labelledby="stm-learning">
@@ -83,11 +81,16 @@
       <div><dt>기존 실습 준비</dt><dd><ul><li><strong>핀·주변장치 설정</strong>과 코드 작성 도구를 각각 확인</li><li>핀맵과 회로 배선 조건을 대조하며 실행 준비</li></ul></dd></div>
       <div><dt>개선 사항</dt><dd><ul><li>설정과 배선을 오가던 확인 흐름을 <strong>하나의 작업 화면으로 통합</strong></li><li>지원 C/HAL 동작 모델과 회로 상태를 연결해 <strong>예제의 실행 결과를 즉시 확인</strong></li></ul></dd></div>
     </dl></div>
-    <figure class="detail-image demo-figure" id="stm-demo"><button class="image-button" type="button" data-enlarge aria-label="STM LED 실행 GIF 확대"><img src="./assets/stm-led-demo.gif" data-gif="./assets/stm-led-demo.gif" data-poster="./assets/stm-led-demo-poster.webp" width="793" height="608" alt="STM HAL LED 예제: 시뮬레이션 시작 클릭부터 LED 점멸까지" loading="lazy"></button><figcaption><strong>시작 버튼 클릭 → LED 점멸</strong><button class="demo-toggle" type="button" data-demo-toggle="stm-demo" aria-pressed="true">GIF 일시정지</button></figcaption></figure>
+    <figure class="detail-image demo-figure" id="stm-demo"><button class="image-button" type="button" data-demo-toggle="stm-demo" data-demo-label="STM LED 실행" aria-label="STM LED 실행 GIF 일시정지" aria-pressed="true"><img src="./assets/stm-led-demo.gif" data-gif="./assets/stm-led-demo.gif" data-poster="./assets/stm-led-demo-poster.webp" width="793" height="608" alt="STM HAL LED 예제: 시뮬레이션 시작 클릭부터 LED 점멸까지" loading="lazy"></button></figure>
   </div>
 </section>
-          <section class="detail-section" aria-labelledby="stm-troubleshooting">
-  <span class="label">TROUBLESHOOTING</span><h4 class="detail-title" id="stm-troubleshooting">UART 시뮬레이션의 시간 경계 오류 수정</h4>
+
+          <section class="detail-section" aria-labelledby="stm-storage">
+            <span class="label">IMPLEMENTATION</span><h4 class="detail-title" id="stm-storage">회로·설정 자동 저장과 프로젝트 파일 입출력</h4>
+            <div class="implementation-list"><div><h5>자동 저장</h5><ul><li>편집 상태를 <strong>JSON 문자열로 직렬화</strong></li><li><strong>localStorage</strong>에 저장하고 앱 시작 시 복원</li></ul></div><div><h5>프로젝트 파일</h5><ul><li>회로·설정·소스를 <strong>.stm32lab 파일</strong>로 저장·불러오기</li><li>파일 대화상자를 통한 프로젝트 입출력</li></ul></div><div><h5>소스 연동</h5><ul><li><strong>.ioc·C/H 파일</strong> 가져오기</li><li>지원 범위의 <strong>HAL main.c</strong> 생성·내보내기</li></ul></div></div>
+          </section>
+<section class="detail-section" aria-labelledby="stm-troubleshooting">
+  <span class="label">TROUBLESHOOTING</span><h4 class="detail-title" id="stm-troubleshooting">UART 시뮬레이션의 시간 경계 오류</h4>
   <div class="troubleshooting-grid"><dl class="case-facts">
     <div><dt>문제</dt><dd><ul><li>특정 입력 시점에서 <strong>UART 에코의 일부 문자 누락</strong></li></ul></dd></div>
     <div><dt>원인</dt><dd><ul><li><strong>µs → ms → µs 변환 오차</strong>로 수신 시점 오판</li></ul></dd></div>
@@ -97,6 +100,16 @@
     <figcaption><strong>RX·TX 모두 ‘HAL log’ 일치</strong><br>9600 baud · 260ms에 입력 · 20ms 한 단계 실행</figcaption>
   </figure></div>
 </section>
+
+          <section class="detail-section" aria-labelledby="stm-testing">
+            <span class="label">TESTING</span><h4 class="detail-title" id="stm-testing">정상·시간 경계·오류 재발을 나눈 자동 검사</h4>
+            <div class="implementation-list"><div><h5>동작 모델 검사</h5><ul><li><strong>node:test · node:assert/strict</strong> 사용</li><li>회로 연결·HAL·타이머·통신의 입력과 기대값 비교</li></ul></div><div><h5>경계·오류 조건</h5><ul><li>LED 전환 <strong>99ms·100ms·200ms</strong> 경계 확인</li><li>잘못된 핀·UART 설정과 오류 재발 조건 검사</li></ul></div><div><h5>UI·상태 보존</h5><ul><li><strong>Playwright</strong>로 Electron 클릭·입력·상태 확인</li><li>프로젝트 저장·재열기와 사용자 파일 보존 검사</li></ul></div></div>
+          </section>
+
+          <section class="detail-section" aria-labelledby="stm-uart-regression">
+            <span class="label">REGRESSION</span><h4 class="detail-title" id="stm-uart-regression">UART 입력 시점·baud·tick을 교차한 회귀 검사</h4>
+            <div class="architecture"><p class="arch-caption">시뮬레이션 모델 · 동일 입력 HAL log 비교</p><div class="flow"><div class="flow-node"><span class="node-label">01</span><strong>시험 조건</strong><p>baud 2종 × 입력 시점 6개 × tick 2개</p></div><span class="flow-connector" aria-hidden="true">→</span><div class="flow-node"><span class="node-label">02</span><strong>수정 전</strong><p>24조건 중 에코 불일치 6건</p></div><span class="flow-connector" aria-hidden="true">→</span><div class="flow-node"><span class="node-label">03</span><strong>수정 후</strong><p>24조건 모두 RX·TX·에코 일치</p></div></div></div><p class="flow-note">2026.09.22 재현 · 수정 전 567ea06 / 수정 후 2fde25d · 실물 보드 통신 시험과 구분</p>
+          </section>
         </div></details>
       </article>
       <article class="project" id="cons" aria-labelledby="cons-title">
@@ -105,7 +118,7 @@
           <figure class="project-visual cons-visual"><div class="phone-screens"><button class="image-button" type="button" data-enlarge aria-label="CONS 지도 화면 확대"><img src="./assets/cons-map.webp" width="520" height="1122" alt="CONS — 실외 지도 화면" loading="lazy"></button><button class="image-button" type="button" data-enlarge aria-label="CONS 실내 위치 화면 확대"><img src="./assets/cons-floor.webp" width="236" height="518" alt="CONS — 실내 위치 표시 화면" loading="lazy"></button><button class="image-button" type="button" data-enlarge aria-label="CONS AR 길안내 화면 확대"><img src="./assets/cons-ar.webp" width="520" height="1124" alt="CONS — AR 길안내 화면" loading="lazy"></button></div><figcaption><span>지도 · 실내 위치 · AR 길안내</span><span>클릭하여 확대 ↗</span></figcaption></figure>
           <div class="project-description"><h4>BLE 비콘 기반<br>실내 측위·AR 길안내 시스템</h4><div class="project-meta"><span>2024.03 — 2024.12</span><span>4인 프로젝트</span></div><ul><li>BLE·RSSI를 활용한 실내 위치 추정 구현</li><li>Android BLE 수집·Retrofit 서버 연동</li><li>Android–Unity 간 좌표 전달 흐름 구현</li></ul><p class="techline">Android · BLE · RSSI · Retrofit<br>Unity 연동</p></div>
         </div>
-        <details class="detail" open><summary>애플리케이션 아키텍처 · 개선 · 트러블슈팅 2건 <small>Beacon 연동 · Unity 빌드 설정</small></summary><div class="detail-body">
+        <details class="detail" open><summary>애플리케이션 아키텍처 · 구현 · 개선 · 트러블슈팅 2건 <small>Beacon 연동 · Unity 빌드 설정</small></summary><div class="detail-body">
           <section class="detail-section" aria-labelledby="cons-architecture">
             <span class="label">APPLICATION ARCHITECTURE</span><h4 class="detail-title" id="cons-architecture">애플리케이션 아키텍처</h4>
             <figure class="application-architecture">
@@ -114,31 +127,32 @@
                   <img src="./assets/architecture/cons-application.svg" width="1320" height="850" alt="CONS 애플리케이션 아키텍처: Android·Unity·Room·Spring Boot·MySQL 연결" loading="lazy">
                 </button>
               </div>
-              <figcaption><span>Android · Unity · Spring Boot · MySQL</span><span>클릭하여 크게 보기 ↗</span></figcaption>
-              <p class="diagram-scroll-hint">클릭하여 확대 · 확대 화면에서 좌클릭 드래그로 이동</p>
             </figure>
           </section>
-          <section class="detail-section" aria-labelledby="cons-measurement"><span class="label">IMPROVEMENT</span><h4 class="detail-title" id="cons-measurement">측위 데이터 분포와 5회 좌표 평균</h4><div class="case-grid"><figure class="detail-image"><button class="image-button" type="button" data-enlarge aria-label="CONS 실측 산점도 확대"><img src="./assets/cons-measurement.webp" width="572" height="451" alt="CONS 측위 실험 — 1회 측정 좌표와 5회 평균 좌표를 비교한 산점도" loading="lazy"></button><figcaption>프로젝트 측위 실험의 1회·5회 평균 좌표 비교</figcaption></figure><div><dl class="case-facts"><div><dt>기존</dt><dd><ul><li><strong>1회 측정 좌표</strong> 사용</li><li>측정 시점에 따라 위치 편차 발생</li></ul></dd></div><div><dt>개선 사항</dt><dd><ul><li><strong>5회 측정 좌표의 평균값</strong> 사용</li><li>해당 실험의 1회·5회 평균 좌표 비교에서 <strong>편차 완화 경향</strong> 확인</li></ul></dd></div></dl></div></div></section>
+
+          <section class="detail-section" aria-labelledby="cons-implementation">
+            <span class="label">IMPLEMENTATION</span><h4 class="detail-title" id="cons-implementation">비콘 수집부터 실내 좌표 전달까지 연결</h4>
+            <div class="implementation-list"><div><h5>비콘 수집·층 판별</h5><ul><li>Android BLE 스캔과 <strong>UUID 필터링</strong></li><li><strong>Minor 값</strong>을 층 정보로 해석</li></ul></div><div><h5>거리·좌표 계산</h5><ul><li>RSSI 거리 계산과 <strong>가까운 비콘 선별</strong></li><li>측위 공동 구현 · 계산 결과의 NaN·무한대 조건 확인</li></ul></div><div><h5>서버·Unity 연동</h5><ul><li><strong>Retrofit</strong>으로 비콘 좌표 조회</li><li>응답 좌표와 비콘 목록의 순서 정렬·매칭</li><li>계산한 좌표의 <strong>Android–Unity 전달</strong> 구현</li></ul></div></div>
+          </section>
+<section class="detail-section" aria-labelledby="cons-measurement"><span class="label">IMPROVEMENT</span><h4 class="detail-title" id="cons-measurement">측위 데이터 분포와 5회 좌표 평균</h4><div class="case-grid"><figure class="detail-image"><button class="image-button" type="button" data-enlarge aria-label="CONS 실측 산점도 확대"><img src="./assets/cons-measurement.webp" width="572" height="451" alt="CONS 측위 실험 — 1회 측정 좌표와 5회 평균 좌표를 비교한 산점도" loading="lazy"></button><figcaption>프로젝트 측위 실험의 1회·5회 평균 좌표 비교</figcaption></figure><div><dl class="case-facts"><div><dt>비교 조건</dt><dd><ul><li><strong>오산역 · 비콘 3개 · Galaxy S22+</strong></li><li>단일 측위 10회와 5회 평균 측위 10회 비교</li></ul></dd></div><div><dt>기존</dt><dd><ul><li><strong>1회 측정 좌표</strong> 사용</li><li>측정 시점에 따라 위치 편차 발생</li></ul></dd></div><div><dt>개선 사항</dt><dd><ul><li><strong>5회 측정 좌표의 평균값</strong> 사용</li><li>해당 실험의 1회·5회 평균 좌표 비교에서 <strong>편차 완화 경향</strong> 확인</li></ul></dd></div></dl></div></div></section>
           <section class="detail-section" aria-labelledby="cons-troubleshooting">
-  <span class="label">TROUBLESHOOTING 01 / BEACON</span><h4 class="detail-title" id="cons-troubleshooting">지원 중단 Beacon API를 교체해 데이터 수신 확인</h4>
+  <span class="label">TROUBLESHOOTING 01 / BEACON</span><h4 class="detail-title" id="cons-troubleshooting">지원 중단된 API에 의한 Android ↔ Beacon 인식 문제</h4>
   <div class="troubleshooting-grid"><dl class="case-facts">
     <div><dt>문제</dt><dd><ul><li>기존 예제의 연동 함수에서 <strong>빌드·비콘 인식 문제</strong> 발생</li></ul></dd></div>
     <div><dt>원인</dt><dd><ul><li>오래된 예제에 <strong>지원 중단 API</strong> 포함</li><li>예제와 현재 라이브러리의 API 차이 확인</li></ul></dd></div>
     <div><dt>해결</dt><dd><ul><li>함수의 동작·인자를 비교해 <strong>바인딩·해제·탐색 API 교체</strong></li><li>Beacon 탐색 버튼과 수신 데이터 표시 분리</li></ul></dd></div>
   </dl><figure class="evidence-figure demo-figure" id="cons-beacon-demo">
-    <button class="image-button" type="button" data-enlarge aria-label="CONS Beacon RSSI 수신 GIF 확대"><img src="./assets/cons-beacon-rssi.gif" data-gif="./assets/cons-beacon-rssi.gif" data-poster="./assets/cons-beacon-rssi-poster.webp" width="360" height="652" alt="Beacon 테스트 앱에서 감지된 기기 이름과 RSSI 수치가 바뀌는 실제 수신 화면" loading="lazy"></button>
-    <figcaption><strong>Beacon 감지 · RSSI 실시간 수신</strong><button class="demo-toggle" type="button" data-demo-toggle="cons-beacon-demo" aria-pressed="true">GIF 일시정지</button></figcaption>
+    <button class="image-button" type="button" data-demo-toggle="cons-beacon-demo" data-demo-label="Beacon RSSI 수신" aria-label="Beacon RSSI 수신 GIF 일시정지" aria-pressed="true"><img src="./assets/cons-beacon-rssi.gif" data-gif="./assets/cons-beacon-rssi.gif" data-poster="./assets/cons-beacon-rssi-poster.webp" width="360" height="652" alt="Beacon 테스트 앱에서 감지된 기기 이름과 RSSI 수치가 바뀌는 실제 수신 화면" loading="lazy"></button>
   </figure></div>
 </section>
 <section class="detail-section" aria-labelledby="cons-unity-build">
-  <span class="label">TROUBLESHOOTING 02 / UNITY BUILD</span><h4 class="detail-title" id="cons-unity-build">Unity 모듈의 빌드 설정을 Android 환경에 맞춰 수정</h4>
+  <span class="label">TROUBLESHOOTING 02 / UNITY BUILD</span><h4 class="detail-title" id="cons-unity-build">Android ↔ Unity 모듈 연동 문제</h4>
   <div class="troubleshooting-grid"><dl class="case-facts">
     <div><dt>문제</dt><dd><ul><li>구버전 연동 예제 적용 후 <strong>Unity 모듈 빌드·실행 오류</strong> 발생</li></ul></dd></div>
     <div><dt>원인</dt><dd><ul><li>예제와 현재 환경의 <strong>모듈·Java·SDK 설정 차이</strong></li><li>당시 활성화한 <strong>Oculus 옵션</strong> 관련 오류 확인</li></ul></dd></div>
     <div><dt>해결</dt><dd><ul><li><strong>Unity 모듈·의존성 연결</strong>과 빌드 설정 조정</li><li><strong>Java·SDK·namespace·NDK 경로</strong> 점검</li><li>해당 프로젝트의 <strong>Oculus 옵션 해제</strong></li></ul></dd></div>
   </dl><figure class="evidence-figure">
     <button class="image-button" type="button" data-enlarge aria-label="CONS Android–Unity 통합 실행 화면 확대"><img src="./assets/cons-unity-runtime.webp" width="332" height="720" alt="CONS Android 앱에 통합한 Unity AR 실행 화면: 복도 위 길안내 화살표와 미니맵" loading="lazy"></button>
-    <figcaption><strong>Android–Unity 통합 실행</strong><br>AR 경로 화살표·목적지 선택·미니맵 표시</figcaption>
   </figure></div>
 </section>
         </div></details>
@@ -149,7 +163,7 @@
           <figure class="project-visual bookies-visual"><button class="image-button" type="button" data-enlarge aria-label="BOOKIES 메인 화면 확대"><img src="./assets/bookies.webp" width="1156" height="533" alt="BOOKIES 전자책 서비스의 메인 화면" loading="lazy"></button><figcaption><span>전자책 구매·열람 Web 서비스</span><span>클릭하여 확대 ↗</span></figcaption></figure>
           <div class="project-description"><h4>전자책 Web·App 서비스의<br>DB 이전과 클라우드 배포</h4><div class="project-meta"><span>2025.02 — 2025.03</span><span>전체 10명 · Web 파트 4명</span></div><ul><li>개발 일정·기준 관리와 Oracle DB 관리</li><li>Oracle RDS 이전 및 EC2 Web 서비스 배포</li><li>S3 연동과 접근 권한 설정</li></ul><p class="techline">Java · Spring Boot · Oracle · JDBC<br>AWS EC2 / RDS / S3 · Gradle · Linux</p></div>
         </div>
-        <details class="detail" open><summary>애플리케이션 아키텍처 · 구현 내용</summary><div class="detail-body">
+        <details class="detail" open><summary>애플리케이션 아키텍처 · 구현 · 트러블슈팅</summary><div class="detail-body">
           <section class="detail-section" aria-labelledby="bookies-architecture">
             <span class="label">APPLICATION ARCHITECTURE</span><h4 class="detail-title" id="bookies-architecture">애플리케이션 아키텍처</h4>
             <figure class="application-architecture">
@@ -158,14 +172,27 @@
                   <img src="./assets/architecture/bookies-application.svg" width="1320" height="900" alt="BOOKIES 애플리케이션 아키텍처: Web·Packager·Distributor와 Oracle RDS·S3 연결" loading="lazy">
                 </button>
               </div>
-              <figcaption><span>Web · Packager · Distributor · 데이터·파일 저장소</span><span>클릭하여 크게 보기 ↗</span></figcaption>
-              <p class="diagram-scroll-hint">클릭하여 확대 · 확대 화면에서 좌클릭 드래그로 이동</p>
             </figure>
           </section>
-        <section class="detail-section" aria-labelledby="bookies-implementation">
+
+          <section class="detail-section" aria-labelledby="bookies-qna">
+            <span class="label">IMPLEMENTATION</span><h4 class="detail-title" id="bookies-qna">Web·Android QnA REST API와 게시글 권한 처리</h4>
+            <div class="troubleshooting-grid"><dl class="case-facts"><div><dt>직접 구현</dt><dd><ul><li><strong>QnA 목록·검색·상세·작성·수정·삭제</strong>와 관리자 답변</li><li>Android 화면에서 사용하는 <strong>게시글·댓글 REST API</strong></li></ul></dd></div><div><dt>권한 구분</dt><dd><ul><li>비밀글 조회: <strong>작성자·관리자</strong></li><li>게시글 수정·삭제: <strong>작성자 확인</strong></li></ul></dd></div><div><dt>입력 처리</dt><dd><ul><li>QnA REST 입력에 <strong>기존 XSS 필터 연결</strong></li><li>작성 요청 횟수의 집계·제한 조건 보완</li></ul></dd></div></dl><div class="architecture"><p class="arch-caption">백엔드 담당 범위</p><div class="flow"><div class="flow-node"><span class="node-label">01</span><strong>Web·Android</strong><p>게시글·댓글 요청</p></div><span class="flow-connector" aria-hidden="true">→</span><div class="flow-node"><span class="node-label">02</span><strong>REST API</strong><p>사용자·권한 확인</p></div><span class="flow-connector" aria-hidden="true">→</span><div class="flow-node"><span class="node-label">03</span><strong>QnA 처리</strong><p>조회·저장·수정·삭제</p></div></div></div></div>
+          </section>
+<section class="detail-section" aria-labelledby="bookies-implementation">
   <span class="label">IMPLEMENTATION</span><h4 class="detail-title" id="bookies-implementation">Oracle DB 이전 및 Web 서비스 배포</h4>
   <div class="implementation-list"><div><h5>DB 운영 환경 이전</h5><ul><li><strong>Oracle 19c → RDS</strong> 이전</li><li>Web 서버의 <strong>JDBC 연결</strong> 구성</li></ul></div><div><h5>Web 서비스 배포</h5><ul><li>Gradle로 <strong>WAR 빌드</strong></li><li><strong>EC2 배포·실행</strong> 및 Web 접속 확인</li></ul></div><div><h5>접근 범위 설정</h5><ul><li><strong>DB 관리자·Web EC2</strong> 기준 RDS 접근 제어</li><li>관리자 SSH와 <strong>Web 서비스 포트 구분</strong></li></ul></div></div>
 </section>
+
+          <section class="detail-section" aria-labelledby="bookies-runtime">
+            <span class="label">TROUBLESHOOTING</span><h4 class="detail-title" id="bookies-runtime">실습 대상 버전과 기존 개발 환경의 호환성 문제</h4>
+            <div class="troubleshooting-grid"><dl class="case-facts"><div><dt>문제</dt><dd><ul><li>기존 <strong>Boot 3.x·JDK 21</strong> 구성과 모의해킹 실습 대상 환경의 차이</li></ul></dd></div><div><dt>원인</dt><dd><ul><li>Spring 버전별 <strong>패키지·Security 설정·배포 방식</strong> 차이</li></ul></dd></div><div><dt>해결</dt><dd><ul><li>실습 조건에 맞춰 <strong>Boot 2.6.5·JDK 17·Tomcat 9.0.58</strong> 구성</li><li>Jakarta → javax import와 Servlet·JSTL 의존성 조정</li><li>Security 설정 전환과 <strong>외부 Tomcat용 WAR 초기화·런타임 의존성</strong> 구성</li></ul></dd></div></dl><div><div class="architecture"><p class="arch-caption">개발 환경 → 실습 대상 환경</p><div class="flow"><div class="flow-node"><span class="node-label">01</span><strong>기존 구성</strong><p>Boot 3.x · JDK 21</p></div><span class="flow-connector" aria-hidden="true">→</span><div class="flow-node"><span class="node-label">02</span><strong>버전 조정</strong><p>Boot 2.6.5 · JDK 17</p></div><span class="flow-connector" aria-hidden="true">→</span><div class="flow-node"><span class="node-label">03</span><strong>배포 구성</strong><p>Tomcat 9 · WAR</p></div></div></div><p class="flow-note">환경 구축 공동 수행 · 개인 변경 범위: 버전·의존성·패키지·WAR 구성</p></div></div>
+          </section>
+
+          <section class="detail-section" aria-labelledby="bookies-cloud-access">
+            <span class="label">TROUBLESHOOTING</span><h4 class="detail-title" id="bookies-cloud-access">외부 Tomcat WAR 배포 환경의 클라우드 접속 오류</h4>
+            <div class="troubleshooting-grid"><dl class="case-facts"><div><dt>문제</dt><dd><ul><li>실습용 <strong>WAR 배포 환경에서 클라우드 접속 오류</strong></li></ul></dd></div><div><dt>확인</dt><dd><ul><li>배포 구성과 서버 실행에 필요한 <strong>EL 의존성 점검</strong></li></ul></dd></div><div><dt>해결</dt><dd><ul><li><strong>EL API·Tomcat EL 구현</strong> 의존성 보완</li><li>애플리케이션 빌드에 서버 실행 환경의 의존성 반영</li></ul></dd></div></dl><div class="architecture"><p class="arch-caption">배포 환경에 필요한 의존성 반영</p><div class="flow"><div class="flow-node"><span class="node-label">01</span><strong>WAR</strong><p>애플리케이션 패키지</p></div><span class="flow-connector" aria-hidden="true">→</span><div class="flow-node"><span class="node-label">02</span><strong>EL</strong><p>API·구현 의존성 보완</p></div><span class="flow-connector" aria-hidden="true">→</span><div class="flow-node"><span class="node-label">03</span><strong>Tomcat</strong><p>실행 환경과 구성 정합화</p></div></div></div></div>
+          </section>
         </div></details>
       </article>
       <article class="project" id="arabica" aria-labelledby="arabica-title">
@@ -177,23 +204,15 @@
         <details class="detail" open><summary>애플리케이션 아키텍처 · 구현 · 트러블슈팅</summary><div class="detail-body">
           <section class="detail-section" aria-labelledby="arabica-architecture">
             <span class="label">APPLICATION ARCHITECTURE</span><h4 class="detail-title" id="arabica-architecture">정책·예약 실행·이력을 연결하는 백엔드</h4>
-            <figure class="application-architecture"><div class="application-map" tabindex="0" role="region" aria-label="Arabica 애플리케이션 아키텍처: 웹 클라이언트, Spring Boot API, 스케줄러, 비동기 백업 실행과 원격 서버"><button class="image-button diagram-button" type="button" data-enlarge data-diagram aria-label="정책·예약 실행·이력을 연결하는 백엔드 확대"><img src="./assets/architecture/backup-application.svg" width="1320" height="900" alt="Arabica 애플리케이션 아키텍처: 웹 클라이언트, Spring Boot API, 스케줄러, 비동기 백업 실행과 원격 서버" loading="lazy"></button></div></figure><ul class="about-points"><li><strong>백업 처리:</strong> 원격 실행 → 결과 파일 전송 → 주기적 판독·검증 → 이력 저장</li></ul>
+            <figure class="application-architecture"><div class="application-map" tabindex="0" role="region" aria-label="Arabica 애플리케이션 아키텍처: 웹 클라이언트, Spring Boot API, 스케줄러, 비동기 백업 실행과 원격 서버"><button class="image-button diagram-button" type="button" data-enlarge data-diagram aria-label="정책·예약 실행·이력을 연결하는 백엔드 확대"><img src="./assets/architecture/backup-application.svg" width="1320" height="900" alt="Arabica 애플리케이션 아키텍처: 웹 클라이언트, Spring Boot API, 스케줄러, 비동기 백업 실행과 원격 서버" loading="lazy"></button></div></figure>
           </section>
           <section class="detail-section" aria-labelledby="arabica-implementation">
             <span class="label">IMPLEMENTATION</span><h4 class="detail-title" id="arabica-implementation">백업 정책부터 완료 결과까지 연결</h4>
             <div class="implementation-list"><div><h5>정책·예약 실행</h5><ul><li>전체·증분·차등 방식별 <strong>실행 명령 구성</strong></li><li>사용자 지정 일정과 정책을 연결한 예약 실행</li></ul></div><div><h5>결과 판독·검증</h5><ul><li>결과 파일 판독 후 저장 서버에서 검증 수행</li><li><strong>MySQL 테이블·행 수 비교</strong>와 불일치 정보 기록</li></ul></div><div><h5>이력·복원</h5><ul><li>백업 시작 시각·성공 여부·오류 정보 저장</li><li>선택한 백업 파일의 복원 실행과 <strong>복원 이력 기록</strong></li></ul></div></div>
           </section>
           <section class="detail-section" aria-labelledby="arabica-troubleshooting">
-            <span class="label">TROUBLESHOOTING</span><h4 class="detail-title" id="arabica-troubleshooting">장시간 백업 실행과 완료 확인 분리</h4>
+            <span class="label">TROUBLESHOOTING</span><h4 class="detail-title" id="arabica-troubleshooting">DB 백업 시 장시간 Thread 점유 문제</h4>
             <div class="troubleshooting-grid"><dl class="case-facts"><div><dt>문제</dt><dd><ul><li>백업 대상 DB가 커질수록 원격 명령 실행 시간이 늘어나 <strong>완료를 기다리는 실행 스레드 점유</strong></li></ul></dd></div><div><dt>원인</dt><dd><ul><li>일반 Bash 실행의 종료를 기다리는 흐름에 <strong>백업 실행과 결과 처리가 연결</strong></li></ul></dd></div><div><dt>해결</dt><dd><ul><li>스케줄 백업 진입점을 <strong>별도 실행기로 비동기 처리</strong></li><li>원격 명령을 <strong>백그라운드 실행</strong>으로 변경</li><li>실행 직후 성공 기록을 제거하고 <strong>결과 판독·검증 후 이력 저장</strong></li></ul></dd></div></dl><div><div class="architecture"><p class="arch-caption">변경 전 · 원격 명령 종료 대기</p><div class="flow"><div class="flow-node"><span class="node-label">01</span><strong>백업 호출</strong><p>원격 Bash 실행</p></div><span class="flow-connector" aria-hidden="true">→</span><div class="flow-node"><span class="node-label">02</span><strong>완료 대기</strong><p>실행 스레드 점유</p></div></div></div><br><div class="architecture"><p class="arch-caption">변경 후 · 실행과 결과 확인 분리</p><div class="flow"><div class="flow-node"><span class="node-label">01</span><strong>실행</strong><p>비동기 진입·원격 백그라운드 실행</p></div><span class="flow-connector" aria-hidden="true">→</span><div class="flow-node"><span class="node-label">02</span><strong>확인</strong><p>결과 파일 주기적 판독</p></div><span class="flow-connector" aria-hidden="true">→</span><div class="flow-node"><span class="node-label">03</span><strong>기록</strong><p>데이터 비교·이력 저장</p></div></div></div></div></div>
-          </section>
-          <section class="detail-section" aria-labelledby="arabica-restore-time">
-            <span class="label">TROUBLESHOOTING</span><h4 class="detail-title" id="arabica-restore-time">복원 이력의 날짜 형식 불일치 수정</h4>
-            <div class="troubleshooting-grid"><dl class="case-facts"><div><dt>문제</dt><dd><ul><li>복원 시작 시각을 <strong>문자열로 바꾼 뒤 다시 파싱</strong>하는 저장 경로</li></ul></dd></div><div><dt>원인</dt><dd><ul><li>문자열 생성 형식과 기본 날짜 파싱 형식의 <strong>불일치</strong></li></ul></dd></div><div><dt>해결</dt><dd><ul><li>날짜·시간 객체를 <strong>이력 저장까지 직접 전달</strong></li><li>나노초 정리와 이력 저장부 예외 처리 추가</li></ul></dd></div></dl><div><div class="architecture"><p class="arch-caption">변경 전</p><div class="flow"><div class="flow-node"><span class="node-label">01</span><strong>시작 시각</strong><p>공백 구분 문자열 생성</p></div><span class="flow-connector" aria-hidden="true">→</span><div class="flow-node"><span class="node-label">02</span><strong>이력 저장</strong><p>기본 형식으로 재파싱</p></div></div></div><br><div class="architecture"><p class="arch-caption">변경 후</p><div class="flow"><div class="flow-node"><span class="node-label">01</span><strong>시작 시각</strong><p>날짜·시간 객체 유지</p></div><span class="flow-connector" aria-hidden="true">→</span><div class="flow-node"><span class="node-label">02</span><strong>이력 저장</strong><p>동일 타입으로 전달·저장</p></div></div></div></div></div>
-          </section>
-          <section class="detail-section" aria-labelledby="arabica-command-arguments">
-            <span class="label">TROUBLESHOOTING</span><h4 class="detail-title" id="arabica-command-arguments">차등 백업 명령과 스크립트 입력 정합성 수정</h4>
-            <div class="troubleshooting-grid"><dl class="case-facts"><div><dt>문제</dt><dd><ul><li>차등 백업 명령 생성부와 <strong>스크립트 입력 인자 구성 불일치</strong></li></ul></dd></div><div><dt>원인</dt><dd><ul><li>실행 명령의 자리표시자와 전달값에서 <strong>필수 인증 인자 누락</strong></li></ul></dd></div><div><dt>해결</dt><dd><ul><li>명령 포맷에 누락된 인자 자리와 전달값 추가</li><li>Java 명령 생성부와 <strong>Bash 입력 순서 일치</strong></li></ul></dd></div></dl><div><div class="architecture"><p class="arch-caption">명령 생성과 스크립트 입력 대조</p><div class="flow"><div class="flow-node"><span class="node-label">01</span><strong>명령 포맷</strong><p>필수 인자 자리 보완</p></div><span class="flow-connector" aria-hidden="true">→</span><div class="flow-node"><span class="node-label">02</span><strong>전달값</strong><p>누락된 값 연결</p></div><span class="flow-connector" aria-hidden="true">→</span><div class="flow-node"><span class="node-label">03</span><strong>스크립트</strong><p>입력 순서에 맞춰 수신</p></div></div></div></div></div>
           </section>
         </div></details>
       </article>
@@ -206,14 +225,14 @@
         <details class="detail" open><summary>애플리케이션 아키텍처 · 구현 · 트러블슈팅</summary><div class="detail-body">
           <section class="detail-section" aria-labelledby="cmp-architecture">
             <span class="label">APPLICATION ARCHITECTURE</span><h4 class="detail-title" id="cmp-architecture">NSS·NBU 외부 API와 테넌트별 조회 연동</h4>
-            <figure class="application-architecture"><div class="application-map" tabindex="0" role="region" aria-label="CMP v2.0 애플리케이션 아키텍처: React, WebFlux, NSS·NBU API와 테넌트 매핑"><button class="image-button diagram-button" type="button" data-enlarge data-diagram aria-label="NSS·NBU 외부 API와 테넌트별 조회 연동 확대"><img src="./assets/architecture/integration-application.svg" width="1320" height="900" alt="CMP v2.0 애플리케이션 아키텍처: React, WebFlux, NSS·NBU API와 테넌트 매핑" loading="lazy"></button></div></figure><ul class="about-points"><li><strong>담당 범위:</strong> 인증·조회 API 연동, WebFlux 전환, 테넌트별 백업 정책 조회</li></ul>
+            <figure class="application-architecture"><div class="application-map" tabindex="0" role="region" aria-label="CMP v2.0 애플리케이션 아키텍처: React, WebFlux, NSS·NBU API와 테넌트 매핑"><button class="image-button diagram-button" type="button" data-enlarge data-diagram aria-label="NSS·NBU 외부 API와 테넌트별 조회 연동 확대"><img src="./assets/architecture/integration-application.svg" width="1320" height="900" alt="CMP v2.0 애플리케이션 아키텍처: React, WebFlux, NSS·NBU API와 테넌트 매핑" loading="lazy"></button></div></figure>
           </section>
           <section class="detail-section" aria-labelledby="cmp-webflux">
-            <span class="label">TROUBLESHOOTING</span><h4 class="detail-title" id="cmp-webflux">외부 API 응답 대기를 고려한 WebFlux 전환</h4>
+            <span class="label">TROUBLESHOOTING</span><h4 class="detail-title" id="cmp-webflux">대량 데이터 조회 시 외부 API 응답 대기로 인한 처리 지연</h4>
             <div class="troubleshooting-grid"><dl class="case-facts"><div><dt>문제</dt><dd><ul><li>데이터 증가에 따라 <strong>기존 MVC 처리 구조에서 장애 발생</strong></li></ul></dd></div><div><dt>원인</dt><dd><ul><li>동기 외부 API 호출에서 응답을 기다리는 동안 <strong>요청 스레드 점유</strong></li></ul></dd></div><div><dt>해결</dt><dd><ul><li><strong>MVC → Spring WebFlux</strong>로 프레임워크 환경 교체</li><li>WebClient·Mono 기반으로 외부 API 응답 처리</li></ul></dd></div></dl><div><div class="architecture"><p class="arch-caption">변경 전 · 동기 호출</p><div class="flow"><div class="flow-node"><span class="node-label">01</span><strong>요청 처리</strong><p>외부 API 호출</p></div><span class="flow-connector" aria-hidden="true">→</span><div class="flow-node"><span class="node-label">02</span><strong>응답 대기</strong><p>호출 스레드 점유</p></div></div></div><br><div class="architecture"><p class="arch-caption">변경 후 · 비동기 응답 연결</p><div class="flow"><div class="flow-node"><span class="node-label">01</span><strong>WebClient</strong><p>외부 API 요청</p></div><span class="flow-connector" aria-hidden="true">→</span><div class="flow-node"><span class="node-label">02</span><strong>Mono</strong><p>응답 후 후속 처리</p></div></div></div></div></div>
           </section>
           <section class="detail-section" aria-labelledby="cmp-tenant">
-            <span class="label">TROUBLESHOOTING</span><h4 class="detail-title" id="cmp-tenant">테넌트별 Kubernetes 백업 정책 조회 범위 수정</h4>
+            <span class="label">TROUBLESHOOTING</span><h4 class="detail-title" id="cmp-tenant">Kubernetes 백업 연동 확장에 따른 테넌트별 정책 조회 문제</h4>
             <div class="troubleshooting-grid"><dl class="case-facts"><div><dt>문제</dt><dd><ul><li>Kubernetes 백업 정책이 <strong>모든 테넌트에 표시</strong></li></ul></dd></div><div><dt>원인</dt><dd><ul><li>조회 결과를 요청 테넌트의 <strong>클러스터·namespace에 맞게 구분</strong>할 필요</li></ul></dd></div><div><dt>해결</dt><dd><ul><li>NSS·NBU 조회 경로 분리와 페이지·API 로그 점검</li><li><strong>테넌트·클러스터·namespace 매핑 필터</strong> 적용</li></ul></dd></div></dl><div><figure class="detail-image"><button class="image-button" type="button" data-enlarge data-diagram aria-label="테넌트별 정책 조회 흐름 확대"><img src="./assets/architecture/integration-tenant-policy.svg" width="1320" height="600" alt="NSS·NBU 조회 결과에 테넌트·클러스터·namespace 매핑 필터 적용" loading="lazy"></button></figure></div></div>
           </section>
           <section class="detail-section" aria-labelledby="cmp-benchmark">
@@ -231,23 +250,11 @@
         <details class="detail" open><summary>애플리케이션 아키텍처 · 구현 · 트러블슈팅</summary><div class="detail-body">
           <section class="detail-section" aria-labelledby="wallet-architecture">
             <span class="label">APPLICATION ARCHITECTURE</span><h4 class="detail-title" id="wallet-architecture">보안 필터·Dispatcher·업무 API 요청 처리</h4>
-            <figure class="application-architecture"><div class="application-map" tabindex="0" role="region" aria-label="Wallet 애플리케이션 아키텍처: 요청 복호화·입력 검사, Dispatcher, 업무 API, MyBatis·PostgreSQL, 외부 알림"><button class="image-button diagram-button" type="button" data-enlarge data-diagram aria-label="보안 필터·Dispatcher·업무 API 요청 처리 확대"><img src="./assets/architecture/wallet-application.svg" width="1320" height="960" alt="Wallet 애플리케이션 아키텍처: 요청 복호화·입력 검사, Dispatcher, 업무 API, MyBatis·PostgreSQL, 외부 알림" loading="lazy"></button></div></figure><ul class="about-points"><li><strong>Web·App 로그인 연동:</strong> Wallet이 인증 결과 전달 · Store가 인증 상태를 확인해 Web에 SSE 이벤트 전송</li></ul>
+            <figure class="application-architecture"><div class="application-map" tabindex="0" role="region" aria-label="Wallet 애플리케이션 아키텍처: 요청 복호화·입력 검사, Dispatcher, 업무 API, MyBatis·PostgreSQL, 외부 알림"><button class="image-button diagram-button" type="button" data-enlarge data-diagram aria-label="보안 필터·Dispatcher·업무 API 요청 처리 확대"><img src="./assets/architecture/wallet-application.svg" width="1320" height="960" alt="Wallet 애플리케이션 아키텍처: 요청 복호화·입력 검사, Dispatcher, 업무 API, MyBatis·PostgreSQL, 외부 알림" loading="lazy"></button></div></figure>
           </section>
           <section class="detail-section" aria-labelledby="wallet-implementation">
             <span class="label">IMPLEMENTATION</span><h4 class="detail-title" id="wallet-implementation">사용자 식별자 분리와 DB 연동 구조 정리</h4>
             <div class="implementation-list"><div><h5>사용자 식별자 분리</h5><ul><li>문자열 PK를 <strong>Long 내부 사용자 키</strong>로 변경</li><li>소셜 로그인 식별자를 <strong>별도 컬럼</strong>으로 분리</li></ul></div><div><h5>호출·저장 경로 반영</h5><ul><li>API·DTO·DAO·Mapper의 사용자 ID 타입 반영</li><li>가입 입력과 사용자·계좌 조회의 식별자 구분</li></ul></div><div><h5>DB 제품 전환</h5><ul><li><strong>MariaDB → PostgreSQL</strong> 전환에 맞춰 쿼리 변경</li><li>중복 갱신 구문을 PostgreSQL 문법에 맞게 수정</li></ul></div></div>
-          </section>
-          <section class="detail-section" aria-labelledby="wallet-db-mapping">
-            <span class="label">TROUBLESHOOTING</span><h4 class="detail-title" id="wallet-db-mapping">Entity·SQL 매핑과 실제 DB 정의의 불일치 수정</h4>
-            <div class="troubleshooting-grid"><dl class="case-facts"><div><dt>문제</dt><dd><ul><li>테이블명·컬럼명·enum 처리 등 <strong>DB 접근 매핑 오류</strong></li></ul></dd></div><div><dt>원인</dt><dd><ul><li>Entity의 테이블·컬럼 이름과 실제 DB 이름 불일치</li><li>SQL의 명시적 enum 형변환과 매핑 구성 불일치</li></ul></dd></div><div><dt>해결</dt><dd><ul><li>잘못 지정된 <strong>테이블명을 실제 대상에 맞게 수정</strong></li><li>camelCase 컬럼명을 <strong>실제 snake_case 컬럼명</strong>으로 변경</li><li>enum 저장 방식에 맞춰 Mapper의 형변환 처리 수정</li></ul></dd></div></dl><div><div class="architecture"><p class="arch-caption">계층별 정의 대조</p><div class="flow"><div class="flow-node"><span class="node-label">01</span><strong>Entity</strong><p>테이블·컬럼 이름</p></div><span class="flow-connector" aria-hidden="true">→</span><div class="flow-node"><span class="node-label">02</span><strong>Mapper</strong><p>SQL·타입 처리</p></div><span class="flow-connector" aria-hidden="true">→</span><div class="flow-node"><span class="node-label">03</span><strong>Database</strong><p>실제 스키마와 일치</p></div></div></div></div></div>
-          </section>
-          <section class="detail-section" aria-labelledby="wallet-account-mapping">
-            <span class="label">TROUBLESHOOTING</span><h4 class="detail-title" id="wallet-account-mapping">가입 시 계좌 생성 결과와 저장 파라미터 연결 수정</h4>
-            <div class="troubleshooting-grid"><dl class="case-facts"><div><dt>문제</dt><dd><ul><li>회원가입의 <strong>계좌 생성·저장 경로 오류</strong></li></ul></dd></div><div><dt>원인</dt><dd><ul><li>계좌 생성 결과는 Map인데 INSERT는 <strong>기존 DTO 필드명 참조</strong></li><li>사용자 ID 전달 타입과 DB 저장 타입 불일치</li></ul></dd></div><div><dt>해결</dt><dd><ul><li>INSERT 파라미터를 <strong>실제 Map 키에 맞게 변경</strong></li><li>사용자 ID의 BIGINT 변환 보완</li><li>기존 계좌 조회와 계좌 생성 분기 정리</li></ul></dd></div></dl><div><div class="architecture"><p class="arch-caption">반환 자료구조와 INSERT 계약 일치</p><div class="flow"><div class="flow-node"><span class="node-label">01</span><strong>계좌 생성</strong><p>Map으로 결과 반환</p></div><span class="flow-connector" aria-hidden="true">→</span><div class="flow-node"><span class="node-label">02</span><strong>파라미터</strong><p>키 이름·ID 타입 정합성</p></div><span class="flow-connector" aria-hidden="true">→</span><div class="flow-node"><span class="node-label">03</span><strong>저장</strong><p>계좌 INSERT에 연결</p></div></div></div></div></div>
-          </section>
-          <section class="detail-section" aria-labelledby="wallet-sse">
-            <span class="label">TROUBLESHOOTING</span><h4 class="detail-title" id="wallet-sse">Wallet·Store 로그인 연동의 인증 상태 매핑 수정</h4>
-            <div class="troubleshooting-grid"><dl class="case-facts"><div><dt>문제</dt><dd><ul><li>인증 결과를 기록하고 조회하는 경로의 <strong>상태명·매핑 불일치</strong></li></ul></dd></div><div><dt>원인</dt><dd><ul><li>인증 완료 상태명이 서로 다르고 <strong>DTO·DB 컬럼 대응 불일치</strong></li></ul></dd></div><div><dt>해결</dt><dd><ul><li><strong>Store의 상태 필드·완료 상태명·Mapper를 통일</strong></li><li>조회 결과의 DTO 매핑과 컬럼 별칭 보완</li><li>UUID별 인증 상태를 DB에서 조회해 완료 시 <strong>SSE 이벤트 1회 전달</strong></li></ul></dd></div></dl><div><div class="architecture"><p class="arch-caption">Wallet·Store 인증 결과 전달</p><div class="flow"><div class="flow-node"><span class="node-label">01</span><strong>Wallet</strong><p>사용자·인증 결과 전달</p></div><span class="flow-connector" aria-hidden="true">→</span><div class="flow-node"><span class="node-label">02</span><strong>Store</strong><p>UUID·인증 상태 확인</p></div><span class="flow-connector" aria-hidden="true">→</span><div class="flow-node"><span class="node-label">03</span><strong>Web</strong><p>SSE 인증 완료 이벤트 수신</p></div></div></div><p class="flow-note">Wallet: 인증 API 연동 · Store: SSE 구독·상태 저장·전송 처리</p></div></div>
           </section>
           <section class="detail-section" aria-labelledby="wallet-xss">
             <span class="label">TROUBLESHOOTING</span><h4 class="detail-title" id="wallet-xss">XSS 정제 결과를 실제 요청 본문에 반영</h4>
