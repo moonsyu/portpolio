@@ -143,6 +143,16 @@
       "name": "linux",
       "url": "https://raw.githubusercontent.com/devicons/devicon/7330accdbc47e2dc0c19789a48533c4a3c50fe58/icons/linux/linux-original.svg",
       "bytes": 193922
+    },
+    {
+      "name": "mariadb",
+      "url": "https://raw.githubusercontent.com/devicons/devicon/7330accdbc47e2dc0c19789a48533c4a3c50fe58/icons/mariadb/mariadb-original.svg",
+      "bytes": 1831
+    },
+    {
+      "name": "postgresql",
+      "url": "https://raw.githubusercontent.com/devicons/devicon/7330accdbc47e2dc0c19789a48533c4a3c50fe58/icons/postgresql/postgresql-original.svg",
+      "bytes": 9178
     }
   ]
 }

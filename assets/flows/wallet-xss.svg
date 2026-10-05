@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="940" height="1170" viewBox="0 0 940 1170" role="img" aria-labelledby="title"><title id="title">Wallet: JSON의 정제값을 요청 본문에 반영하는 XSS 처리 흐름</title><defs><marker id="arrow" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 Z" fill="#2355de"/></marker></defs><rect width="940" height="1170" fill="white"/><style>text{font-family:'Malgun Gothic','Segoe UI',sans-serif;fill:#172538;font-weight:650}.note{fill:#526780}.heading{fill:#2355de;font-weight:750}.edge{fill:none;stroke:#2355de;stroke-width:2.5;marker-end:url(#arrow)}</style>
+<text x="470" y="48" text-anchor="middle" class="heading" font-size="30"><tspan x="470" dy="0">정제 결과를 요청 본문까지 전달</tspan></text>
+<rect x="285" y="92" width="370" height="76" rx="38" fill="#f8fafc" stroke="#c5d2e6" stroke-width="2"/>
+<text x="470" y="139.1" text-anchor="middle" class="" font-size="26"><tspan x="470" dy="0">복호화된 JSON</tspan></text>
+<path class="edge" d="M470 168 L470 210"/>
+<rect x="285" y="210" width="370" height="92" rx="10" fill="#f8fafc" stroke="#c5d2e6" stroke-width="2"/>
+<text x="470" y="265.1" text-anchor="middle" class="" font-size="26"><tspan x="470" dy="0">중첩 객체·배열 순회</tspan></text>
+<path class="edge" d="M470 302 L470 344"/>
+<path d="M470 344 L640 415 L470 486 L300 415 Z" fill="#eef3ff" stroke="#2355de" stroke-width="2"/>
+<text x="470" y="424" text-anchor="middle" class="" font-size="25"><tspan x="470" dy="0">문자열 값인가?</tspan></text>
+<path class="edge" d="M300 415 H200 V535"/>
+<text x="237" y="400" text-anchor="middle" class="note" font-size="23"><tspan x="237" dy="0">예</tspan></text>
+<path class="edge" d="M640 415 H755 V535"/>
+<text x="700" y="400" text-anchor="middle" class="note" font-size="23"><tspan x="700" dy="0">아니오</tspan></text>
+<rect x="40" y="535" width="320" height="100" rx="10" fill="#f8fafc" stroke="#c5d2e6" stroke-width="2"/>
+<text x="200" y="575.38" text-anchor="middle" class="" font-size="26"><tspan x="200" dy="0">AntiSamy 정책 적용</tspan><tspan x="200" dy="37.699999999999996">정제 문자열 반환</tspan></text>
+<rect x="595" y="535" width="300" height="100" rx="10" fill="#f8fafc" stroke="#c5d2e6" stroke-width="2"/>
+<text x="745" y="575.38" text-anchor="middle" class="" font-size="26"><tspan x="745" dy="0">숫자·불리언 등</tspan><tspan x="745" dy="37.699999999999996">비문자열 값 유지</tspan></text>
+<rect x="50" y="674" width="300" height="82" rx="10" fill="#eef3ff" stroke="#c5d2e6" stroke-width="2"/>
+<text x="200" y="723.05" text-anchor="middle" class="" font-size="23"><tspan x="200" dy="0">원래 값을 정제값으로 교체</tspan></text>
+<path class="edge" d="M200 635 L200 674"/>
+<path class="edge" d="M200 756 V807 H470 V853"/>
+<path class="edge" d="M745 635 V807 H470 V853"/>
+<rect x="285" y="853" width="370" height="92" rx="10" fill="#f8fafc" stroke="#c5d2e6" stroke-width="2"/>
+<text x="470" y="889.38" text-anchor="middle" class="" font-size="26"><tspan x="470" dy="0">변경된 JSON으로</tspan><tspan x="470" dy="37.699999999999996">요청 본문 재구성</tspan></text>
+<path class="edge" d="M470 945 L470 988"/>
+<rect x="285" y="988" width="370" height="76" rx="38" fill="#f8fafc" stroke="#c5d2e6" stroke-width="2"/>
+<text x="470" y="1035.1" text-anchor="middle" class="" font-size="26"><tspan x="470" dy="0">업무 API에 전달</tspan></text>
+<text x="470" y="1112" text-anchor="middle" class="note" font-size="25"><tspan x="470" dy="0">정책 객체는 한 번 준비하고 재사용</tspan></text>
+</svg>

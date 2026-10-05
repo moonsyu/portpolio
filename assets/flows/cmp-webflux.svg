@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="930" viewBox="0 0 960 930" role="img" aria-labelledby="title"><title id="title">CMP: 외부 API 동기 응답 대기에서 WebFlux 응답 연결로 전환</title><defs><marker id="arrow" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 Z" fill="#2355de"/></marker></defs><rect width="960" height="930" fill="white"/><style>text{font-family:'Malgun Gothic','Segoe UI',sans-serif;fill:#172538;font-weight:650}.note{fill:#526780}.heading{fill:#2355de;font-weight:750}.edge{fill:none;stroke:#2355de;stroke-width:2.5;marker-end:url(#arrow)}</style>
+<text x="245" y="40" text-anchor="middle" class="heading" font-size="28"><tspan x="245" dy="0">변경 전 · MVC 동기 호출</tspan></text>
+<text x="245" y="76" text-anchor="middle" class="note" font-size="23"><tspan x="245" dy="0">응답 대기 중 Thread 점유</tspan></text>
+<text x="720" y="48" text-anchor="middle" class="heading" font-size="28"><tspan x="720" dy="0">변경 후 · WebFlux</tspan></text>
+<path d="M480 78 V886" stroke="#dce3ed" stroke-width="2" stroke-dasharray="7 7"/>
+<rect x="85" y="100" width="320" height="76" rx="38" fill="#f8fafc" stroke="#c5d2e6" stroke-width="2"/>
+<text x="245" y="147.1" text-anchor="middle" class="" font-size="26"><tspan x="245" dy="0">클라이언트 요청</tspan></text>
+<path class="edge" d="M245 176 L245 220"/>
+<rect x="560" y="100" width="320" height="76" rx="38" fill="#f8fafc" stroke="#c5d2e6" stroke-width="2"/>
+<text x="720" y="147.1" text-anchor="middle" class="" font-size="26"><tspan x="720" dy="0">클라이언트 요청</tspan></text>
+<path class="edge" d="M720 176 L720 220"/>
+<rect x="85" y="220" width="320" height="96" rx="10" fill="#f8fafc" stroke="#c5d2e6" stroke-width="2"/>
+<text x="245" y="258.38" text-anchor="middle" class="" font-size="26"><tspan x="245" dy="0">Controller · Service</tspan><tspan x="245" dy="37.699999999999996">외부 API 호출</tspan></text>
+<path class="edge" d="M245 316 L245 370"/>
+<path d="M245 370 L405 440 L245 510 L85 440 Z" fill="#eef3ff" stroke="#2355de" stroke-width="2"/>
+<text x="245" y="449" text-anchor="middle" class="" font-size="25"><tspan x="245" dy="0">응답 도착?</tspan></text>
+<path class="edge" d="M85 440 H38 V342 H245 V370"/>
+<text x="70" y="479" text-anchor="middle" class="note" font-size="23"><tspan x="70" dy="0">대기</tspan></text>
+<path class="edge" d="M245 510 L245 658"/>
+<text x="282" y="638" text-anchor="middle" class="note" font-size="22"><tspan x="282" dy="0">예</tspan></text>
+<rect x="85" y="658" width="320" height="90" rx="10" fill="#f8fafc" stroke="#c5d2e6" stroke-width="2"/>
+<text x="245" y="712.1" text-anchor="middle" class="" font-size="26"><tspan x="245" dy="0">응답 데이터 처리</tspan></text>
+<path class="edge" d="M245 748 L245 798"/>
+<rect x="85" y="798" width="320" height="76" rx="38" fill="#f8fafc" stroke="#c5d2e6" stroke-width="2"/>
+<text x="245" y="845.1" text-anchor="middle" class="" font-size="26"><tspan x="245" dy="0">클라이언트 응답</tspan></text>
+<rect x="560" y="220" width="320" height="96" rx="10" fill="#f8fafc" stroke="#c5d2e6" stroke-width="2"/>
+<text x="720" y="258.38" text-anchor="middle" class="" font-size="26"><tspan x="720" dy="0">WebClient 요청</tspan><tspan x="720" dy="37.699999999999996">Mono 처리 흐름 연결</tspan></text>
+<path class="edge" d="M720 316 L720 370"/>
+<rect x="560" y="370" width="320" height="110" rx="10" fill="#f8fafc" stroke="#c5d2e6" stroke-width="2"/>
+<text x="720" y="415.38" text-anchor="middle" class="" font-size="26"><tspan x="720" dy="0">외부 I/O 응답 대기</tspan><tspan x="720" dy="37.699999999999996">대기 Thread 점유 분리</tspan></text>
+<path class="edge" d="M720 480 L720 552"/>
+<text x="806" y="523" text-anchor="middle" class="note" font-size="21"><tspan x="806" dy="0">응답 준비 알림</tspan></text>
+<rect x="560" y="552" width="320" height="96" rx="10" fill="#f8fafc" stroke="#c5d2e6" stroke-width="2"/>
+<text x="720" y="590.38" text-anchor="middle" class="" font-size="26"><tspan x="720" dy="0">Mono 후속 처리</tspan><tspan x="720" dy="37.699999999999996">응답 데이터 변환</tspan></text>
+<path class="edge" d="M720 648 L720 798"/>
+<rect x="560" y="798" width="320" height="76" rx="38" fill="#f8fafc" stroke="#c5d2e6" stroke-width="2"/>
+<text x="720" y="845.1" text-anchor="middle" class="" font-size="26"><tspan x="720" dy="0">클라이언트 응답</tspan></text>
+</svg>

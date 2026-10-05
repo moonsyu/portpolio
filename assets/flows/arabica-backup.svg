@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="1120" viewBox="0 0 960 1120" role="img" aria-labelledby="title"><title id="title">Arabica: 백업 실행과 주기적 완료 확인 분리</title><defs><marker id="arrow" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 Z" fill="#2355de"/></marker></defs><rect width="960" height="1120" fill="white"/><style>text{font-family:'Malgun Gothic','Segoe UI',sans-serif;fill:#172538;font-weight:650}.note{fill:#526780}.heading{fill:#2355de;font-weight:750}.edge{fill:none;stroke:#2355de;stroke-width:2.5;marker-end:url(#arrow)}</style>
+<text x="250" y="40" text-anchor="middle" class="heading" font-size="29"><tspan x="250" dy="0">변경 전 · 완료 대기</tspan></text>
+<text x="250" y="76" text-anchor="middle" class="note" font-size="23"><tspan x="250" dy="0">완료까지 Thread 점유</tspan></text>
+<text x="710" y="48" text-anchor="middle" class="heading" font-size="29"><tspan x="710" dy="0">변경 후 · 실행 / 확인 분리</tspan></text>
+<path d="M480 78 V1080" stroke="#dce3ed" stroke-width="2" stroke-dasharray="7 7"/>
+<rect x="90" y="100" width="320" height="78" rx="39" fill="#f8fafc" stroke="#c5d2e6" stroke-width="2"/>
+<text x="250" y="148.1" text-anchor="middle" class="" font-size="26"><tspan x="250" dy="0">백업 스케줄 실행</tspan></text>
+<path class="edge" d="M250 178 L250 218"/>
+<rect x="90" y="218" width="320" height="96" rx="10" fill="#f8fafc" stroke="#c5d2e6" stroke-width="2"/>
+<text x="250" y="256.38" text-anchor="middle" class="" font-size="26"><tspan x="250" dy="0">SSH 명령 호출</tspan><tspan x="250" dy="37.699999999999996">원격 Bash 실행</tspan></text>
+<path class="edge" d="M250 314 L250 354"/>
+<path d="M250 354 L410 426 L250 498 L90 426 Z" fill="#eef3ff" stroke="#2355de" stroke-width="2"/>
+<text x="250" y="435" text-anchor="middle" class="" font-size="25"><tspan x="250" dy="0">백업 종료?</tspan></text>
+<path class="edge" d="M90 426 H40 V334 H250 V354"/>
+<text x="75" y="462" text-anchor="middle" class="note" font-size="23"><tspan x="75" dy="0">대기</tspan></text>
+<path class="edge" d="M250 498 L250 626"/>
+<text x="282" y="614" text-anchor="middle" class="note" font-size="22"><tspan x="282" dy="0">예</tspan></text>
+<rect x="90" y="626" width="320" height="82" rx="41" fill="#f8fafc" stroke="#c5d2e6" stroke-width="2"/>
+<text x="250" y="676.1" text-anchor="middle" class="" font-size="26"><tspan x="250" dy="0">후속 처리</tspan></text>
+<rect x="550" y="100" width="320" height="78" rx="39" fill="#f8fafc" stroke="#c5d2e6" stroke-width="2"/>
+<text x="710" y="148.1" text-anchor="middle" class="" font-size="26"><tspan x="710" dy="0">백업 스케줄 실행</tspan></text>
+<path class="edge" d="M710 178 L710 218"/>
+<rect x="550" y="218" width="320" height="96" rx="10" fill="#f8fafc" stroke="#c5d2e6" stroke-width="2"/>
+<text x="710" y="256.38" text-anchor="middle" class="" font-size="26"><tspan x="710" dy="0">별도 실행기 진입</tspan><tspan x="710" dy="37.699999999999996">@Async</tspan></text>
+<path class="edge" d="M710 314 L710 354"/>
+<rect x="550" y="354" width="320" height="96" rx="10" fill="#f8fafc" stroke="#c5d2e6" stroke-width="2"/>
+<text x="710" y="392.38" text-anchor="middle" class="" font-size="26"><tspan x="710" dy="0">원격 백그라운드 실행</tspan><tspan x="710" dy="37.699999999999996">nohup bash … &amp;</tspan></text>
+<path class="edge" d="M710 450 L710 490"/>
+<rect x="550" y="490" width="320" height="78" rx="39" fill="#f8fafc" stroke="#c5d2e6" stroke-width="2"/>
+<text x="710" y="538.1" text-anchor="middle" class="" font-size="26"><tspan x="710" dy="0">실행 호출 반환</tspan></text>
+<text x="710" y="630" text-anchor="middle" class="heading" font-size="26"><tspan x="710" dy="0">별도 결과 확인 주기</tspan></text>
+<rect x="550" y="666" width="320" height="82" rx="10" fill="#f8fafc" stroke="#c5d2e6" stroke-width="2"/>
+<text x="710" y="697.38" text-anchor="middle" class="" font-size="26"><tspan x="710" dy="0">5분 간격 확인</tspan><tspan x="710" dy="37.699999999999996">결과 파일 판독</tspan></text>
+<path class="edge" d="M710 748 L710 788"/>
+<path d="M710 788 L870 855 L710 922 L550 855 Z" fill="#eef3ff" stroke="#2355de" stroke-width="2"/>
+<text x="710" y="864" text-anchor="middle" class="" font-size="25"><tspan x="710" dy="0">완료 결과 존재?</tspan></text>
+<path class="edge" d="M550 855 H510 V707 H550"/>
+<text x="557" y="779" text-anchor="middle" class="note" font-size="19"><tspan x="557" dy="0">아니오</tspan></text>
+<path class="edge" d="M710 922 L710 960"/>
+<text x="748" y="949" text-anchor="middle" class="note" font-size="22"><tspan x="748" dy="0">예</tspan></text>
+<rect x="550" y="960" width="320" height="106" rx="10" fill="#f8fafc" stroke="#c5d2e6" stroke-width="2"/>
+<text x="710" y="1003.38" text-anchor="middle" class="" font-size="26"><tspan x="710" dy="0">업로드·데이터 검증</tspan><tspan x="710" dy="37.699999999999996">완료 결과와 이력 저장</tspan></text>
+<text x="250" y="806" text-anchor="middle" class="note" font-size="23"><tspan x="250" dy="0">백업 실행과 결과 처리가</tspan><tspan x="250" dy="33.35">동일 대기 흐름에 연결</tspan></text>
+</svg>

@@ -129,3 +129,8 @@ strong,b{font-weight:750;color:var(--ink)}
 .implementation-list ul{font-size:18px;font-weight:600;line-height:1.85}
 .implementation-list li+li{margin-top:8px}
 @media(max-width:760px){.implementation-list ul{font-size:17px}}
+
+/* Source code comparisons and flowcharts retain their full proportions. */
+.evidence-stack{display:grid;gap:24px;min-width:0}
+.evidence-stack .evidence-figure{padding:0;overflow:hidden}
+.evidence-stack img,.flow-evidence img{max-height:none}

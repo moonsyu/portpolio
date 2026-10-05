@@ -7,8 +7,20 @@
 - 순서: 소개(01) → 프로젝트(02) → 연락처(03)
 - 보유 기술: 기술 아이콘과 이름을 함께 표시
 - 수상·자격: 별도 목록, 수상 기관·행사명·일자 및 자격·어학 등급·취득일 표시
-- 기능: 소개·프로젝트 탐색, 상세 내용 기본 펼침·접기, 이미지 드래그·휠 확대, 실행 GIF 재생·일시정지, 반응형 레이아웃
+- 기능: 소개·프로젝트 탐색, 상세 내용 항상 표시, 이미지 드래그·휠 확대, 실행 GIF 재생·일시정지, 반응형 레이아웃
 - 애플리케이션 아키텍처: 기술·기능 아이콘, 모듈별 영역, 요청·응답·저장 흐름을 표현한 SVG 도식 6개
+
+## 최신 내용 수정 · 2026-10-05
+
+- 프로젝트 요약 막대·개요 이미지 하단 캡션 제거; 기존 디자인 유지.
+- 데이터·배포 기술에 MySQL·MariaDB·PostgreSQL 아이콘 추가.
+- STM TESTING·REGRESSION 및 BOOKIES 별도 QnA 구역 제거; CONS 측위 비교를 IMPLEMENTATION 맨 앞으로 이동.
+- BOOKIES의 Jakarta·javax 및 WAR EL 의존성 변경을 실제 Git 코드 전후 이미지로 표시.
+- Arabica·CMP·Wallet XSS 흐름도, Store 외래키 참조 변경 도식 추가.
+- Wallet 구현 항목을 DB Migration·SSE/QR 로그인·SMS/FCM 알림으로 정리.
+- Store 마이그레이션 FK 4개 수정과 Wallet DB 전환을 구분; 근거가 연결되지 않은 Wallet FK 장애 후보는 보류.
+- 상세 출처·표현 범위·검증: [2026-10-05 반영 기록](docs/portfolio-refinements-20261005.md).
+- 아래 날짜별 항목은 이전 변경 이력. PDF는 이번 웹 변경에 맞춰 재생성하지 않음.
 
 ## 회사 프로젝트 추가 · 2026-10-04
 
@@ -47,6 +59,9 @@ python -m http.server 8080
 - `app.js`: 이미지 확대·탐색 상태 표시
 - `assets/`: 포트폴리오에 사용한 실제 프로젝트 화면·프로필 사진
 - `assets/architecture/`: 애플리케이션 아키텍처 SVG·아이콘·출처·라이선스
+- `assets/evidence/`: BOOKIES 실제 Git 코드의 전후 발췌 렌더
+- `assets/flows/`: 확인된 처리 흐름·관계 변경을 재구성한 도식
+- `scripts/build_troubleshooting_flows.mjs`: 처리 흐름·Store FK 변경 도식 생성기
 - `scripts/build_architectures.py`: 아키텍처 도식 생성 스크립트(Python 표준 라이브러리)
 - `.nojekyll`: 정적 파일 배포 설정
 
