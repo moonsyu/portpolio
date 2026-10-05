@@ -134,3 +134,13 @@ strong,b{font-weight:750;color:var(--ink)}
 .evidence-stack{display:grid;gap:24px;min-width:0}
 .evidence-stack .evidence-figure{padding:0;overflow:hidden}
 .evidence-stack img,.flow-evidence img{max-height:none}
+
+/* Icon-only project stacks; labels appear on hover or keyboard focus. */
+.project-description .project-tech-icons{display:flex;flex-wrap:wrap;gap:12px;list-style:none;margin:0;padding:20px 0 0;border-top:1px solid var(--line)}
+.project-tech-icons li{position:relative;display:flex;align-items:center;justify-content:center;width:58px;height:58px;border:1px solid var(--line);border-radius:9px;background:var(--paper);cursor:help}
+.project-tech-icons img{width:36px;height:36px;object-fit:contain}
+.project-tech-icons li::after{content:attr(aria-label);position:absolute;left:var(--tooltip-left,0px);bottom:calc(100% + 8px);z-index:5;width:max-content;max-width:160px;padding:7px 10px;border-radius:6px;background:var(--ink);color:white;font:600 14px/1.5 "Segoe UI","Malgun Gothic",sans-serif;white-space:normal;visibility:hidden;opacity:0;pointer-events:none}
+.project-tech-icons li:hover::after,.project-tech-icons li:focus-visible::after{visibility:visible;opacity:1}
+.project-tech-icons li:focus-visible{outline:2px solid var(--blue);outline-offset:3px}
+.skill-group-ai{grid-column:1/-1}
+@media(max-width:760px){.project-description .project-tech-icons{gap:10px}.project-tech-icons li{width:50px;height:50px}.project-tech-icons img{width:32px;height:32px}}

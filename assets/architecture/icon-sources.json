@@ -153,6 +153,81 @@
       "name": "postgresql",
       "url": "https://raw.githubusercontent.com/devicons/devicon/7330accdbc47e2dc0c19789a48533c4a3c50fe58/icons/postgresql/postgresql-original.svg",
       "bytes": 9178
+    },
+    {
+      "name": "terminal",
+      "url": "https://raw.githubusercontent.com/lucide-icons/lucide/f06ac67e33d645c40b8ce19a0419c85c5d7dd751/icons/terminal.svg",
+      "bytes": 261
+    },
+    {
+      "name": "bot",
+      "url": "https://raw.githubusercontent.com/lucide-icons/lucide/f06ac67e33d645c40b8ce19a0419c85c5d7dd751/icons/bot.svg",
+      "bytes": 380
+    },
+    {
+      "name": "workflow",
+      "url": "https://raw.githubusercontent.com/lucide-icons/lucide/f06ac67e33d645c40b8ce19a0419c85c5d7dd751/icons/workflow.svg",
+      "bytes": 351
+    },
+    {
+      "name": "git-branch",
+      "url": "https://raw.githubusercontent.com/lucide-icons/lucide/f06ac67e33d645c40b8ce19a0419c85c5d7dd751/icons/git-branch.svg",
+      "bytes": 313
+    },
+    {
+      "name": "signal",
+      "url": "https://raw.githubusercontent.com/lucide-icons/lucide/f06ac67e33d645c40b8ce19a0419c85c5d7dd751/icons/signal.svg",
+      "bytes": 330
+    },
+    {
+      "name": "plug",
+      "url": "https://raw.githubusercontent.com/lucide-icons/lucide/f06ac67e33d645c40b8ce19a0419c85c5d7dd751/icons/plug.svg",
+      "bytes": 363
+    },
+    {
+      "name": "cable",
+      "url": "https://raw.githubusercontent.com/lucide-icons/lucide/f06ac67e33d645c40b8ce19a0419c85c5d7dd751/icons/cable.svg",
+      "bytes": 532
+    },
+    {
+      "name": "cloud-cog",
+      "url": "https://raw.githubusercontent.com/lucide-icons/lucide/f06ac67e33d645c40b8ce19a0419c85c5d7dd751/icons/cloud-cog.svg",
+      "bytes": 655
+    },
+    {
+      "name": "database-backup",
+      "url": "https://raw.githubusercontent.com/lucide-icons/lucide/f06ac67e33d645c40b8ce19a0419c85c5d7dd751/icons/database-backup.svg",
+      "bytes": 473
+    },
+    {
+      "name": "radio",
+      "url": "https://raw.githubusercontent.com/lucide-icons/lucide/f06ac67e33d645c40b8ce19a0419c85c5d7dd751/icons/radio.svg",
+      "bytes": 437
+    },
+    {
+      "name": "key-round",
+      "url": "https://raw.githubusercontent.com/lucide-icons/lucide/f06ac67e33d645c40b8ce19a0419c85c5d7dd751/icons/key-round.svg",
+      "bytes": 453
+    },
+    {
+      "name": "shield-check",
+      "url": "https://raw.githubusercontent.com/lucide-icons/lucide/f06ac67e33d645c40b8ce19a0419c85c5d7dd751/icons/shield-check.svg",
+      "bytes": 415
+    },
+    {
+      "name": "gradle",
+      "url": "https://raw.githubusercontent.com/devicons/devicon/7330accdbc47e2dc0c19789a48533c4a3c50fe58/icons/gradle/gradle-original.svg",
+      "bytes": 1134
+    },
+    {
+      "name": "bash",
+      "url": "https://raw.githubusercontent.com/devicons/devicon/7330accdbc47e2dc0c19789a48533c4a3c50fe58/icons/bash/bash-original.svg",
+      "bytes": 1800
+    },
+    {
+      "name": "postman",
+      "url": "https://raw.githubusercontent.com/devicons/devicon/7330accdbc47e2dc0c19789a48533c4a3c50fe58/icons/postman/postman-original.svg",
+      "bytes": 3729
     }
   ]
 }

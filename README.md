@@ -106,6 +106,9 @@ python scripts/build_architectures.py
 
 ## 실행 화면 및 접근성
 
+- 프로젝트 개요: 상단 번호·프로젝트명, 왼쪽 실행 화면 또는 서비스 개념도, 오른쪽 소개·참여 정보·기존 설명 3개·기술 아이콘 순서
+- 프로젝트 상단 오른쪽 분류 문구 제거; 기술 스택은 아이콘만 표시하고 마우스·키보드 포커스 시 이름 제공
+- 보유 기술 AI 항목: OpenCode, OpenClaw, Harness Engineering, Ponytail; 해당 항목은 공식 로고 대신 Lucide 기능 아이콘 사용
 - STM LED GIF: 실제 애플리케이션의 HAL GPIO LED 예제를 실행 버튼 클릭 전부터 기록
 - 기록 범위: 시작 버튼, LED 점멸, 실행 시간·전류 표시; 원본 화면을 잘라 GIF로 변환
 - 모션 감소 설정에서는 정지 이미지로 시작하며 GIF 이미지 클릭·Enter·Space로 재생/정지 전환
