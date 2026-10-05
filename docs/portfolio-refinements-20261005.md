@@ -1,7 +1,7 @@
 # 프로젝트 내용·시각 근거 정리 · 2026-10-05
 
 - 적용 대상: `portpolio` GitHub Pages.
-- 기존 디자인·프로젝트 순서 유지; PDF·경력기술서 저장소 변경 없음.
+- 기존 디자인 유지; 후속 요청에 따라 Wallet 다음에 Store 독립 프로젝트 추가. PDF·경력기술서 저장소 변경 없음.
 - 조회 원본·회사 코드·내부 ERD·주소·자격 증명은 공개 저장소에 포함하지 않음.
 
 ## 반영 내용
@@ -14,7 +14,19 @@
 - Arabica: DB 스케줄·외부 백업·복원 제목 수정; 백업 Thread 점유 문제와 실행/결과 확인 분리 흐름도 반영.
 - CMP: 외부 API 동기 대기와 WebFlux·Mono 응답 처리 비교 흐름도 반영.
 - Wallet: DB Migration, SSE·QR 로그인 연동, SMS·FCM 알림으로 구현 항목 구성; XSS 요청 본문 반영 흐름도 추가.
-- Store: DB 마이그레이션의 FK 참조 오류를 연동 프로젝트 구역에 `TROUBLESHOOTING / STORE`로 구분하여 추가.
+- Store: 처음 Wallet 하위에 표시했던 DB 마이그레이션 FK 오류를 후속 요청에 따라 7번 Store 독립 프로젝트로 이동.
+- Store 독립 구성: 개요 → 애플리케이션 아키텍처 → 구현 → 기존 FK 트러블슈팅. Wallet의 DB 전환 구현 이력은 유지하고 오류 사례만 분리.
+
+## Store 독립 프로젝트 근거
+
+- 개요·개인 구현: DB 전환, 스키마 관계 수정, Wallet 인증과 웹 SSE 연동. 전체 커머스 기능을 단독 개발했다고 표현하지 않음.
+- 아키텍처: 웹 API/SSE → Store Controller·Service → MyBatis DAO/Mapper → PostgreSQL; Wallet App → Wallet API → Store 인증 승인 전달.
+- Store `6e9899b`의 `NetWorkController.java`, `NetworkServiceImpl.java`, `LoginDAO.java`와 `pom.xml`에서 일반 요청·기능 분기·MyBatis·기술 구성 확인.
+- SSE 이력: Store `3cd78a8` 메모리 연결 관리, `04a3d22` 인증 상태 DB 저장·조회·SSE 결과 반환; Wallet `739d9159` 인증 결과 전달.
+- SSE DB 저장 내용은 인증 상태이며 Java Sink 객체가 아님. MyBatis 호출까지 전체 비동기·논블로킹이라고 주장하지 않음.
+- 아키텍처는 일반 요청·SSE·저장 경로 중심의 요약. 별도 프로필 조회 등 모든 API를 나열하지 않음; Store에서 Wallet DB로 직접 접근하는 연결은 없음.
+- 관계 구조: `822f953`의 FK 참조 교정과 `a134f73`/`43d5a71`의 후속 중간 매핑·복합키 정리를 별도 구현 항목으로 구분.
+- 생성: `python scripts/build_store_diagrams.py`; 기존 Diagram 도구와 이미 등록된 Devicon/Lucide 아이콘 사용.
 
 ## CONS API 교체 근거
 
