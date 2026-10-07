@@ -108,6 +108,7 @@ document.querySelectorAll('.project-tech-icons li').forEach(icon => {
   const positionLabel = () => {
     const box = icon.getBoundingClientRect();
     const label = getComputedStyle(icon, '::after');
+    if (label.display === 'none') return;
     const width = parseFloat(label.width) + (label.boxSizing === 'border-box' ? 0 : parseFloat(label.paddingLeft) + parseFloat(label.paddingRight));
     const left = Math.max(8 - box.left, Math.min((box.width - width) / 2, innerWidth - 8 - box.left - width));
     icon.style.setProperty('--tooltip-left', `${left}px`);
