@@ -10,6 +10,14 @@
 - 기능: 소개·프로젝트 탐색, 상세 내용 항상 표시, 이미지 드래그·휠 확대, 실행 GIF 재생·일시정지, 반응형 레이아웃
 - 애플리케이션 아키텍처: 기술·기능 아이콘, 모듈별 영역, 요청·응답·저장 흐름을 표현한 SVG 도식 7개
 
+## PDF 갱신 · 2026-10-12
+
+- 사용자 예시의 각 구간을 독립 페이지로 구성: 표지 → 소개 → 기술 스택 → 수상·자격 → 프로젝트 목록 → 프로젝트별 상세 → 연락처.
+- 일반판 40쪽·웹·앱판 35쪽. 현재 웹의 7개 프로젝트·AI 기술 스택·Arabica 회고·최신 실행 화면 반영.
+- 웹·앱판은 STM-Simulator·전역 임베디드 소개·SSAFY 임베디드 트랙 제외, CONS 전체 유지.
+- 기존 웹 디자인을 사용하는 16:9 PDF. 한글 검색·선택, 프로젝트 이동 링크·페이지 북마크 제공.
+- [페이지 구성·검증 기록](docs/pdf-refresh-20261012.md).
+
 ## 개요·구현·Store 흐름도 정리 · 2026-10-11
 
 - 전체 프로젝트 개요의 주요 기술 아이콘 3개를 크기·파란 테두리로 강조.
@@ -137,7 +145,7 @@ python scripts/build_architectures.py
 
 - 프로젝트 개요: 상단 번호·프로젝트명, 왼쪽 실제 프로젝트 실행 화면, 오른쪽 서비스 정의·참여 기간/인원·기능/동작/목적 설명 3개·기술 아이콘 순서
 - 2026-10-07 사용자 확정: 개요 왼쪽에 생성 예시·서비스 개념도·기능 요약 도식을 대체 화면으로 사용하지 않음
-- 개요 실제 화면: STM-Simulator·CONS·BOOKIES의 기존 이미지와 Arabica·CMP·Wallet의 가이드 캡처 사용. Store는 실제 화면 여부 확인 대기.
+- 개요 실제 화면: STM-Simulator·CONS·BOOKIES의 기존 이미지와 Arabica·CMP·Wallet의 가이드 캡처 사용. Store는 로컬 실행 후 좌측 메뉴를 연 캡처 사용.
 - 프로젝트 상단 오른쪽 분류 문구 제거; 기술 스택은 아이콘만 표시하고 마우스·키보드 포커스 시 이름 제공
 - 보유 기술 AI 항목: OpenCode, OpenClaw, Harness Engineering, Ponytail; 해당 항목은 공식 로고 대신 Lucide 기능 아이콘 사용
 - STM LED GIF: 실제 애플리케이션의 HAL GPIO LED 예제를 실행 버튼 클릭 전부터 기록
@@ -154,7 +162,7 @@ python scripts/build_architectures.py
 - 상단 `웹·앱 PDF` 버튼: `output/pdf/Jang-MoonSu-Web-App-Portfolio.pdf` 별도 편집본 저장
 - 별도본: STM-Simulator·임베디드 학습 기술·SSAFY 임베디드 트랙 및 전역 IoT·하드웨어 소개 제외
 - 사용자 지정 유지 항목: CONS 소개·아키텍처·개선·트러블슈팅과 모바일 연동 기술, BOOKIES 전체 내용
-- 형식: PPT와 같은 16:9 가로 슬라이드, 1280 × 720 pt
+- 형식: PPT와 같은 16:9 가로 슬라이드, 1440 × 810px 기준 레이아웃
 - 수상 페이지: 왼쪽 수상 세로 목록·가로 구분선, 오른쪽 자격·어학 카드
 - 마지막 연락처 페이지: 본문과 같은 밝은 배경·푸른색 링크
 - 웹페이지의 색상·강조·좌우 배치를 반영하고 각 구역을 독립 슬라이드로 출력
@@ -162,14 +170,18 @@ python scripts/build_architectures.py
 - 개요와 아키텍처를 서로 다른 페이지로 분리하고 글자를 선택·검색할 수 있도록 출력
 - 소개·수상·자격·프로젝트·개선·트러블슈팅 내용: `index.html`에서 추출
 - 기존 프로젝트 화면·아키텍처 사용, 새 이미지 생성 불필요
-- GIF는 실행 화면 한 장과 온라인 재생 링크로 표시해 웹페이지의 좌우 배치 유지
-- PDF 갱신 요청 시 사이트 내용에 맞춰 별도 생성. 2026-10-04 회사 프로젝트 추가는 웹 전용이며 기존 PDF에 미반영.
+- GIF는 기존 정지 이미지와 온라인 재생 링크로 표시해 웹페이지의 좌우 배치 유지
+- PDF 갱신 요청 시 현재 `index.html`·`styles.css`·자산을 읽어 두 파일 재생성. 2026-10-12 현재 회사 프로젝트까지 반영.
 - 준비: `python -m pip install -r scripts/requirements-pdf.txt`, `npm install`
 - 두 파일 생성: `python scripts/build_pdf.py`
 - 선택 생성: `--variant full` 또는 `--variant web-app`
-- 기본 글꼴: Windows 맑은 고딕, PDF에 글꼴 포함
-- 다른 환경: `--font-dir`로 `malgun.ttf`·`malgunbd.ttf` 폴더 지정
-- 공유 Node 패키지 환경: `--node-modules`로 패키지 폴더 지정
+- 기본 렌더러: Windows의 설치된 Microsoft Edge. 다른 환경은 `npx playwright install chromium` 실행 후 사용.
+- 기본 글꼴: 웹과 동일한 Segoe UI·맑은 고딕 계열. PDF에 사용 글꼴 포함.
+- `scripts/pdf.css`: 웹페이지에 영향을 주지 않는 PDF 전용 페이지 배치.
+- `scripts/verify_pdf.py`: 모든 페이지의 원문 텍스트 보존·페이지 수·외부 링크 검사, 북마크 추가.
+- 공유 Node 패키지 환경: `--node-modules`로 패키지 폴더 지정. `--node`로 Node 실행 파일 지정.
+- 별도 검토 출력: `--output-dir <폴더> --work-dir <폴더>`. 작업 폴더에 페이지 구성·배치 검사 JSON·HTML 보관.
+- 자동 검사 후 전체 PDF를 렌더링해 잘림·누락·가독성을 직접 확인하고, 두 다운로드 링크의 캐시 버전을 갱신한 뒤 배포.
 
 ## 트러블슈팅 검증 자료
 
