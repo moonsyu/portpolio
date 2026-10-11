@@ -33,8 +33,8 @@
 
 ## 출력 파일
 
-- `output/pdf/Jang-MoonSu-Portfolio.pdf`: 8,695,155 bytes / SHA-256 `bd991b5f9e065eb1e3eb401cd5a363033ce2a38fa4f677c45b2919ccf690a1ce`.
-- `output/pdf/Jang-MoonSu-Web-App-Portfolio.pdf`: 7,569,896 bytes / SHA-256 `773d1eaa185828a27265ae76f38ff5eb5451f2289cbc4b9924bc407191c3a811`.
+- `output/pdf/Jang-MoonSu-Portfolio.pdf`: 8,693,215 bytes / SHA-256 `48f3a143c75a404cbf3a71940fb3fc0c4345144434f69c175783454b4555d8c1`.
+- `output/pdf/Jang-MoonSu-Web-App-Portfolio.pdf`: 7,567,902 bytes / SHA-256 `981a2084f1eedce340eb244817623bac0ca51cddea2759e547afc0c7ced85008`.
 
 ## 페이지 구성
 
@@ -80,3 +80,11 @@
 | 38 | 33 | Store · DB 전환·관계 구조 정리·SSE 인증 연동 |
 | 39 | 34 | Store · Store DB 마이그레이션의 외래키 참조 오류 |
 | 40 | 35 | 연락처 |
+
+## 표지 버튼 후속 수정
+
+- 사용자 요청: PDF 표지의 `PDF 다운로드`·`웹·앱 PDF` 버튼 제거.
+- 생성기의 임시 문서에서만 다운로드 버튼 제거. 웹페이지의 두 다운로드 버튼 유지.
+- 일반판 40쪽·웹·앱판 35쪽 재생성 및 원문·링크·레이아웃 검사 통과.
+- 표지 두 장 직접 확인. 다운로드 문구·PDF 파일 링크 0건, 프로젝트 보기·GitHub 링크 유지.
+- 총 75쪽 렌더 대조: 각 판의 표지만 변경, 나머지 73쪽 픽셀 동일.

@@ -39,6 +39,8 @@ async function render(browser, edition) {
   const result = await page.evaluate(({source, edition, base, css, exportCss}) => {
     const doc = new DOMParser().parseFromString(source, 'text/html');
     const site = doc.querySelector('link[rel="canonical"]').href;
+    // Download controls belong to the website, not the exported document.
+    doc.querySelectorAll('.hero-actions .button-pdf').forEach(button => button.remove());
     if (edition === 'web-app') {
       doc.querySelector('#stm').remove();
       doc.querySelector('.project-index a[href="#stm"]').remove();
