@@ -68,24 +68,33 @@ chart('wallet-xss','Wallet: JSON의 정제값을 요청 본문에 반영하는 X
  node(285,988,370,76,['업무 API에 전달'],{round:true});
  text(470,1112,['정책 객체는 한 번 준비하고 재사용'],25,'note');
 });
-chart('store-migration','Store: 장바구니·결제 옵션의 FK를 부모 PK 참조로 변경',960,1050,({text,node,edge,parts})=>{
- text(240,45,['변경 전 · 비유일 컬럼 참조'],28,'heading');
- text(720,45,['변경 후 · 부모 PK 참조'],28,'heading');
- parts.push('<path d="M480 82 V1000" stroke="#dce3ed" stroke-width="2" stroke-dasharray="7 7"/>');
- for(const [y,title,parent] of [[120,'장바구니 옵션','장바구니 행'],[590,'결제 옵션','결제 상품 행']]){
-  text(240,y-25,[title],25,'heading');text(720,y-25,[title],25,'heading');
-  for(const x of [240,720]){
-   node(x-180,y,360,72,[parent]);
-   node(x-180,y+165,360,72,['옵션 그룹 연결 행']);
-   node(x-180,y+330,360,72,['옵션 상세 연결 행']);
-   edge(`M${x-145} ${y+165} V${y+72}`);
-   edge(`M${x-145} ${y+330} V${y+237}`);
-  }
-  text(260,y+115,['상품 ID'],24);text(260,y+145,['중복 가능'],21,'note');
-  text(260,y+280,['옵션 그룹 ID'],24);text(260,y+310,['중복 가능'],21,'note');
-  text(740,y+124,[title==='장바구니 옵션'?'장바구니 PK':'결제 상품 연결 PK'],24);
-  text(740,y+289,['옵션 그룹 연결 PK'],24);
+chart('store-migration','Store: 변경 전 참조 오류에서 부모 PK 참조 교정까지의 하향 흐름',960,1280,({text,node,edge,parts})=>{
+ text(480,44,['변경 전 · 유일하지 않은 컬럼 참조'],30,'heading');
+ text(480,80,['화살표: 자식 행에서 부모 행으로 FK 참조'],23,'note');
+ for(const [x,title,parent] of [[245,'장바구니 옵션','장바구니 행'],[715,'결제 옵션','결제 상품 행']]){
+  text(x,124,[title],26,'heading');
+  node(x-200,150,400,72,['옵션 상세 연결 행']);
+  edge(`M${x-156} 222 V316`);
+  text(x+20,260,['옵션 그룹 ID'],25);text(x+20,295,['중복 가능'],22,'note');
+  node(x-200,316,400,72,['옵션 그룹 연결 행']);
+  edge(`M${x-156} 388 V482`);
+  text(x+20,426,['상품 ID'],25);text(x+20,460,['중복 가능'],22,'note');
+  node(x-200,482,400,72,[parent]);
  }
- text(480,1023,['자식 → 부모 참조 · 4개 관계의 참조 컬럼 교정'],24,'note');
+ parts.push('<path d="M245 554 V580 H715 V554" fill="none" stroke="#2355de" stroke-width="2.5"/>');
+ edge('M480 580 V606');
+ node(170,606,620,90,['참조 대상의 유일성 조건 불충족','PostgreSQL 마이그레이션 실패'],{fill:'#eef3ff',size:26});
+ edge('M480 696 V744');
+ text(480,788,['해결 · 4개 FK를 기존 부모 PK 참조로 교정'],30,'heading');
+ for(const [x,title,parent] of [[245,'장바구니 옵션','장바구니 행'],[715,'결제 옵션','결제 상품 행']]){
+  text(x,835,[title],26,'heading');
+  node(x-200,861,400,72,['옵션 상세 연결 행']);
+  edge(`M${x-156} 933 V1019`);
+  text(x+20,982,['옵션 그룹 연결 PK'],24,'heading');
+  node(x-200,1019,400,72,['옵션 그룹 연결 행']);
+  edge(`M${x-156} 1091 V1177`);
+  text(x+20,1140,[title==='장바구니 옵션'?'장바구니 PK':'결제 상품 연결 PK'],24,'heading');
+  node(x-200,1177,400,72,[parent]);
+ }
 });
 console.log('Created 4 source-grounded flowcharts.');

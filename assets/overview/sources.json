@@ -62,5 +62,54 @@
       1003
     ],
     "processing": "PNG ancillary metadata removed; decoded pixels unchanged; ICC profile retained"
+  },
+  {
+    "asset": "assets/overview/arabica-dashboard-full.png",
+    "document": "백업프로젝트_1차보고서_화면_설계서.pptx",
+    "document_sha256": "304e2b22883e15550aebee7d91fec8cce4a51a0d4dcf1dc12da7a26824a04a53",
+    "slides": [
+      4
+    ],
+    "media": "ppt/media/image3.png",
+    "source_media_sha256": "3537594a1ec620f99ef5e5875bdc1bda9c80b9b554879768c377c21ff2a8b165",
+    "published_sha256": "3537594a1ec620f99ef5e5875bdc1bda9c80b9b554879768c377c21ff2a8b165",
+    "dimensions": [
+      1918,
+      904
+    ],
+    "processing": "Original extracted PNG; unchanged"
+  },
+  {
+    "asset": "assets/overview/wallet-main.png",
+    "document": "veta_use_guide-union.pptx",
+    "document_sha256": "3862d8e8634bb2de09e7c7ee837cc57d90d967cf9655209265c5f1529ae2a8ef",
+    "slides": [
+      36,
+      37
+    ],
+    "media": "ppt/media/image75.tiff",
+    "source_media_sha256": "5a57e04e17fdc0ab7ee832096ff36c3e56578f19c4e0943a533ec9fa2661c9da",
+    "published_sha256": "7dc7142ef589835fa5fb84b87313047b277e261c12ff28266259aab76045c063",
+    "dimensions": [
+      1080,
+      2400
+    ],
+    "processing": "TIFF to PNG; decoded pixels unchanged; original screen retained as requested"
+  },
+  {
+    "asset": "assets/overview/wallet-coin.png",
+    "document": "veta_use_guide-union.pptx",
+    "document_sha256": "3862d8e8634bb2de09e7c7ee837cc57d90d967cf9655209265c5f1529ae2a8ef",
+    "slides": [
+      44
+    ],
+    "media": "ppt/media/image88.tiff",
+    "source_media_sha256": "b8f4e8801db881f29e468434ef0b84e6761fe2dbaca297fb337c2ca57418365a",
+    "published_sha256": "762b13fe3eeb0dca305c1c9c081ffe74acec83ce2eddfe8eda5e71df07dac989",
+    "dimensions": [
+      1080,
+      2400
+    ],
+    "processing": "TIFF to PNG; decoded pixels unchanged; original screen retained as requested"
   }
 ]

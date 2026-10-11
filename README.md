@@ -10,6 +10,17 @@
 - 기능: 소개·프로젝트 탐색, 상세 내용 항상 표시, 이미지 드래그·휠 확대, 실행 GIF 재생·일시정지, 반응형 레이아웃
 - 애플리케이션 아키텍처: 기술·기능 아이콘, 모듈별 영역, 요청·응답·저장 흐름을 표현한 SVG 도식 7개
 
+## 개요·구현·Store 흐름도 정리 · 2026-10-11
+
+- 전체 프로젝트 개요의 주요 기술 아이콘 3개를 크기·파란 테두리로 강조.
+- STM: STM 학습·C·Electron. BOOKIES: AWS·Spring Boot·Oracle.
+- `IMPLEMENTATION(구현)`·`TROUBLESHOOTING(트러블 슈팅)`으로 통일. `APPLICATION ARCHITECTURE` 유지.
+- CONS: Beacon·Unity 연동 및 실내 측위 구현으로 설명 정리.
+- Arabica: 탐색 메뉴를 포함한 전체 대시보드 화면으로 교체.
+- Wallet: 원본 메인·코인 화면으로 교체, DB Migration 구현 항목을 RSA·AntiSamy 보안 기능으로 변경.
+- Store: 외래키 참조 오류·수정 관계 흐름도를 위에서 아래 방향으로 변경. 웹 개요 화면은 추가 원본 위치 확인 대기.
+- [변경 근거·원본 화면·직접 검증 기록](docs/overview-implementation-revision-20261011.md).
+
 ## 실제 화면·Arabica 회고 · 2026-10-11
 
 - Arabica·CMP·Wallet 개요 왼쪽을 사용자 가이드의 실제 화면으로 교체.
