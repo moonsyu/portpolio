@@ -1,0 +1,66 @@
+[
+  {
+    "asset": "assets/overview/arabica-backup-settings.png",
+    "document": "Arabica_웹_사용_가이드.pptx",
+    "document_sha256": "9390f2339d8f0b8e58711176352987d3c4e39d456de0af1e089f04337749f8ea",
+    "slides": [
+      6
+    ],
+    "media": "ppt/media/image15.png",
+    "source_media_sha256": "7a30928dcf3d35e850b6b2f9d14149a4dc2448187f6f8ee94e039cb379b48462",
+    "published_sha256": "7a30928dcf3d35e850b6b2f9d14149a4dc2448187f6f8ee94e039cb379b48462",
+    "dimensions": [
+      1647,
+      860
+    ],
+    "processing": "Original extracted PNG; unchanged"
+  },
+  {
+    "asset": "assets/overview/cmp-solution-suite.png",
+    "document": "cmp_사용자_가이드.pptx",
+    "document_sha256": "69419e8aa2e6a4e76f227f73278e29f58ad0da4d988c6da68684ed2db355818b",
+    "slides": [
+      4
+    ],
+    "media": "ppt/media/image19.png",
+    "source_media_sha256": "4713946b5b8d9b1d17c86ef5c70461436ca9d53ad9585cefc850317d7dfbef69",
+    "published_sha256": "4713946b5b8d9b1d17c86ef5c70461436ca9d53ad9585cefc850317d7dfbef69",
+    "dimensions": [
+      1911,
+      886
+    ],
+    "processing": "Original extracted PNG; unchanged"
+  },
+  {
+    "asset": "assets/overview/wallet-sms-verification.png",
+    "document": "wallet guide.pptx",
+    "document_sha256": "c583effb8648973384e0f841b5c2c383bfdf23a24c389848589800ee9dbbe20c",
+    "slides": [
+      2
+    ],
+    "media": "ppt/media/image4.tiff",
+    "source_media_sha256": "2c7b95918bc7e3e3c86bb3475710813691a7d84fd112228bdc2c8d9408258a0b",
+    "published_sha256": "eea590fb04df4c94ff933f080f088340e216a8c73d356f56773f347bd4ed7568",
+    "dimensions": [
+      1080,
+      2400
+    ],
+    "processing": "TIFF to PNG; pixel-equivalent format conversion"
+  },
+  {
+    "asset": "assets/overview/wallet-payment-pin.png",
+    "document": "wallet guide.pptx",
+    "document_sha256": "c583effb8648973384e0f841b5c2c383bfdf23a24c389848589800ee9dbbe20c",
+    "slides": [
+      9
+    ],
+    "media": "ppt/media/image20.png",
+    "source_media_sha256": "2d4339a0fbf7f3002194b3b392e2566f03cc7ce96009f895586cb803a19ce57f",
+    "published_sha256": "bbfb28fc397747ee772c6487bc5cdfaa6aa74682f16b14e548cf1c9853c1478e",
+    "dimensions": [
+      505,
+      1003
+    ],
+    "processing": "PNG ancillary metadata removed; decoded pixels unchanged; ICC profile retained"
+  }
+]

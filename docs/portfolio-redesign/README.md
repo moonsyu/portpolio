@@ -5,7 +5,8 @@
 - 최신 결정일: 2026-10-02.
 - Arabica·Wallet은 2026-10-04 Git 추가 조사로 구현·수정 근거 보강. CMP는 확정 문안 사용.
 - 웹 반영: 기존 디자인에 회사 프로젝트 3개 추가. [내용과 근거 범위](../company-projects-content.md).
-- 보완 설계·회고 페이지와 35페이지 PPT 제작은 보류.
+- 2026-10-11: Arabica 추가 보완·회고는 기존 웹 디자인에 반영. [반영 기록](../overview-screens-and-arabica-reflection-20261011.md).
+- 35페이지 PPT 제작·전체 디자인 개편은 보류 유지.
 
 - 문서 관리: `portpolio/docs/portfolio-redesign/` (2026-10-04 이전).
 - 연결된 프로젝트 근거는 `remote-codex`의 2026-10-02 확정본을 참조합니다.
