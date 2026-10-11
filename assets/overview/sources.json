@@ -118,12 +118,13 @@
     "source_commit": "22a1e87c060275c76dd822a83d3639547f62c54e",
     "capture_date": "2026-10-11",
     "capture_url": "http://127.0.0.1:3000/",
-    "published_sha256": "2079ebe33fd408831b2f30e495bfa37414d472df0cfdf0bb66898879d1a9fac3",
+    "published_sha256": "468734d96ec1ef5c4a27fbd9ca67071586ea6820f521b8dbaf3f5b104de6fff7",
     "dimensions": [
       1425,
       891
     ],
     "capture_viewport": [1440, 900],
+    "capture_state": "Left navigation open; original 90% sidebar width preserved",
     "processing": "Original desktop browser screenshot; unchanged",
     "verification_scope": "Frontend main screen; backend at localhost:8081 unavailable; not evidence of successful API or login integration"
   }
