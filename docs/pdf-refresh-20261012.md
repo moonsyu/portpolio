@@ -8,7 +8,8 @@
 - Arabica 회고는 웹과 동일하게 추가 보완안·미구현 표시 유지.
 - 이미지 예시를 통째로 붙이지 않고 현재 HTML에서 본문·아이콘·기존 화면·도식을 재사용.
 - GIF는 기존 poster 이미지와 웹 실행 링크 사용.
-- 웹 본문·스타일 변경 없음. 다운로드 링크의 최신 파일 설명·캐시 버전만 변경.
+- 웹 본문·스타일 유지. Arabica·CMP·Wallet·Store 개요 이미지와 다운로드 링크 캐시 갱신.
+- 개요 이미지 표시 문구·아이콘 및 Store 캡처 변경: [이미지 수정 기록](image-corrections-20261012.md).
 
 ## 검증
 
@@ -19,7 +20,8 @@
 - 한글 선택·검색, 40개/35개 페이지 북마크, 내부 목차 이동·공개 웹 링크 유지.
 - 비공개 파일 경로 링크 0건. PDF 엄격 읽기 검사 통과.
 - 모든 페이지 연락처·프로필·기술 아이콘·프로젝트 그림 직접 검토. 상세 코드 비교·수상·아키텍처·회고·Store 흐름도 추가 확대 확인.
-- 최종 PDF 재렌더 75쪽의 PNG가 검토본과 모두 동일.
+- 이미지 수정 후 총 75쪽 재렌더·이전 PDF 대조 완료. 일반판 22·27·32·36쪽, 웹·앱판 17·22·27·31쪽만 변경. 나머지 67쪽 픽셀 동일.
+- 변경된 8쪽 직접 검토: Arabica 로고, CMP 아이콘·카드 이름, Wallet Nuri 표시, Store 메뉴에 가리지 않는 메인 화면 확인.
 
 ## 생성 방식
 
@@ -31,8 +33,8 @@
 
 ## 출력 파일
 
-- `output/pdf/Jang-MoonSu-Portfolio.pdf`: 7,007,328 bytes / SHA-256 `d7de7ab2a1975d36f0e981f2ecaaa69adef64166527d1b6ea97c0c730bed147a`.
-- `output/pdf/Jang-MoonSu-Web-App-Portfolio.pdf`: 5,882,067 bytes / SHA-256 `9d666ebbc47673524e68ceb0e61f6cca09040cbfa101024c395250d25d653991`.
+- `output/pdf/Jang-MoonSu-Portfolio.pdf`: 8,695,155 bytes / SHA-256 `bd991b5f9e065eb1e3eb401cd5a363033ce2a38fa4f677c45b2919ccf690a1ce`.
+- `output/pdf/Jang-MoonSu-Web-App-Portfolio.pdf`: 7,569,896 bytes / SHA-256 `773d1eaa185828a27265ae76f38ff5eb5451f2289cbc4b9924bc407191c3a811`.
 
 ## 페이지 구성
 

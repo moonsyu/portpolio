@@ -24,12 +24,13 @@
     ],
     "media": "ppt/media/image19.png",
     "source_media_sha256": "4713946b5b8d9b1d17c86ef5c70461436ca9d53ad9585cefc850317d7dfbef69",
-    "published_sha256": "4713946b5b8d9b1d17c86ef5c70461436ca9d53ad9585cefc850317d7dfbef69",
+    "published_sha256": "ad4eb66715facc0ee099f6c5f20b39ccb5aa54923e6d72f4966796822438e134",
     "dimensions": [
-      1911,
-      886
+      1842,
+      854
     ],
-    "processing": "Original extracted PNG; unchanged"
+    "processing": "Built-in image_gen display edit: CMP cloud branding; Web 사이트 접속 globe card; 외부 서비스 연동 server card. Original source document retained. Generated display derivative; not a pixel-identical source capture.",
+    "display_edit_date": "2026-10-12"
   },
   {
     "asset": "assets/overview/wallet-sms-verification.png",
@@ -72,12 +73,13 @@
     ],
     "media": "ppt/media/image3.png",
     "source_media_sha256": "3537594a1ec620f99ef5e5875bdc1bda9c80b9b554879768c377c21ff2a8b165",
-    "published_sha256": "3537594a1ec620f99ef5e5875bdc1bda9c80b9b554879768c377c21ff2a8b165",
+    "published_sha256": "5a37c9be09947aa0165d814f3c7152a18bf8cde6b4a41e7851ba03a5d5f4c093",
     "dimensions": [
-      1918,
-      904
+      1827,
+      861
     ],
-    "processing": "Original extracted PNG; unchanged"
+    "processing": "Built-in image_gen display edit: upper-left UWS-BackUp brand changed to Arabica; original source document retained. Generated display derivative; not a pixel-identical source capture.",
+    "display_edit_date": "2026-10-12"
   },
   {
     "asset": "assets/overview/wallet-main.png",
@@ -89,12 +91,13 @@
     ],
     "media": "ppt/media/image75.tiff",
     "source_media_sha256": "5a57e04e17fdc0ab7ee832096ff36c3e56578f19c4e0943a533ec9fa2661c9da",
-    "published_sha256": "7dc7142ef589835fa5fb84b87313047b277e261c12ff28266259aab76045c063",
+    "published_sha256": "746632fbc1d2bfc8df71b692e8501418605ecfb1aa16531ac5ca312ba0efad03",
     "dimensions": [
-      1080,
-      2400
+      841,
+      1870
     ],
-    "processing": "TIFF to PNG; decoded pixels unchanged; original screen retained as requested"
+    "processing": "Built-in image_gen display edit: greeting display name changed to Nuri!; original source document retained. Generated display derivative; not a pixel-identical source capture.",
+    "display_edit_date": "2026-10-12"
   },
   {
     "asset": "assets/overview/wallet-coin.png",
@@ -118,14 +121,17 @@
     "source_commit": "22a1e87c060275c76dd822a83d3639547f62c54e",
     "capture_date": "2026-10-11",
     "capture_url": "http://127.0.0.1:3000/",
-    "published_sha256": "468734d96ec1ef5c4a27fbd9ca67071586ea6820f521b8dbaf3f5b104de6fff7",
+    "published_sha256": "2079ebe33fd408831b2f30e495bfa37414d472df0cfdf0bb66898879d1a9fac3",
     "dimensions": [
       1425,
       891
     ],
-    "capture_viewport": [1440, 900],
-    "capture_state": "Left navigation open; original 90% sidebar width preserved",
-    "processing": "Original desktop browser screenshot; unchanged",
+    "capture_viewport": [
+      1440,
+      900
+    ],
+    "capture_state": "Main screen with left navigation closed; artwork and main navigation unobscured",
+    "processing": "Original desktop browser screenshot restored from portfolio commit 432a7ac; unchanged pixels",
     "verification_scope": "Frontend main screen; backend at localhost:8081 unavailable; not evidence of successful API or login integration"
   }
 ]
