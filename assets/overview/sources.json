@@ -111,5 +111,19 @@
       2400
     ],
     "processing": "TIFF to PNG; decoded pixels unchanged; original screen retained as requested"
+  },
+  {
+    "asset": "assets/overview/store-main.jpg",
+    "source": "venetaStoreAPP/venetaStoreWeb local runtime",
+    "source_commit": "22a1e87c060275c76dd822a83d3639547f62c54e",
+    "capture_date": "2026-10-11",
+    "capture_url": "http://127.0.0.1:3000/",
+    "published_sha256": "9500c939114ae8484adbb5751978a1d09130e8f3910e12a43e41688677fd119a",
+    "dimensions": [
+      685,
+      834
+    ],
+    "processing": "Original browser viewport screenshot; unchanged",
+    "verification_scope": "Frontend main screen; backend at localhost:8081 unavailable; not evidence of successful API or login integration"
   }
 ]
