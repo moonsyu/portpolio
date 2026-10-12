@@ -2,13 +2,13 @@
 
 - 웹사이트: [moonsyu.github.io/portpolio](https://moonsyu.github.io/portpolio/)
 - 구성: HTML·CSS·JavaScript 기반 정적 사이트
-- 프로젝트: STM-Simulator → CONS → BOOKIES → Arabica → CMP → Wallet → Store
+- 프로젝트: CONS → BOOKIES → Arabica → CMP → Wallet → Store
 - 소개: Java 백엔드, IoT 연동, 학습 도구 개발 경험
 - 순서: 소개(01) → 프로젝트(02) → 연락처(03)
 - 보유 기술: 기술 아이콘과 이름을 함께 표시
 - 수상·자격: 별도 목록, 수상 기관·행사명·일자 및 자격·어학 등급·취득일 표시
 - 기능: 소개·프로젝트 탐색, 상세 내용 항상 표시, 이미지 드래그·휠 확대, 실행 GIF 재생·일시정지, 반응형 레이아웃
-- 애플리케이션 아키텍처: 기술·기능 아이콘, 모듈별 영역, 요청·응답·저장 흐름을 표현한 SVG 도식 7개
+- 애플리케이션 아키텍처: 기술·기능 아이콘, 모듈별 영역, 요청·응답·저장 흐름을 표현한 SVG 도식 6개
 
 ## 브랜치별 웹 주소
 
@@ -32,10 +32,12 @@
 - Pages 배포는 커밋한 PDF 파일을 게시. 웹 내용을 바꿀 때는 해당 브랜치에서 PDF를 갱신해 함께 커밋.
 - 방식 근거: [GitHub Pages 사용자 지정 워크플로](https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages).
 
+- [브랜치 구성·PDF 매핑 검증 기록](docs/branch-deployment-20261012.md).
+
 ## PDF 갱신 · 2026-10-12
 
 - 사용자 예시의 각 구간을 독립 페이지로 구성: 표지 → 소개 → 기술 스택 → 수상·자격 → 프로젝트 목록 → 프로젝트별 상세 → 연락처.
-- 일반판 40쪽·웹·앱판 35쪽. 현재 웹의 7개 프로젝트·AI 기술 스택·Arabica 회고·최신 실행 화면 반영.
+- 전체본 40쪽·웹·앱판 35쪽. 각 브랜치의 프로젝트·AI 기술 스택·Arabica 회고·최신 실행 화면 반영.
 - 웹·앱판은 STM-Simulator·전역 임베디드 소개·SSAFY 임베디드 트랙 제외, CONS 전체 유지.
 - 기존 웹 디자인을 사용하는 16:9 PDF. 한글 검색·선택, 프로젝트 이동 링크·페이지 북마크 제공.
 - [페이지 구성·검증 기록](docs/pdf-refresh-20261012.md).
