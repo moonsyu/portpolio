@@ -33,7 +33,7 @@
 
 ## 출력 파일
 
-- `output/pdf/Jang-MoonSu-Portfolio.pdf`: 8,693,215 bytes / SHA-256 `48f3a143c75a404cbf3a71940fb3fc0c4345144434f69c175783454b4555d8c1`.
+- `output/pdf/Jang-MoonSu-Portfolio.pdf`: 8,694,115 bytes / SHA-256 `41637dec67f7d2b73b7f6e2155b47cf325d2bea9db05ea8e6523b886950fb440`.
 - `output/pdf/Jang-MoonSu-Web-App-Portfolio.pdf`: 7,567,902 bytes / SHA-256 `981a2084f1eedce340eb244817623bac0ca51cddea2759e547afc0c7ced85008`.
 
 ## 페이지 구성
@@ -88,3 +88,7 @@
 - 일반판 40쪽·웹·앱판 35쪽 재생성 및 원문·링크·레이아웃 검사 통과.
 - 표지 두 장 직접 확인. 다운로드 문구·PDF 파일 링크 0건, 프로젝트 보기·GitHub 링크 유지.
 - 총 75쪽 렌더 대조: 각 판의 표지만 변경, 나머지 73쪽 픽셀 동일.
+
+## 브랜치 분리 후속 갱신
+
+- 현재 브랜치 PDF와 웹 주소 매핑: [브랜치 배포 기록](branch-deployment-20261012.md).
