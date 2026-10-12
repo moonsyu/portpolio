@@ -1,0 +1,59 @@
+name: Publish branch sites
+
+on:
+  push:
+    branches: [main, embedded]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+# Each run publishes both branches together; deployments must not overlap.
+concurrency:
+  group: portfolio-pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout main
+        uses: actions/checkout@v6
+        with:
+          ref: main
+          path: sources/main
+          persist-credentials: false
+      - name: Checkout embedded
+        uses: actions/checkout@v6
+        with:
+          ref: embedded
+          path: sources/embedded
+          persist-credentials: false
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+      - name: Validate site assembly
+        run: python3 sources/main/scripts/test_assemble_pages.py
+      - name: Assemble main and embedded
+        run: >-
+          python3 sources/main/scripts/assemble_pages.py
+          --main sources/main
+          --embedded sources/embedded
+          --output _site
+      - name: Upload site
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: _site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy branch sites
+        id: deployment
+        uses: actions/deploy-pages@v4

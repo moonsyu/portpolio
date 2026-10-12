@@ -1,4 +1,4 @@
-"""Build both current HTML portfolio PDFs as one section per widescreen page."""
+"""Build the current branch's portfolio PDF as one section per widescreen page."""
 from argparse import ArgumentParser
 from pathlib import Path
 import os
@@ -9,7 +9,7 @@ ROOT = Path(__file__).resolve().parents[1]
 
 if __name__ == '__main__':
     parser = ArgumentParser(description=__doc__)
-    parser.add_argument('--variant', choices=['all', 'full', 'web-app'], default='all')
+    parser.add_argument('--variant', choices=['auto', 'all', 'full', 'web-app'], default='auto')
     parser.add_argument('--node', default=os.environ.get('PDF_NODE', 'node'))
     parser.add_argument('--node-modules', type=Path)
     parser.add_argument('--browser-executable', type=Path)

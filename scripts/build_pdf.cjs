@@ -14,14 +14,17 @@ function option(name, fallback) {
   const i = args.indexOf(name);
   return i < 0 ? fallback : args[i + 1];
 }
-const variant = option('--variant', 'all');
+const source = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
+const sourceVariant = source.includes('name="portfolio-variant" content="web-app"') ? 'web-app' : 'full';
+const requestedVariant = option('--variant', 'auto');
+const variant = requestedVariant === 'auto' ? sourceVariant : requestedVariant;
 if (!['all', 'full', 'web-app'].includes(variant)) throw Error('Unknown PDF variant');
+if (sourceVariant === 'web-app' && variant !== 'web-app') throw Error('Build the full PDF from the embedded branch');
 const out = path.resolve(option('--output-dir', path.join(root, 'output/pdf')));
 const keepWork = option('--work-dir', null);
 const work = keepWork ? path.resolve(keepWork) : fs.mkdtempSync(path.join(os.tmpdir(), 'portfolio-pdf-'));
 fs.mkdirSync(out, {recursive: true});
 fs.mkdirSync(work, {recursive: true});
-const source = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
 const css = fs.readFileSync(path.join(root, 'styles.css'), 'utf8');
 const exportCss = fs.readFileSync(path.join(__dirname, 'pdf.css'), 'utf8');
 const base = pathToFileURL(root + path.sep).href;
@@ -36,12 +39,12 @@ async function render(browser, edition) {
     return /^(file:|data:|about:)/.test(url) ? route.continue() : route.abort();
   });
   await page.setContent('<!doctype html><html lang="ko"><head></head><body></body></html>');
-  const result = await page.evaluate(({source, edition, base, css, exportCss}) => {
+  const result = await page.evaluate(({source, sourceVariant, edition, base, css, exportCss}) => {
     const doc = new DOMParser().parseFromString(source, 'text/html');
     const site = doc.querySelector('link[rel="canonical"]').href;
     // Download controls belong to the website, not the exported document.
     doc.querySelectorAll('.hero-actions .button-pdf').forEach(button => button.remove());
-    if (edition === 'web-app') {
+    if (edition === 'web-app' && sourceVariant !== 'web-app') {
       doc.querySelector('#stm').remove();
       doc.querySelector('.project-index a[href="#stm"]').remove();
       doc.querySelectorAll('.timeline-item').forEach(row => {
@@ -135,7 +138,7 @@ async function render(browser, edition) {
     style.textContent = css + '\n' + exportCss;
     document.head.append(style);
     return {slides, html: '<!doctype html>\n' + document.documentElement.outerHTML};
-  }, {source, edition, base, css, exportCss});
+  }, {source, sourceVariant, edition, base, css, exportCss});
   const htmlPath = path.join(work, `${edition}.html`);
   fs.writeFileSync(htmlPath, result.html);
   await page.goto(pathToFileURL(htmlPath).href);

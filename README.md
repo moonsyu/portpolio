@@ -10,6 +10,28 @@
 - 기능: 소개·프로젝트 탐색, 상세 내용 항상 표시, 이미지 드래그·휠 확대, 실행 GIF 재생·일시정지, 반응형 레이아웃
 - 애플리케이션 아키텍처: 기술·기능 아이콘, 모듈별 영역, 요청·응답·저장 흐름을 표현한 SVG 도식 7개
 
+## 브랜치별 웹 주소
+
+| 브랜치 | 구성 | 웹 주소 | PDF 다운로드 |
+| --- | --- | --- | --- |
+| `main` | 웹·앱 프로젝트 6개 | <https://moonsyu.github.io/portpolio/> | 웹·앱판 35쪽 |
+| `embedded` | STM·하드웨어 학습 포함 전체 프로젝트 7개 | <https://moonsyu.github.io/portpolio/embedded/> | 전체본 40쪽 |
+
+- `main`은 웹·앱판과 동일한 소개·기술·프로젝트 구성. 기존 사용자 지정 예외인 CONS 유지.
+- `embedded`는 STM-Simulator·IoT/하드웨어 소개·임베디드 학습 기술·SSAFY 트랙을 포함한 전체 구성.
+- 각 페이지의 다운로드 버튼은 `PDF 다운로드` 하나. 브랜치에 맞는 PDF 파일만 게시.
+- 두 브랜치의 HTML·CSS·이미지·PDF를 독립적으로 수정. 한 브랜치 수정이 다른 브랜치의 내용을 변경하지 않음.
+- `main` 또는 `embedded`에 푸시하면 `Publish branch sites`가 두 브랜치의 최신 내용을 하나의 Pages 사이트로 배포.
+- GitHub Pages 게시 원본: `GitHub Actions`. `github-pages` 환경에 `main`·`embedded` 브랜치 배포 허용.
+- 워크플로와 조립 스크립트는 `main`에서 관리. 트리거 수정 시 `embedded`의 `.github/workflows/pages.yml`에도 같은 수정 반영.
+- 사이트 파일·자산·해당 PDF만 게시. 각 경로의 `deployment.json`으로 원본 브랜치·커밋 확인.
+- Canonical·Open Graph URL은 배포 경로에 맞게 조정. 상대경로 자산·다운로드는 해당 브랜치 파일 사용.
+- 검증: `python scripts/test_assemble_pages.py`.
+- 별도 체크아웃을 준비한 뒤 `python scripts/assemble_pages.py --main <main 경로> --embedded <embedded 경로> --output <비어 있는 외부 폴더>`로 통합 배포물 생성.
+- `python scripts/build_pdf.py`는 현재 브랜치에 맞는 PDF를 생성. `embedded`에서는 `--variant all`로 두 PDF 생성도 가능.
+- Pages 배포는 커밋한 PDF 파일을 게시. 웹 내용을 바꿀 때는 해당 브랜치에서 PDF를 갱신해 함께 커밋.
+- 방식 근거: [GitHub Pages 사용자 지정 워크플로](https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages).
+
 ## PDF 갱신 · 2026-10-12
 
 - 사용자 예시의 각 구간을 독립 페이지로 구성: 표지 → 소개 → 기술 스택 → 수상·자격 → 프로젝트 목록 → 프로젝트별 상세 → 연락처.
