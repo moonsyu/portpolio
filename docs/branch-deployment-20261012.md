@@ -15,5 +15,5 @@
 
 ## PDF 해시
 
-- `main`: SHA-256 `68cfa11fc7e28090483e696d9e13e741790f05cde56cffffeb0da5b671a7e0ff`.
+- `main`: SHA-256 `94cb5f1ca7339fd1c0e65a2f67b22d0b183d0f13365e6a83f3a9f2b2d0ff574e` (기술 스택 2열·2행 배치 반영).
 - `embedded`: SHA-256 `41637dec67f7d2b73b7f6e2155b47cf325d2bea9db05ea8e6523b886950fb440`.

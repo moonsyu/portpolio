@@ -34,7 +34,7 @@
 ## 출력 파일
 
 - `output/pdf/Jang-MoonSu-Portfolio.pdf`: 8,693,215 bytes / SHA-256 `48f3a143c75a404cbf3a71940fb3fc0c4345144434f69c175783454b4555d8c1`.
-- `output/pdf/Jang-MoonSu-Web-App-Portfolio.pdf`: 7,567,902 bytes / SHA-256 `68cfa11fc7e28090483e696d9e13e741790f05cde56cffffeb0da5b671a7e0ff`.
+- `output/pdf/Jang-MoonSu-Web-App-Portfolio.pdf`: 7,567,911 bytes / SHA-256 `94cb5f1ca7339fd1c0e65a2f67b22d0b183d0f13365e6a83f3a9f2b2d0ff574e`.
 
 ## 페이지 구성
 
@@ -92,3 +92,12 @@
 ## 브랜치 분리 후속 갱신
 
 - 현재 브랜치 PDF와 웹 주소 매핑: [브랜치 배포 기록](branch-deployment-20261012.md).
+
+## 웹·앱 기술 스택 배치 후속 수정
+
+- `main`의 AI 분류에 남아 있던 전체 열 점유 설정 제거. 백엔드 / 데이터·배포, 모바일·연동 / AI의 2열·2행 배치로 정렬.
+- 760px 이하 기존 1열 배치 유지. 기술 내용·아이콘·embedded 브랜치 변경 없음.
+- 웹 CSS와 PDF 다운로드 링크 캐시 갱신.
+- 웹·앱 PDF 35쪽 원문·링크·레이아웃 검사 통과. 변경된 3쪽 직접 확인, 나머지 34쪽 렌더 픽셀 동일.
+- 브라우저 연결 도구 사용 불가로 웹 실화면 검사는 미실시. 동일 CSS를 사용하는 PDF 렌더와 반응형 소스로 확인.
+- Impeccable 배치 검사 경고 3건은 기존 소개·수상 컨테이너의 여백 관련 항목으로 이번 기술 스택 수정과 무관.

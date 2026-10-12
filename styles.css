@@ -146,7 +146,6 @@ strong,b{font-weight:750;color:var(--ink)}
 .project-tech-icons li{margin:0}
 .project-tech-icons li.is-primary{width:70px;height:70px;border:2px solid var(--blue);background:var(--blue-soft);box-shadow:inset 0 -4px 0 var(--blue)}
 .project-tech-icons li.is-primary img{width:44px;height:44px}
-.skill-group-ai{grid-column:1/-1}
 .project-visual-pending{background:var(--paper);border-style:dashed}
 .project-image-slot{display:grid;place-items:center;aspect-ratio:21/13;padding:24px;color:var(--muted);font-size:18px;font-weight:650;text-align:center}
 .overview-phone-pair{display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:18px;padding:24px}
