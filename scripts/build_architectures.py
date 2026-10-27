@@ -94,7 +94,7 @@ def stm():
 
 
 def cons():
-    d=Diagram('CONS 애플리케이션 아키텍처','BLE 비콘 신호를 Android에서 수집하고 위치를 계산. Retrofit으로 Spring Boot 서버와 비콘 좌표 교환. Android–Unity 좌표 전달은 설계 단계(점선), Room에서 역·노선도 조회. 서버는 MySQL에 비콘 정보 저장.',850)
+    d=Diagram('CONS 애플리케이션 아키텍처','BLE 비콘 신호를 Android에서 수집하고 위치를 계산. Retrofit으로 Spring Boot 서버와 비콘 좌표 교환. Android는 Unity AR 길안내와 사용자 좌표 연동, Room에서 역·노선도 조회. 서버는 MySQL에 비콘 정보 저장.',850)
     d.box(254,84,518,627,'Mobile Application')
     d.node('user-round',91,165,'사용자',size=62)
     d.node('bluetooth',91,395,'BLE Beacon','RSSI 신호',size=64,color='#2355de')
@@ -107,7 +107,7 @@ def cons():
     d.arrow([(132,433),(214,433),(214,310),(280,310)],'BLE / RSSI',(205,415))
     d.node('unity',399,515,'Unity','AR 길안내',size=63)
     d.node('database',623,515,'Room','역·노선도 정보',size=63,color='#299c72')
-    d.arrow([(399,397),(399,503)],'좌표 전달 (설계)',(399,452),dashed=True)
+    d.arrow([(399,397),(399,503)],'사용자 좌표',(399,452),both=True)
     d.arrow([(623,397),(623,503)],'역·노선도 조회',(623,452),both=True)
     d.box(944,138,316,230,'Server Application')
     d.node('spring',1102,200,'Spring Boot','비콘 좌표 API',size=62)

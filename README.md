@@ -42,7 +42,7 @@
 - Stella Archive 대조로 수정: 캡스톤 수상명(한신 AI·SW페스티벌), OPIc 시험일 2026.09.11, Rookies 22기 과정명·920시간, 기술 스택(WebFlux·Security·JWT·MyBatis·Redis), CONS 역할(팀장·서버·실내 측위 공동)과 Unity 연동 표현, BOOKIES 기간 2025.01 시작·S3 제외·CVE 시나리오 맥락, CMP 시험 조건(JVM 옵션 동일·호스트 상이, Postman Performance, 1/10건), Wallet·Store 5인·RSA·AES·KRDC 결제.
 - 사용자 결정으로 Stella에 근거가 없는 수치·조건도 제거: CONS 측위 조건(비콘 3개·Galaxy S22+·10회), Arabica의 "10개 이상"과 백그라운드(nohup) 실행 표현.
 - Store 트러블슈팅을 FK 교정 사례에서 Stella 근거 사례(Wallet 결제 실패 응답의 오류 필드 위치 수정, 커밋 `bf290211`)로 교체. `assets/flows/store-migration.svg` 삭제, `store-payment-error.svg` 추가. 구현 항목의 FK·장바구니 복합키를 DB 설계·KRDC 결제로 교체.
-- 도식도 Stella 기준으로 수정: BOOKIES는 Web↔S3 연결을 제거하고 Distributor의 Presigned URL·키 전달과 Agent의 S3 다운로드로 표시(DRM·S3는 팀원 개발). CONS는 Android–Unity 좌표 전달을 설계 단계 점선으로 표시. Arabica 흐름도의 "실행 호출 반환"은 @Async 효과인 "스케줄러는 대기 없이 반환"으로 표시.
+- 도식도 Stella 기준으로 수정: BOOKIES는 Web↔S3 연결을 제거하고 Distributor의 Presigned URL·키 전달과 Agent의 S3 다운로드로 표시(DRM·S3는 팀원 개발). CONS 아키텍처의 Android–Unity 사용자 좌표 화살표는 사용자 의도에 따라 완성 기능(실선)으로 유지. Arabica 흐름도의 "실행 호출 반환"은 @Async 효과인 "스케줄러는 대기 없이 반환"으로 표시.
 - 웹·앱판 PDF 35쪽 재생성. 프로젝트 목록 쪽은 `scripts/pdf.css`에서 카드 크기 조정.
 
 ## PDF 갱신 · 2026-10-12
