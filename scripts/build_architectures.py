@@ -94,7 +94,7 @@ def stm():
 
 
 def cons():
-    d=Diagram('CONS 애플리케이션 아키텍처','BLE 비콘 신호를 Android에서 수집하고 위치를 계산. Retrofit으로 Spring Boot 서버와 비콘 좌표 교환. Android는 Unity AR 길안내와 사용자 좌표 연동, Room에서 역·노선도 조회. 서버는 MySQL에 비콘 정보 저장.',850)
+    d=Diagram('CONS 애플리케이션 아키텍처','BLE 비콘 신호를 Android에서 수집하고 위치를 계산. Retrofit으로 Spring Boot 서버와 비콘 좌표 교환. Android–Unity 좌표 전달은 설계 단계(점선), Room에서 역·노선도 조회. 서버는 MySQL에 비콘 정보 저장.',850)
     d.box(254,84,518,627,'Mobile Application')
     d.node('user-round',91,165,'사용자',size=62)
     d.node('bluetooth',91,395,'BLE Beacon','RSSI 신호',size=64,color='#2355de')
@@ -107,7 +107,7 @@ def cons():
     d.arrow([(132,433),(214,433),(214,310),(280,310)],'BLE / RSSI',(205,415))
     d.node('unity',399,515,'Unity','AR 길안내',size=63)
     d.node('database',623,515,'Room','역·노선도 정보',size=63,color='#299c72')
-    d.arrow([(399,397),(399,503)],'사용자 좌표',(399,452),both=True)
+    d.arrow([(399,397),(399,503)],'좌표 전달 (설계)',(399,452),dashed=True)
     d.arrow([(623,397),(623,503)],'역·노선도 조회',(623,452),both=True)
     d.box(944,138,316,230,'Server Application')
     d.node('spring',1102,200,'Spring Boot','비콘 좌표 API',size=62)
@@ -122,7 +122,7 @@ def cons():
 
 
 def bookies():
-    d=Diagram('BOOKIES 애플리케이션 아키텍처','Web Browser와 Android App이 Spring Boot Web Service에 연결. Web은 JPA/JDBC로 Oracle RDS와, 파일 연동으로 S3와 연결. Packager는 S3에 암호화 파일을 저장하고, Distributor는 S3에서 파일을 받아 DRM Agent Client에 전달.',900)
+    d=Diagram('BOOKIES 애플리케이션 아키텍처','Web Browser와 Android App이 Spring Boot Web Service에 연결. Web은 JPA/JDBC로 Oracle RDS와 연결. Packager는 S3에 암호화 파일을 저장하고, Distributor는 S3 Presigned URL과 키를 DRM Agent Client에 전달. Agent는 S3에서 암호화 파일을 내려받음. DRM과 S3 연동은 팀원 개발.',950)
     d.box(20,170,210,440,'Clients')
     d.node('globe',125,232,'Web Browser',size=65,color='#2355de')
     d.node('android',125,417,'Android App',size=65)
@@ -142,12 +142,13 @@ def bookies():
     d.arrow([(480,459),(480,674)],'JPA / JDBC',(480,607),both=True)
     d.box(725,680,285,180,'Object Storage')
     d.node('cloud',867,728,'Amazon S3','암호화 전자책',size=60,color='#349447')
-    d.arrow([(605,459),(605,600),(785,600),(785,674)],'파일 연동',(660,592),both=True)
     d.arrow([(850,367),(850,674)],'암호화 파일 저장',(850,559))
-    d.arrow([(953,674),(953,557),(1140,557),(1140,367)],'파일 조회',(1046,549))
+    d.arrow([(953,674),(953,557),(1140,557),(1140,367)],'Presigned URL 발급',(1046,549))
     d.box(1060,680,235,180,'Client')
     d.node('book-open',1177,731,'DRM Agent Client',size=57)
-    d.arrow([(1200,269),(1260,269),(1260,648),(1177,648),(1177,674)],'전자책 전달',(1250,612))
+    d.arrow([(1200,269),(1260,269),(1260,648),(1177,648),(1177,674)],'URL · 키 전달',(1250,612))
+    d.arrow([(940,862),(940,900),(1120,900),(1120,868)])
+    d.text(1030,926,'암호화 파일 다운로드',17,fill='#475467')
     return d.save('bookies-application.svg')
 
 
