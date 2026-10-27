@@ -39,10 +39,14 @@ html,body{margin:0;padding:0;width:1440px;scroll-behavior:auto;background:#fff}
 .credentials .award-organizer{font-size:16px}
 .credentials .award-list time{font-size:16px}
 .credentials .qualification-list>li{padding:25px}
-.project-list .project-index{margin:0;min-height:360px}
-.project-list .project-index a{padding:30px 24px}
+.project-list .project-index{margin:0;gap:16px}
+.project-list .project-index a{gap:7px;padding:0 0 16px}
+.project-list .index-thumb{height:118px;margin-bottom:4px}
 .project-list .project-index strong{font-size:21px}
-.project-list .project-index small{font-size:17px}
+.project-list .project-index small{font-size:16px;margin-top:2px}
+.project-list .index-role{font-size:15px}
+.project-list .project-index:has(>a:nth-child(7)){grid-template-columns:repeat(4,1fr)}
+.project-list .project-index:has(>a:nth-child(7)) .index-thumb{height:104px}
 .overview .project-heading{margin-bottom:34px}
 .overview .project-heading h3{font-size:36px}
 .overview .project-overview{grid-template-columns:1.2fr 1fr;gap:44px}

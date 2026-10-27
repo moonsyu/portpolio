@@ -34,6 +34,13 @@
 
 - [브랜치 구성·PDF 매핑 검증 기록](docs/branch-deployment-20261012.md).
 
+## UI 개편 적용 · 2026-10-28
+
+- `main`의 UI 개편을 이 브랜치에도 적용: 첫 화면 프로필 카드(실무 약 10개월·프로젝트 7·수상 6, 현재 SSAFY 16기)·기술 칩, 썸네일 프로젝트 카드, 프로젝트별 역할 요약, 상세 구역 하위 탐색, 트러블슈팅 문제→원인→해결 단계 카드.
+- 첫 화면 문구("Java 백엔드에서 IoT·하드웨어까지")는 이 브랜치의 기존 문구 유지.
+- STM-Simulator도 같은 형식의 카드(개인 프로젝트 · 1인 · 기획·구현·회귀 검증)와 역할 요약 추가.
+- PDF 프로젝트 목록 쪽: 카드가 7개일 때만 4열 배치(`scripts/pdf.css`). 전체본 40쪽·웹·앱판 35쪽 재생성.
+
 ## Stella Archive 기준 내용 수정 · 2026-10-28
 
 - `main`(2026-10-27)과 같은 Stella Archive 대조 결과를 반영. 기간·명칭·인원 등 사실 정보는 Stella 기준.
@@ -41,7 +48,7 @@
 - 근거 없는 수치·조건 제거: CONS 측위 조건(비콘 3개·Galaxy S22+·10회), Arabica의 "10개 이상"과 백그라운드(nohup) 실행 표현.
 - Store 트러블슈팅을 Wallet 결제 실패 응답의 오류 필드 위치 수정(커밋 `bf290211`)으로 교체. `store-migration.svg` 삭제, `store-payment-error.svg` 추가.
 - 도식: BOOKIES는 Web↔S3 연결 제거와 Distributor·Agent 흐름 표시, Arabica는 "스케줄러는 대기 없이 반환". CONS의 Android–Unity 사용자 좌표 연결은 사용자 의도에 따라 완성 기능으로 유지.
-- `main`의 UI 개편(프로필 카드·프로젝트 카드·하위 탐색 등)은 이 브랜치에 반영하지 않음. STM-Simulator는 Stella에 자료가 없어 기존 내용 유지.
+- STM-Simulator는 Stella에 자료가 없어 기존 내용 유지.
 - 전체본 PDF 재생성.
 
 ## PDF 갱신 · 2026-10-12
