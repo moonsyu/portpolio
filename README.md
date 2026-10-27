@@ -34,6 +34,16 @@
 
 - [브랜치 구성·PDF 매핑 검증 기록](docs/branch-deployment-20261012.md).
 
+## Stella Archive 기준 내용 수정 · 2026-10-28
+
+- `main`(2026-10-27)과 같은 Stella Archive 대조 결과를 반영. 기간·명칭·인원 등 사실 정보는 Stella 기준.
+- 수정: 캡스톤 수상명(한신 AI·SW페스티벌), OPIc 시험일 2026.09.11, Rookies 22기 과정명·920시간, 기술 스택(WebFlux·Security·JWT·MyBatis·Redis), CONS 역할(팀장·서버·실내 측위 공동), BOOKIES 기간 2025.01 시작·S3 제외·CVE 시나리오 맥락, CMP 시험 조건(JVM 옵션 동일·호스트 상이, Postman Performance, 1/10건), Wallet·Store 5인·RSA·AES·KRDC 결제.
+- 근거 없는 수치·조건 제거: CONS 측위 조건(비콘 3개·Galaxy S22+·10회), Arabica의 "10개 이상"과 백그라운드(nohup) 실행 표현.
+- Store 트러블슈팅을 Wallet 결제 실패 응답의 오류 필드 위치 수정(커밋 `bf290211`)으로 교체. `store-migration.svg` 삭제, `store-payment-error.svg` 추가.
+- 도식: BOOKIES는 Web↔S3 연결 제거와 Distributor·Agent 흐름 표시, Arabica는 "스케줄러는 대기 없이 반환". CONS의 Android–Unity 사용자 좌표 연결은 사용자 의도에 따라 완성 기능으로 유지.
+- `main`의 UI 개편(프로필 카드·프로젝트 카드·하위 탐색 등)은 이 브랜치에 반영하지 않음. STM-Simulator는 Stella에 자료가 없어 기존 내용 유지.
+- 전체본 PDF 재생성.
+
 ## PDF 갱신 · 2026-10-12
 
 - 사용자 예시의 각 구간을 독립 페이지로 구성: 표지 → 소개 → 기술 스택 → 수상·자격 → 프로젝트 목록 → 프로젝트별 상세 → 연락처.
