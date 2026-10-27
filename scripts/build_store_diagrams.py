@@ -34,7 +34,7 @@ def application():
     d.text(686, 306, 'Controller · API / SSE', 25, True)
     d.arrow([(246, 295), (389, 295)], 'HTTP · SSE', (315, 270), both=True)
     d.box(395, 440, 510, 160, 'Service · 기능 분기', fill='#f8fafc', stroke='#c8d0dc', width=1.6)
-    d.text(530, 530, '상품·장바구니·결제', 22, True)
+    d.text(530, 530, '상품·결제', 22, True)
     d.text(530, 565, '기능별 처리', 19, fill='#475467')
     d.text(785, 530, 'SSE 인증', 22, True)
     d.text(785, 565, '인증 상태 갱신·조회', 19, fill='#475467')

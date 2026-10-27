@@ -116,3 +116,43 @@ document.querySelectorAll('.project-tech-icons li').forEach(icon => {
   icon.addEventListener('mouseenter', positionLabel);
   icon.addEventListener('focus', positionLabel);
 });
+
+// 프로젝트별 하위 탐색: 상세 구역의 분류(아키텍처·구현·트러블슈팅…)로 바로 이동
+const subnavNames = [['APPLICATION ARCHITECTURE', '아키텍처'], ['IMPLEMENTATION', '구현'], ['TROUBLESHOOTING', '트러블슈팅'], ['BENCHMARK', '성능 시험'], ['REFLECTION', '회고']];
+document.querySelectorAll('article.project').forEach(project => {
+  const detail = project.querySelector('.detail');
+  if (!detail) return;
+  const groups = new Map();
+  project.querySelectorAll('.detail-section').forEach(section => {
+    const label = section.querySelector('.label')?.textContent || '';
+    const match = subnavNames.find(([key]) => label.startsWith(key));
+    if (match && !groups.has(match[1])) groups.set(match[1], section);
+  });
+  if (groups.size < 2) return;
+  const nav = document.createElement('nav');
+  nav.className = 'project-subnav';
+  nav.setAttribute('aria-label', `${project.querySelector('.project-heading h3').textContent} 상세 구역`);
+  groups.forEach((section, name) => {
+    const link = document.createElement('a');
+    link.href = `#${section.getAttribute('aria-labelledby')}`;
+    link.textContent = name;
+    nav.append(link);
+  });
+  detail.before(nav);
+  const links = [...nav.querySelectorAll('a')];
+  const subnavObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      const id = entry.target.dataset.subnav;
+      links.forEach(link => link.setAttribute('aria-current', String(link.hash === `#${id}`)));
+    });
+  }, { rootMargin: '-20% 0px -60% 0px', threshold: 0 });
+  // 같은 분류의 구역이 여러 개면 모두 감시해 해당 분류를 표시
+  project.querySelectorAll('.detail-section').forEach(section => {
+    const label = section.querySelector('.label')?.textContent || '';
+    const match = subnavNames.find(([key]) => label.startsWith(key));
+    if (!match) return;
+    section.dataset.subnav = groups.get(match[1]).getAttribute('aria-labelledby');
+    subnavObserver.observe(section);
+  });
+});

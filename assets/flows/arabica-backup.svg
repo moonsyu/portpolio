@@ -24,7 +24,7 @@
 <text x="710" y="256.38" text-anchor="middle" class="" font-size="26"><tspan x="710" dy="0">별도 실행기 진입</tspan><tspan x="710" dy="37.699999999999996">@Async</tspan></text>
 <path class="edge" d="M710 314 L710 354"/>
 <rect x="550" y="354" width="320" height="96" rx="10" fill="#f8fafc" stroke="#c5d2e6" stroke-width="2"/>
-<text x="710" y="392.38" text-anchor="middle" class="" font-size="26"><tspan x="710" dy="0">원격 백그라운드 실행</tspan><tspan x="710" dy="37.699999999999996">nohup bash … &amp;</tspan></text>
+<text x="710" y="392.38" text-anchor="middle" class="" font-size="26"><tspan x="710" dy="0">SSH exec로</tspan><tspan x="710" dy="37.699999999999996">원격 백업 스크립트 실행</tspan></text>
 <path class="edge" d="M710 450 L710 490"/>
 <rect x="550" y="490" width="320" height="78" rx="39" fill="#f8fafc" stroke="#c5d2e6" stroke-width="2"/>
 <text x="710" y="538.1" text-anchor="middle" class="" font-size="26"><tspan x="710" dy="0">실행 호출 반환</tspan></text>

@@ -34,6 +34,16 @@
 
 - [브랜치 구성·PDF 매핑 검증 기록](docs/branch-deployment-20261012.md).
 
+## UI 개편·Stella Archive 대조 · 2026-10-27
+
+- Figma 시안(`장문수 포트폴리오 UI 개편` 파일의 Before/After 페이지)을 기준으로 첫 화면 프로필 카드·주요 기술 칩, 썸네일 프로젝트 카드, 프로젝트별 역할 요약(기간·팀·내 역할·핵심 기술), 상세 구역 하위 탐색, 트러블슈팅 문제→원인→해결 단계 카드 적용.
+- 하위 탐색은 `app.js`가 상세 구역의 분류 라벨로 생성. 내용은 숨기지 않고 해당 구역으로 이동만 함.
+- 역할 요약이 있는 웹 화면에서는 기존 `project-meta`를 숨기고, PDF 개요 쪽에는 `project-meta` 유지.
+- Stella Archive 대조로 수정: 캡스톤 수상명(한신 AI·SW페스티벌), OPIc 시험일 2026.09.11, Rookies 22기 과정명·920시간, 기술 스택(WebFlux·Security·JWT·MyBatis·Redis), CONS 역할(팀장·서버·실내 측위 공동)과 Unity 연동 표현, BOOKIES 기간 2025.01 시작·S3 제외·CVE 시나리오 맥락, CMP 시험 조건(JVM 옵션 동일·호스트 상이, Postman Performance, 1/10건), Wallet·Store 5인·RSA·AES·KRDC 결제.
+- 사용자 결정으로 Stella에 근거가 없는 수치·조건도 제거: CONS 측위 조건(비콘 3개·Galaxy S22+·10회), Arabica의 "10개 이상"과 백그라운드(nohup) 실행 표현.
+- Store 트러블슈팅을 FK 교정 사례에서 Stella 근거 사례(Wallet 결제 실패 응답의 오류 필드 위치 수정, 커밋 `bf290211`)로 교체. `assets/flows/store-migration.svg` 삭제, `store-payment-error.svg` 추가. 구현 항목의 FK·장바구니 복합키를 DB 설계·KRDC 결제로 교체.
+- 웹·앱판 PDF 35쪽 재생성. 프로젝트 목록 쪽은 `scripts/pdf.css`에서 카드 크기 조정.
+
 ## PDF 갱신 · 2026-10-12
 
 - 사용자 예시의 각 구간을 독립 페이지로 구성: 표지 → 소개 → 기술 스택 → 수상·자격 → 프로젝트 목록 → 프로젝트별 상세 → 연락처.

@@ -26,7 +26,7 @@ chart('arabica-backup','Arabica: 백업 실행과 주기적 완료 확인 분리
  node(90,626,320,82,['후속 처리'],{round:true});
  node(550,100,320,78,['백업 스케줄 실행'],{round:true});line(710,178,710,218);
  node(550,218,320,96,['별도 실행기 진입','@Async']);line(710,314,710,354);
- node(550,354,320,96,['원격 백그라운드 실행','nohup bash … &']);line(710,450,710,490);
+ node(550,354,320,96,['SSH exec로','원격 백업 스크립트 실행']);line(710,450,710,490);
  node(550,490,320,78,['실행 호출 반환'],{round:true});
  text(710,630,['별도 결과 확인 주기'],26,'heading');
  node(550,666,320,82,['5분 간격 확인','결과 파일 판독']);line(710,748,710,788);
@@ -68,33 +68,18 @@ chart('wallet-xss','Wallet: JSON의 정제값을 요청 본문에 반영하는 X
  node(285,988,370,76,['업무 API에 전달'],{round:true});
  text(470,1112,['정책 객체는 한 번 준비하고 재사용'],25,'note');
 });
-chart('store-migration','Store: 변경 전 참조 오류에서 부모 PK 참조 교정까지의 하향 흐름',960,1280,({text,node,edge,parts})=>{
- text(480,44,['변경 전 · 유일하지 않은 컬럼 참조'],30,'heading');
- text(480,80,['화살표: 자식 행에서 부모 행으로 FK 참조'],23,'note');
- for(const [x,title,parent] of [[245,'장바구니 옵션','장바구니 행'],[715,'결제 옵션','결제 상품 행']]){
-  text(x,124,[title],26,'heading');
-  node(x-200,150,400,72,['옵션 상세 연결 행']);
-  edge(`M${x-156} 222 V316`);
-  text(x+20,260,['옵션 그룹 ID'],25);text(x+20,295,['중복 가능'],22,'note');
-  node(x-200,316,400,72,['옵션 그룹 연결 행']);
-  edge(`M${x-156} 388 V482`);
-  text(x+20,426,['상품 ID'],25);text(x+20,460,['중복 가능'],22,'note');
-  node(x-200,482,400,72,[parent]);
- }
- parts.push('<path d="M245 554 V580 H715 V554" fill="none" stroke="#2355de" stroke-width="2.5"/>');
- edge('M480 580 V606');
- node(170,606,620,90,['참조 대상의 유일성 조건 불충족','PostgreSQL 마이그레이션 실패'],{fill:'#eef3ff',size:26});
- edge('M480 696 V744');
- text(480,788,['해결 · 4개 FK를 기존 부모 PK 참조로 교정'],30,'heading');
- for(const [x,title,parent] of [[245,'장바구니 옵션','장바구니 행'],[715,'결제 옵션','결제 상품 행']]){
-  text(x,835,[title],26,'heading');
-  node(x-200,861,400,72,['옵션 상세 연결 행']);
-  edge(`M${x-156} 933 V1019`);
-  text(x+20,982,['옵션 그룹 연결 PK'],24,'heading');
-  node(x-200,1019,400,72,['옵션 그룹 연결 행']);
-  edge(`M${x-156} 1091 V1177`);
-  text(x+20,1140,[title==='장바구니 옵션'?'장바구니 PK':'결제 상품 연결 PK'],24,'heading');
-  node(x-200,1177,400,72,[parent]);
- }
+chart('store-payment-error','Store: Wallet 결제 실패 응답을 최상위 오류 필드에서 읽도록 바꾼 흐름',960,930,({text,node,line,parts})=>{
+ node(250,40,460,112,['Wallet 결제 실패 응답','최상위 error_code · error_message'],{round:true});
+ parts.push('<path d="M480 152 V190 H245 V222 M480 190 H720 V222" fill="none" stroke="#2355de" stroke-width="2.5"/>');
+ text(245,262,['변경 전'],28,'heading');text(720,262,['변경 후'],28,'heading');
+ parts.push('<path d="M480 236 V886" stroke="#dce3ed" stroke-width="2" stroke-dasharray="7 7"/>');
+ node(85,300,320,110,['성공 응답처럼','result 하위 객체로 접근']);line(245,410,245,470);
+ node(85,470,320,110,['오류 필드를','읽지 못하는 경로'],{fill:'#fff3e6'});line(245,580,245,640);
+ node(85,640,320,96,['사용자에게','결제 오류 전달 불가'],{round:true});
+ node(560,300,320,110,['최상위 JSON에서','오류 필드 읽기']);line(720,410,720,470);
+ node(560,470,320,110,['error_code ·','error_message 추출'],{fill:'#eef3ff'});line(720,580,720,640);
+ node(560,640,320,96,['CommonException 구성'],{round:true});
+ text(480,830,['Transfer · TransferApproveCheck 두 경로 수정'],24,'note');
 });
 console.log('Created 4 source-grounded flowcharts.');
+// store-payment-error 근거: Stella Archive Store 트러블슈팅(커밋 bf290211, 2025-12-30)
