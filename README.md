@@ -38,7 +38,7 @@
 
 - 소개를 Stella 기준으로 수정: STM32 학습용 회로·펌웨어 통합 데스크톱 IDE, C 인터프리터 회로 시뮬레이터와 Cortex-M4 펌웨어 에뮬레이터 통합, v1.4.2 공개 배포.
 - 역할을 "기획 · 요구사항 · 검수 · 릴리스 (AI 협업 개발)"로 수정.
-- 대표 썸네일을 v1.4.2 실행 화면(HAL LED 예제, Stella 등록 캡처)으로 교체.
+- 대표 썸네일과 구현 GIF를 실제 앱 실행 화면으로 교체: 1.8인치 TFT LCD 예제(실행 클릭 → SPI RGB565 컬러 막대 출력). `stm-simulator-tft.webp`, `stm-tft-demo.gif`.
 - 애플리케이션 아키텍처를 Electron 프로세스 경계(Renderer·Preload·Main), 같은 회로 모델을 구동하는 두 실행 엔진, ARM GCC·GDB·GitHub Release 연동 구조로 다시 그림. 7개 도식 모두 `scripts/build_architectures_figma.py`에서 생성.
 
 ## 담당 범위 조정·Arabica 회고 제거 · 2026-10-29
