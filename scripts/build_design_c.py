@@ -91,7 +91,7 @@ def make_c():
     b.text(x, 3410, '회로 편집, 주변장치 설정, 지원 범위의 C/HAL 동작 모델을 연결한 학습 도구', 26, 620, muted)
     b.bullets(x, 3480, STM_POINTS, 1180, 23, 620, ink, 6)
     b.text(x, 3625, 'Electron · JavaScript · HTML / CSS / SVG · C · STM32 HAL 학습', 23, 650, green)
-    b.image(ASSET / 'stm-simulator.webp', x, 3680, 1240, 743, 0)
+    b.image(ASSET / 'stm-simulator-v142.webp', x, 3680, 1240, 743, 0)
     b.text(x, 4525, '애플리케이션 구조', 32, 820, ink)
     b.text(x, 4580, '구성 요소와 연결 범위를 실제 도식으로 확인합니다.', 23, 600, muted)
     b.image(ASSET / 'architecture/stm-application.svg', x, 4650, 1240)

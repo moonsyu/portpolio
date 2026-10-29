@@ -34,6 +34,13 @@
 
 - [브랜치 구성·PDF 매핑 검증 기록](docs/branch-deployment-20261012.md).
 
+## STM-Simulator Stella 기준 갱신 · 2026-10-29
+
+- 소개를 Stella 기준으로 수정: STM32 학습용 회로·펌웨어 통합 데스크톱 IDE, C 인터프리터 회로 시뮬레이터와 Cortex-M4 펌웨어 에뮬레이터 통합, v1.4.2 공개 배포.
+- 역할을 "기획 · 요구사항 · 검수 · 릴리스 (AI 협업 개발)"로 수정.
+- 대표 썸네일을 v1.4.2 실행 화면(HAL LED 예제, Stella 등록 캡처)으로 교체.
+- 애플리케이션 아키텍처를 Electron 프로세스 경계(Renderer·Preload·Main), 같은 회로 모델을 구동하는 두 실행 엔진, ARM GCC·GDB·GitHub Release 연동 구조로 다시 그림. 7개 도식 모두 `scripts/build_architectures_figma.py`에서 생성.
+
 ## 담당 범위 조정·Arabica 회고 제거 · 2026-10-29
 
 - 사용자 결정으로 아키텍처의 내 담당 범위 조정: BOOKIES는 EC2·RDS, Arabica는 MariaDB, Wallet은 PostgreSQL·Firebase FCM·SMS 서비스, Store는 PostgreSQL까지 포함.
@@ -155,8 +162,8 @@ python -m http.server 8080
 - `assets/flows/`: 확인된 처리 흐름·관계 변경을 재구성한 도식
 - `scripts/build_troubleshooting_flows.mjs`: 처리 흐름·Store FK 변경 도식 생성기
 - `scripts/build_store_diagrams.py`: 기존 디자인을 사용하는 Store 개요·애플리케이션 아키텍처 생성기
-- `scripts/build_architectures_figma.py`: 웹·앱 6개 프로젝트 애플리케이션 아키텍처 생성기. [Figma 시안](https://www.figma.com/design/PMTeokQEzCz2eW6rMRTKKF)과 같은 좌표·색·문구
-- `scripts/build_architectures.py`: STM 아키텍처 도식 생성 스크립트(Python 표준 라이브러리)
+- `scripts/build_architectures_figma.py`: 7개 프로젝트 애플리케이션 아키텍처 생성기. [Figma 시안](https://www.figma.com/design/PMTeokQEzCz2eW6rMRTKKF)과 같은 좌표·색·문구
+- `scripts/build_architectures.py`: 이전 도식 생성기(현재는 `build_architectures_figma.py` 사용)
 - `.nojekyll`: 정적 파일 배포 설정
 
 ## 포트폴리오 전면 개편 계획
@@ -185,7 +192,6 @@ python -m http.server 8080
 ## 아키텍처 편집 및 아이콘 출처
 
 ```powershell
-python scripts/build_architectures.py
 python scripts/build_architectures_figma.py
 ```
 

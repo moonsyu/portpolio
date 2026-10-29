@@ -154,6 +154,5 @@ def bookies():
 
 if __name__ == '__main__':
     OUT.mkdir(parents=True,exist_ok=True)
-    # CONS·BOOKIES 도식은 Figma 시안 기준 scripts/build_architectures_figma.py에서 생성
-    used=stm()
-    print('Built STM architecture SVG; icons:', ', '.join(sorted(used)))
+    # 애플리케이션 아키텍처 7개는 scripts/build_architectures_figma.py에서 생성
+    print('Use scripts/build_architectures_figma.py to build application architectures.')
