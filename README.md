@@ -152,8 +152,8 @@ python -m http.server 8080
 - `assets/flows/`: 확인된 처리 흐름·관계 변경을 재구성한 도식
 - `scripts/build_troubleshooting_flows.mjs`: 처리 흐름·Store FK 변경 도식 생성기
 - `scripts/build_store_diagrams.py`: 기존 디자인을 사용하는 Store 개요·애플리케이션 아키텍처 생성기
-- `scripts/build_architectures_figma.py`: 6개 프로젝트 애플리케이션 아키텍처 생성기. [Figma 시안](https://www.figma.com/design/PMTeokQEzCz2eW6rMRTKKF)과 같은 좌표·색·문구
-- `scripts/build_architectures.py`: STM 아키텍처 도식 생성 스크립트(Python 표준 라이브러리)
+- `scripts/build_architectures_figma.py`: 7개 프로젝트(STM 포함) 애플리케이션 아키텍처 생성기. [Figma 시안](https://www.figma.com/design/PMTeokQEzCz2eW6rMRTKKF)과 같은 좌표·색·문구
+- `scripts/build_architectures.py`: 이전 도식 생성기(현재는 `build_architectures_figma.py` 사용)
 - `.nojekyll`: 정적 파일 배포 설정
 
 ## 포트폴리오 전면 개편 계획

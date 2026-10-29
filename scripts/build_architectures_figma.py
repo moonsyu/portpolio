@@ -120,6 +120,35 @@ class Diagram:
         (OUT / filename).write_text(svg, encoding='utf-8')
 
 
+def stm():
+    d = Diagram('STM-Simulator 애플리케이션 아키텍처', 'Electron 앱의 격리된 Renderer에서 IDE 작업 화면과 회로 편집을 제공하고, C 인터프리터 회로 시뮬레이터와 Cortex-M4 펌웨어 에뮬레이터가 같은 회로 모델을 구동. Preload의 제한된 IPC로 Main 프로세스가 프로젝트 파일 저장, ARM GCC·GDB 도구, GitHub Release 자동 업데이트를 처리.', 880)
+    d.zone(230, 40, 830, 780, 'Electron 앱 · Windows 포터블 EXE', 'mine', '1인 · AI 코딩 도구 협업')
+    d.zone(260, 90, 760, 530, 'Renderer · contextIsolation · sandbox', 'plain')
+    d.card(40, 130, 170, 130, ['user-round'], 'STM32 학습자', '보드 없이 실습', 'ext')
+    d.card(290, 140, 330, 110, ['file-code'], 'IDE 작업 화면', 'Monaco 편집기 · 명령 팔레트 · 장치 Docs', 'mine')
+    d.card(660, 140, 330, 110, ['network'], '회로 편집', '부품 · 배선 · 핀 계산 · draft 검증', 'mine')
+    d.card(290, 310, 330, 130, ['c'], '회로 시뮬레이터', 'HAL C 소스 해석 · 컴파일 없음\nNVIC · DMA · 회로 검사', 'mine')
+    d.card(660, 310, 330, 130, ['microchip'], '펌웨어 에뮬레이터', 'ARM ELF · Cortex-M4 명령어 실행\nSTM32F446 · F103 주변장치', 'mine')
+    d.card(475, 480, 330, 110, ['microchip'], '회로 모델', '빵판 · 부품 · 배선 · 전압 · 전류 계산', 'mine')
+    d.card(290, 660, 270, 110, ['shield-check'], 'Preload', '제한된 IPC만 노출', 'mine')
+    d.card(640, 650, 350, 130, ['electron'], 'Main 프로세스', '파일 저장 트랜잭션 · 진단 JSONL\n네이티브 도구 실행 · 업데이트', 'mine')
+    d.card(1100, 315, 190, 120, ['terminal'], 'ARM GCC · GDB', 'OpenOCD · ST-LINK\n실물 보드 기록', 'ext')
+    d.card(1100, 490, 190, 120, ['save'], '프로젝트 파일', '.stm32lab · 폴더 저장\n자동 저장 v2', 'ext')
+    d.card(1100, 650, 190, 120, ['git-branch'], 'GitHub Release', 'EXE · ZIP · SHA256\n자동 업데이트', 'ext')
+    d.arrow([(210, 195), (290, 195)], '코드 · 회로 편집', (250, 171))
+    d.arrow([(455, 250), (455, 310)], 'main.c 해석', (455, 280))
+    d.arrow([(990, 195), (1005, 195), (1005, 535), (805, 535)], '회로 반영', (1005, 460))
+    d.arrow([(455, 440), (455, 535), (475, 535)], 'GPIO 변화', (455, 490))
+    d.arrow([(760, 440), (760, 480)], '주변장치 상태', (760, 460))
+    d.arrow([(1100, 375), (990, 375)], '빌드한 ELF', (1058, 351))
+    d.arrow([(425, 620), (425, 660)], 'IPC 호출', (425, 640), both=True)
+    d.arrow([(560, 715), (640, 715)], 'IPC', (600, 691), both=True)
+    d.arrow([(990, 670), (1040, 670), (1040, 550), (1100, 550)], '저장', (1040, 610), both=True)
+    d.arrow([(990, 735), (1100, 735)], '업데이트 확인', (1045, 759))
+    d.legend(40, 845)
+    d.save('stm-application.svg')
+
+
 def cons():
     d = Diagram('CONS 애플리케이션 아키텍처', 'BLE Beacon 신호를 AltBeacon 기반 Beacon 연동 모듈이 UUID Region으로 수신하고, 실내 측위가 Spring Boot 비콘 좌표 서버와 Retrofit으로 좌표를 맞춰 위치를 계산. 계산한 실내 좌표는 Unity 연동(UnityPlayerActivity·Intent)으로 Unity AR 장면에 전달. Beacon 연동과 Unity 연동이 핵심 연동 구간.', 840)
     d.zone(240, 40, 830, 480, 'Android 앱 · Java', 'plain')
@@ -276,6 +305,6 @@ def store():
 
 
 if __name__ == '__main__':
-    for build in (cons, bookies, arabica, cmp, wallet, store):
+    for build in (stm, cons, bookies, arabica, cmp, wallet, store):
         build()
-    print('Rendered 6 Figma architecture diagrams.')
+    print('Rendered 7 architecture diagrams.')
