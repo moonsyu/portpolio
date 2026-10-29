@@ -40,7 +40,7 @@
           </div>
           <aside class="hero-profile" aria-label="프로필 요약">
             <div class="hero-profile-top"><img src="./assets/profile.webp" width="500" height="605" alt="장문수 프로필 사진"><div><p class="hero-profile-name">장문수</p><p>Java Backend Developer</p><p>한신대학교 컴퓨터공학부</p></div></div>
-            <dl class="hero-stats"><div><dt>실무 백엔드</dt><dd>약 10개월</dd></div><div><dt>프로젝트</dt><dd>6</dd></div><div><dt>수상</dt><dd>6</dd></div></dl>
+            <dl class="hero-stats"><div><dt>실무 백엔드</dt><dd><small class="stat-prefix">약</small>10<small>개월</small></dd></div><div><dt>프로젝트</dt><dd>6<small>개</small></dd></div><div><dt>수상</dt><dd>6<small>회</small></dd></div></dl>
             <p class="hero-recent">최근 경력 <strong>주식회사 유더블유에스</strong><br>Arabica · CMP · Wallet · Store 백엔드 (2025.06 — 2026.03)</p>
           </aside>
         </div>
@@ -160,17 +160,6 @@
           <section class="detail-section" aria-labelledby="arabica-troubleshooting">
             <span class="label">TROUBLESHOOTING(트러블 슈팅)</span><h4 class="detail-title" id="arabica-troubleshooting">DB 백업 시 장시간 Thread 점유 문제</h4>
             <div class="troubleshooting-grid"><dl class="case-facts ts-steps"><div><dt>문제</dt><dd><ul><li><strong>다수 DB 예약 백업 시 오류 발생</strong></li></ul></dd></div><div><dt>원인</dt><dd><ul><li>DB 백업 완료를 기다리는 동안 <strong>Thread 점유</strong></li></ul></dd></div><div><dt>해결</dt><dd><ul><li>예약 백업을 <strong>@Async 전용 실행기</strong>로 비동기 처리</li><li>결과 파일을 <strong>5분 주기로 판독</strong>하는 확인 단계로 분리</li><li><strong>업로드·데이터 검증이 끝난 뒤</strong> 백업 이력 저장</li></ul></dd></div></dl><figure class="evidence-figure flow-evidence"><button class="image-button" type="button" data-enlarge aria-label="Arabica: 원격 백업 완료 대기에서 비동기 실행과 주기적 결과 확인으로 분리한 흐름도 확대"><img src="./assets/flows/arabica-backup.svg" width="960" height="1120" alt="Arabica: 원격 백업 완료 대기에서 비동기 실행과 주기적 결과 확인으로 분리한 흐름도" loading="lazy"></button></figure></div></section>
-          <section class="detail-section" aria-labelledby="arabica-reflection">
-            <span class="label">REFLECTION</span><h4 class="detail-title" id="arabica-reflection">비동기 실행 다음으로, 완료 확인과 실행 권한 보완</h4>
-            <p class="reflection-status">추가 보완안 · 미구현</p>
-            <ul class="reflection-lead"><li>구현한 <strong>비동기 실행·결과 판독·검증</strong>을 바탕으로, 작업 누락·중복·과부하와 원격 실행 권한까지 관리하는 방향 검토</li></ul>
-            <figure class="evidence-figure reflection-figure"><button class="image-button" type="button" data-enlarge aria-label="Arabica 추가 보완 설계 제안 확대"><img src="./assets/flows/arabica-reflection.svg" width="1280" height="650" alt="미구현 보완안: 작업 ID·상태 저장 → 제한된 실행기 → 권한을 제한한 원격 백업 → 인증된 완료 알림과 검증. 알림 누락 시 주기 재확인, 중복 결과는 한 번만 반영." loading="lazy"></button></figure>
-            <div class="reflection-points">
-              <div><h5>완료 확인의 지연·누락</h5><ul><li>현재 <strong>결과 파일을 주기적으로 확인</strong>하는 방식의 대기 구간</li><li><strong>인증된 완료 알림 + 누락 시 재확인</strong>으로 보완</li><li>작업 ID·단계별 상태·타임아웃으로 미완료 작업 추적</li></ul></div>
-              <div><h5>과부하·중복 결과 대응</h5><ul><li>실행기 포화 시 <strong>호출 스레드에서 작업이 실행될 가능성</strong></li><li>동시 실행·대기량 제한과 <strong>거절·재시도 정책</strong> 명확화</li><li>동일 작업 ID의 중복 결과를 한 번만 반영</li></ul></div>
-              <div><h5>원격 실행 권한 제한</h5><ul><li>SSH 명령 실행 계정과 허용 범위를 더 엄격히 제한하는 방향 검토</li><li><strong>전용 계정·키 인증·호스트 키 검증</strong> 적용</li><li>허용한 스크립트·인자만 실행하도록 제한</li></ul></div>
-            </div>
-          </section>
         </div></div>
       </article>
       <article class="project" id="cmp" aria-labelledby="cmp-title">

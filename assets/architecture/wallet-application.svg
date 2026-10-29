@@ -84,7 +84,7 @@
 <use href="#icon-bell-ring" x="735.0" y="448.8" width="40" height="40"/>
 <text x="755.0" y="511.8" font-size="17" font-weight="700" fill="#172538" text-anchor="middle">알림</text>
 <text x="755.0" y="536.8" font-size="13" font-weight="400" fill="#5b687a" text-anchor="middle">FCM · SMS 발송 요청</text>
-<rect x="1010" y="90" width="260" height="120" rx="14" fill="#fff" stroke="#c3cede" stroke-width="1.5"/>
+<rect x="1010" y="90" width="260" height="120" rx="14" fill="#fff" stroke="#7d9be8" stroke-width="2"/>
 <use href="#icon-postgresql" x="1120.0" y="103.8" width="40" height="40"/>
 <text x="1140.0" y="166.8" font-size="17" font-weight="700" fill="#172538" text-anchor="middle">PostgreSQL</text>
 <text x="1140.0" y="191.8" font-size="13" font-weight="400" fill="#5b687a" text-anchor="middle">MyBatis · JPA</text>
@@ -93,11 +93,11 @@
 <text x="1140.0" y="343.0" font-size="17" font-weight="700" fill="#172538" text-anchor="middle">Ledger</text>
 <text x="1140.0" y="368.0" font-size="13" font-weight="400" fill="#5b687a" text-anchor="middle">web3j JSON-RPC</text>
 <text x="1140.0" y="385.5" font-size="13" font-weight="400" fill="#5b687a" text-anchor="middle">송금 · 스테이킹</text>
-<rect x="1010" y="440" width="260" height="120" rx="14" fill="#fff" stroke="#c3cede" stroke-width="1.5"/>
+<rect x="1010" y="440" width="260" height="120" rx="14" fill="#fff" stroke="#7d9be8" stroke-width="2"/>
 <use href="#icon-firebase" x="1120.0" y="453.8" width="40" height="40"/>
 <text x="1140.0" y="516.8" font-size="17" font-weight="700" fill="#172538" text-anchor="middle">Firebase FCM</text>
 <text x="1140.0" y="541.8" font-size="13" font-weight="400" fill="#5b687a" text-anchor="middle">앱 푸시 전달</text>
-<rect x="640" y="660" width="230" height="120" rx="14" fill="#fff" stroke="#c3cede" stroke-width="1.5"/>
+<rect x="640" y="660" width="230" height="120" rx="14" fill="#fff" stroke="#7d9be8" stroke-width="2"/>
 <use href="#icon-radio" x="735.0" y="673.8" width="40" height="40"/>
 <text x="755.0" y="736.8" font-size="17" font-weight="700" fill="#172538" text-anchor="middle">SMS 서비스</text>
 <text x="755.0" y="761.8" font-size="13" font-weight="400" fill="#5b687a" text-anchor="middle">인증코드 · 안내 문자</text>
