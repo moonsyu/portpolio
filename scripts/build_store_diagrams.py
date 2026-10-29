@@ -57,5 +57,5 @@ def application():
 
 if __name__ == '__main__':
     overview()
-    application()
-    print('Built Store overview and application architecture.')
+    # 애플리케이션 아키텍처는 Figma 시안 기준 scripts/build_architectures_figma.py에서 생성
+    print('Built Store overview.')

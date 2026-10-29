@@ -8,7 +8,7 @@
 - 보유 기술: 기술 아이콘과 이름을 함께 표시
 - 수상·자격: 별도 목록, 수상 기관·행사명·일자 및 자격·어학 등급·취득일 표시
 - 기능: 소개·프로젝트 탐색, 상세 내용 항상 표시, 이미지 드래그·휠 확대, 실행 GIF 재생·일시정지, 반응형 레이아웃
-- 애플리케이션 아키텍처: 기술·기능 아이콘, 모듈별 영역, 요청·응답·저장 흐름을 표현한 SVG 도식 7개
+- 애플리케이션 아키텍처: SVG 도식 7개. 웹·앱 6개는 Figma 시안 기준으로 내 담당(파란 실선)·팀원 구현(회색 점선)·외부 서비스 구분
 
 ## 브랜치별 웹 주소
 
@@ -33,6 +33,13 @@
 - 방식 근거: [GitHub Pages 사용자 지정 워크플로](https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages).
 
 - [브랜치 구성·PDF 매핑 검증 기록](docs/branch-deployment-20261012.md).
+
+## Stella 재대조·아키텍처 Figma 개편 · 2026-10-29
+
+- `main`과 같은 수정 적용: 정보처리기사 취득일 2024.09.10(증빙 기준), Wallet SMS 문구(6자리 인증코드·3분 만료·5회 단위 발급 제한), 기술 스택 "도구 · AI"(Git·Python·Codex·Claude Code), CMP 기간 2026.01 — 03, Store 인원 Wallet·Store 공동 5인.
+- 웹·앱 6개 애플리케이션 아키텍처를 [Figma](https://www.figma.com/design/PMTeokQEzCz2eW6rMRTKKF) 시안 기준으로 교체(`scripts/build_architectures_figma.py`). STM 도식은 기존 유지.
+- CONS 도식은 Beacon 연동(AltBeacon·UUID Region·Ranging)과 Unity 연동(Unity 모듈·UnityPlayerActivity·좌표 변환)을 핵심 연동 구간으로 강조하고 각 트러블슈팅과 연결.
+- 전체본 PDF 40쪽 재생성.
 
 ## UI 개편 적용 · 2026-10-28
 
@@ -142,7 +149,8 @@ python -m http.server 8080
 - `assets/flows/`: 확인된 처리 흐름·관계 변경을 재구성한 도식
 - `scripts/build_troubleshooting_flows.mjs`: 처리 흐름·Store FK 변경 도식 생성기
 - `scripts/build_store_diagrams.py`: 기존 디자인을 사용하는 Store 개요·애플리케이션 아키텍처 생성기
-- `scripts/build_architectures.py`: 아키텍처 도식 생성 스크립트(Python 표준 라이브러리)
+- `scripts/build_architectures_figma.py`: 웹·앱 6개 프로젝트 애플리케이션 아키텍처 생성기. [Figma 시안](https://www.figma.com/design/PMTeokQEzCz2eW6rMRTKKF)과 같은 좌표·색·문구
+- `scripts/build_architectures.py`: STM 아키텍처 도식 생성 스크립트(Python 표준 라이브러리)
 - `.nojekyll`: 정적 파일 배포 설정
 
 ## 포트폴리오 전면 개편 계획
@@ -172,6 +180,7 @@ python -m http.server 8080
 
 ```powershell
 python scripts/build_architectures.py
+python scripts/build_architectures_figma.py
 ```
 
 - 기술 아이콘: [Devicon](https://github.com/devicons/devicon), MIT 라이선스
