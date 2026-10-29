@@ -177,9 +177,12 @@ strong,b{font-weight:750;color:var(--ink)}
 .hero-profile-top p{margin:0;font-size:14px;line-height:1.6;color:var(--muted)}
 .hero-profile-top .hero-profile-name{font-size:24px;font-weight:800;color:var(--ink)}
 .hero-stats{display:grid;grid-template-columns:repeat(3,1fr);margin:24px 0 0;border-top:1px solid var(--line)}
-.hero-stats div{display:flex;flex-direction:column;padding-top:18px}
-.hero-stats dt{order:2;font-size:13px;color:var(--muted)}
-.hero-stats dd{order:1;margin:0 0 2px;font-size:28px;font-weight:800;letter-spacing:-.03em;color:var(--blue);white-space:nowrap}
+.hero-stats div{display:flex;flex-direction:column;align-items:center;text-align:center;padding:18px 6px 0}
+.hero-stats div+div{border-left:1px solid var(--line)}
+.hero-stats dt{order:2;margin-top:4px;font-size:13px;color:var(--muted)}
+.hero-stats dd{order:1;margin:0;font-size:28px;line-height:1.2;font-weight:800;letter-spacing:-.03em;color:var(--blue);white-space:nowrap}
+.hero-stats dd small{font-size:.55em;font-weight:700;letter-spacing:0;margin-left:2px}
+.hero-stats dd .stat-prefix{margin:0 3px 0 0}
 .hero-recent{margin:20px 0 0;padding:14px 16px;border-radius:12px;background:var(--paper);font-size:14px;line-height:1.6}
 .hero-recent strong{color:var(--blue)}
 .project-index{grid-template-columns:repeat(3,1fr);gap:20px;border:0}

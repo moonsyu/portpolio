@@ -34,8 +34,8 @@
   <path xmlns="http://www.w3.org/2000/svg" d="M3 5v14a2 2 0 0 0 2 2h15a1 1 0 0 0 1-1v-4" />
 </g></symbol></defs>
 <rect width="1320" height="880" fill="#fff"/>
-<rect x="260" y="40" width="650" height="560" rx="20" fill="#f3f6ff" stroke="#2355de" stroke-width="2"/>
-<text x="282.0" y="70.0" font-size="15" font-weight="700" fill="#2355de" text-anchor="start">TimeSquare Store API · Spring Boot</text>
+<rect x="260" y="40" width="650" height="770" rx="20" fill="#f3f6ff" stroke="#2355de" stroke-width="2"/>
+<text x="282.0" y="70.0" font-size="15" font-weight="700" fill="#2355de" text-anchor="start">TimeSquare Store API · PostgreSQL</text>
 <rect x="829.3" y="54" width="62.7" height="22" rx="11" fill="#2355de"/>
 <text x="860.6" y="69.5" font-size="12" font-weight="700" fill="#fff" text-anchor="middle">내 담당</text>
 <rect x="40" y="85" width="180" height="130" rx="14" fill="#fff" stroke="#a3adbb" stroke-width="1.5" stroke-dasharray="6 5"/>
@@ -105,10 +105,10 @@
 <path d="M 1135 470 L 1135 380" fill="none" stroke="#3b4656" stroke-width="2" stroke-linejoin="round" marker-end="url(#arrow)"/>
 <rect x="1079.9" y="414.0" width="110.1" height="22" rx="6" fill="#fff"/>
 <text x="1135.0" y="429.7" font-size="13" font-weight="500" fill="#3b4656" text-anchor="middle">QR 로그인 승인</text>
-<rect x="40" y="832" width="22" height="14" rx="4" fill="#f3f6ff" stroke="#2355de" stroke-width="1.5"/>
-<text x="70.0" y="844.0" font-size="13" font-weight="500" fill="#5b687a" text-anchor="start">내 담당</text>
-<rect x="138.28" y="832" width="22" height="14" rx="4" fill="#fff" stroke="#a3adbb" stroke-width="1.5" stroke-dasharray="4 3"/>
-<text x="168.3" y="844.0" font-size="13" font-weight="500" fill="#5b687a" text-anchor="start">팀원 구현</text>
-<rect x="249.56" y="832" width="22" height="14" rx="4" fill="#fff" stroke="#c3cede" stroke-width="1.5"/>
-<text x="279.6" y="844.0" font-size="13" font-weight="500" fill="#5b687a" text-anchor="start">외부 서비스·저장소</text>
+<rect x="40" y="842" width="22" height="14" rx="4" fill="#f3f6ff" stroke="#2355de" stroke-width="1.5"/>
+<text x="70.0" y="854.0" font-size="13" font-weight="500" fill="#5b687a" text-anchor="start">내 담당</text>
+<rect x="138.28" y="842" width="22" height="14" rx="4" fill="#fff" stroke="#a3adbb" stroke-width="1.5" stroke-dasharray="4 3"/>
+<text x="168.3" y="854.0" font-size="13" font-weight="500" fill="#5b687a" text-anchor="start">팀원 구현</text>
+<rect x="249.56" y="842" width="22" height="14" rx="4" fill="#fff" stroke="#c3cede" stroke-width="1.5"/>
+<text x="279.6" y="854.0" font-size="13" font-weight="500" fill="#5b687a" text-anchor="start">외부 서비스·저장소</text>
 </svg>

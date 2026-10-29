@@ -14,8 +14,8 @@
 
 | 브랜치 | 구성 | 웹 주소 | PDF 다운로드 |
 | --- | --- | --- | --- |
-| `main` | 웹·앱 프로젝트 6개 | <https://moonsyu.github.io/portpolio/> | 웹·앱판 35쪽 |
-| `embedded` | STM·하드웨어 학습 포함 전체 프로젝트 7개 | <https://moonsyu.github.io/portpolio/embedded/> | 전체본 40쪽 |
+| `main` | 웹·앱 프로젝트 6개 | <https://moonsyu.github.io/portpolio/> | 웹·앱판 34쪽 |
+| `embedded` | STM·하드웨어 학습 포함 전체 프로젝트 7개 | <https://moonsyu.github.io/portpolio/embedded/> | 전체본 39쪽 |
 
 - `main`은 웹·앱판과 동일한 소개·기술·프로젝트 구성. 기존 사용자 지정 예외인 CONS 유지.
 - `embedded`는 STM-Simulator·IoT/하드웨어 소개·임베디드 학습 기술·SSAFY 트랙을 포함한 전체 구성.
@@ -33,6 +33,12 @@
 - 방식 근거: [GitHub Pages 사용자 지정 워크플로](https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages).
 
 - [브랜치 구성·PDF 매핑 검증 기록](docs/branch-deployment-20261012.md).
+
+## 담당 범위 조정·Arabica 회고 제거 · 2026-10-29
+
+- 사용자 결정으로 아키텍처의 내 담당 범위 조정: BOOKIES는 EC2·RDS, Arabica는 MariaDB, Wallet은 PostgreSQL·Firebase FCM·SMS 서비스, Store는 PostgreSQL까지 포함.
+- Arabica 회고(추가 보완안·미구현) 구간 제거.
+- PDF 재생성: 웹·앱판 34쪽, 전체본 39쪽.
 
 ## Stella 재대조·아키텍처 Figma 개편 · 2026-10-29
 

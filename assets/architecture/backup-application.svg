@@ -33,8 +33,8 @@
   <path d="m4 17 6-6-6-6" />
 </g></symbol></defs>
 <rect width="1320" height="880" fill="#fff"/>
-<rect x="250" y="40" width="640" height="570" rx="20" fill="#f3f6ff" stroke="#2355de" stroke-width="2"/>
-<text x="272.0" y="70.0" font-size="15" font-weight="700" fill="#2355de" text-anchor="start">Spring Boot API · Java 17</text>
+<rect x="250" y="40" width="640" height="770" rx="20" fill="#f3f6ff" stroke="#2355de" stroke-width="2"/>
+<text x="272.0" y="70.0" font-size="15" font-weight="700" fill="#2355de" text-anchor="start">Spring Boot API · MariaDB</text>
 <rect x="809.3" y="54" width="62.7" height="22" rx="11" fill="#2355de"/>
 <text x="840.6" y="69.5" font-size="12" font-weight="700" fill="#fff" text-anchor="middle">내 담당</text>
 <rect x="40" y="100" width="170" height="130" rx="14" fill="#fff" stroke="#a3adbb" stroke-width="1.5" stroke-dasharray="6 5"/>
@@ -65,7 +65,7 @@
 <use href="#icon-database-backup" x="700.0" y="458.8" width="40" height="40"/>
 <text x="720.0" y="521.8" font-size="17" font-weight="700" fill="#172538" text-anchor="middle">결과 판독 · 검증</text>
 <text x="720.0" y="546.8" font-size="13" font-weight="400" fill="#5b687a" text-anchor="middle">5분 주기 · 테이블·행 수 비교</text>
-<rect x="330" y="660" width="450" height="130" rx="14" fill="#fff" stroke="#c3cede" stroke-width="1.5"/>
+<rect x="330" y="660" width="450" height="130" rx="14" fill="#fff" stroke="#7d9be8" stroke-width="2"/>
 <use href="#icon-mariadb" x="535.0" y="678.8" width="40" height="40"/>
 <text x="555.0" y="741.8" font-size="17" font-weight="700" fill="#172538" text-anchor="middle">MariaDB</text>
 <text x="555.0" y="766.8" font-size="13" font-weight="400" fill="#5b687a" text-anchor="middle">정책 · 백업·복원 이력 · 용량</text>
@@ -103,10 +103,10 @@
 <path d="M 720 570 L 720 660" fill="none" stroke="#3b4656" stroke-width="2" stroke-linejoin="round" marker-end="url(#arrow)"/>
 <rect x="665.7" y="614.0" width="108.6" height="22" rx="6" fill="#fff"/>
 <text x="720.0" y="629.7" font-size="13" font-weight="500" fill="#3b4656" text-anchor="middle">검증 결과 기록</text>
-<rect x="40" y="832" width="22" height="14" rx="4" fill="#f3f6ff" stroke="#2355de" stroke-width="1.5"/>
-<text x="70.0" y="844.0" font-size="13" font-weight="500" fill="#5b687a" text-anchor="start">내 담당</text>
-<rect x="138.28" y="832" width="22" height="14" rx="4" fill="#fff" stroke="#a3adbb" stroke-width="1.5" stroke-dasharray="4 3"/>
-<text x="168.3" y="844.0" font-size="13" font-weight="500" fill="#5b687a" text-anchor="start">팀원 구현</text>
-<rect x="249.56" y="832" width="22" height="14" rx="4" fill="#fff" stroke="#c3cede" stroke-width="1.5"/>
-<text x="279.6" y="844.0" font-size="13" font-weight="500" fill="#5b687a" text-anchor="start">외부 서비스·저장소</text>
+<rect x="40" y="842" width="22" height="14" rx="4" fill="#f3f6ff" stroke="#2355de" stroke-width="1.5"/>
+<text x="70.0" y="854.0" font-size="13" font-weight="500" fill="#5b687a" text-anchor="start">내 담당</text>
+<rect x="138.28" y="842" width="22" height="14" rx="4" fill="#fff" stroke="#a3adbb" stroke-width="1.5" stroke-dasharray="4 3"/>
+<text x="168.3" y="854.0" font-size="13" font-weight="500" fill="#5b687a" text-anchor="start">팀원 구현</text>
+<rect x="249.56" y="842" width="22" height="14" rx="4" fill="#fff" stroke="#c3cede" stroke-width="1.5"/>
+<text x="279.6" y="854.0" font-size="13" font-weight="500" fill="#5b687a" text-anchor="start">외부 서비스·저장소</text>
 </svg>
